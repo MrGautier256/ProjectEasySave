@@ -1,6 +1,14 @@
-#exceptfiles
-!.cs
+
 !.gitignore
 
-#ignore all kind of files
-*
+*.sln
+
+ProjetConsole/.vs/
+
+ProjetConsole/ProjetConsole/bin/
+
+ProjetConsole/ProjetConsole/obj/
+
+ProjetConsole/ProjetConsole/Source/
+
+*.csproj
