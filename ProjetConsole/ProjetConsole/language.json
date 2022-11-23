@@ -13,8 +13,8 @@
 	},
 	"spanish": {
 		"EnterSourcePath": "Entre el camino raiz:",
-		"EnterTargetPath": "Enter el camino de destino:",
+		"EnterTargetPath": "Entre el camino de destino:",
 		"SourcePathInvalid": "El camino raiz no existe o es invalido!",
-		"TargetPathInvalid": "el camino de destino no existe o es invalido!"
+		"TargetPathInvalid": "El camino de destino no existe o es invalido!"
 	}
 }
