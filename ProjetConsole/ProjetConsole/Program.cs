@@ -17,7 +17,7 @@ namespace ProjetTest
 
         public static void copy()
         {
-            string fileName;
+            string fileNameTest;
             string destFile;
             string sourcePath = @"C:\Users\Gautier\source\repos\CESI A3\ProjetConsole\ProjetConsole\Source";
             string targetPath = @"C:\Users\Gautier\source\repos\CESI A3\ProjetConsole\ProjetConsole\Destination";
