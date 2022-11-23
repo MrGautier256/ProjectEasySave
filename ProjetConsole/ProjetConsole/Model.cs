@@ -1,20 +1,19 @@
 ﻿using System;
-namespace P2WorkshopP2
+namespace ProjetConsole
 {
     public class Model
     {
-        private string stringToConvert;
-
-        public void SetstringToConvert(string input)
-        { this.stringToConvert = input; }
-
-        public Model()
+        public string sourcePath { get; set; } = string.Empty;
+        public string targetPath { get; set; } = string.Empty;
+        public void saveFile()
         {
-            stringToConvert = "";
-        }
-        public string convertToUpperCase()
-        {
-            return stringToConvert.ToUpper();
+            string[] files = Directory.GetFiles(sourcePath);
+            foreach (string sourceFile in files)
+            {
+                string fileName = Path.GetFileName(sourceFile);
+                string destFile = Path.Combine(targetPath, fileName);
+                File.Copy(sourceFile, destFile, true);
+            }
         }
 
     }

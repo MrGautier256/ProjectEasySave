@@ -1,9 +1,11 @@
 ﻿using System;
-namespace P2WorkshopP2
+using System.Diagnostics;
+
+namespace ProjetConsole
 {
     public interface IController
     {
-
+        public void execute();
     }
     public class Controller : IController
     {
@@ -15,33 +17,74 @@ namespace P2WorkshopP2
             view = new View();
         }
 
-        public void begin()
+        public void execute()
         {
-            view.AskInputUser();
-            string text = view.getText();
-            if (!lengthChecking(text))
+            view.askSourcePath();
+            view.askTargetPath();
+            string sourcePath = view.getSourcePath();
+            string targetPath = view.getTargetPath();
+            if (checkPathIntegrity(sourcePath, targetPath))
             {
-                view.updateView("Message trop long ou vide");
-            }
-            else
-            {
-                model.SetstringToConvert(text);
-                view.updateView(model.convertToUpperCase());
+                model.sourcePath = sourcePath;
+                model.targetPath = targetPath;
+                model.saveFile();
             }
         }
 
-        private bool lengthChecking(string text)
+        private bool checkPathIntegrity(string source, string target)
         {
-            bool state;
-            if (text.Length >= 8 || text == "")
+            bool integrity = false;
+            if (pathIsValid(source) && sourcePathExist(source))
             {
-                state = false; 
+                if (pathIsValid(target))
+                {
+                    integrity = true;
+                }
+                else
+                {
+                    view.targetPathIsInvalid();
+                    integrity = false;
+                }
             }
             else
             {
-                state = true;
+                view.sourcePathIsInvalid();
+                integrity = false;
             }
-            return state;
+            return integrity;
+        }
+        private bool sourcePathExist(string sourcePath)
+        {
+            bool exist = Directory.Exists(sourcePath);
+            if (!exist)
+            {
+                view.sourcePathIsInvalid();
+            }
+            return exist;
+        }
+        private bool pathIsValid(string path, bool allowRelativePaths = false)
+        {
+            bool isValid;
+
+            try
+            {
+                string fullPath = Path.GetFullPath(path);
+
+                if (allowRelativePaths)
+                {
+                    isValid = Path.IsPathRooted(path);
+                }
+                else
+                {
+                    string root = Path.GetPathRoot(path) ?? string.Empty;
+                    isValid = string.IsNullOrEmpty(root.Trim(new char[] { '\\', '/' })) == false;
+                }
+            }
+            catch
+            {
+                isValid = false;
+            }
+            return isValid;
         }
     }
 }
