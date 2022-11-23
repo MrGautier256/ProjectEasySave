@@ -2,6 +2,7 @@
 !.gitignore
 
 *.sln
+*.bin
 
 ProjetConsole/.vs/
 
