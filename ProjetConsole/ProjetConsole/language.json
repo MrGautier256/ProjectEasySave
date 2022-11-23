@@ -1,11 +1,11 @@
 {
-	"premier": {
-		"valeur": "5",
-		"puissance": "20"
+	"french": {
+		"failed": "echouee",
+		"sucess": "reussi"
 	},
-	"deuxieme": {
-		"failed": "9",
-		"puissance": "25"
+	"english": {
+		"failed": "failed",
+		"sucess": "sucess"
 	}
 }
 
