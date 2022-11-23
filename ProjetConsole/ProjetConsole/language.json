@@ -1,11 +1,15 @@
 {
 	"french": {
-		"failed": "echouee",
-		"sucess": "reussi"
+		"EnterSourcePath": "Entrez le chemin source:",
+		"EnterTargetPath": "Entrez le chemin de destination:",
+		"SourcePathInvalid": "Le chemin source n'existe pas ou n'est pas valide!",
+		"TargetPathInvalid": "Le chemin de destination n'existe pas ou n'est pas valide!"
 	},
 	"english": {
-		"failed": "failed",
-		"sucess": "sucess"
+		"EnterSourcePath": "Enter source Path:",
+		"EnterTargetPath": "Enter target Path:",
+		"SourcePathInvalid": "Source path does not exist or is invalid!",
+		"TargetPathInvalid": "Destination path does not exist or is invalid!"
 	}
 }
 

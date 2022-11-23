@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Diagnostics;
+using TesJson;
 
 namespace ProjetConsole
 {
@@ -19,6 +20,8 @@ namespace ProjetConsole
 
         public void execute()
         {
+            var language = view.askLanguage();
+            Traduction.Instance.setLanguage(language);
             view.askSourcePath();
             view.askTargetPath();
             string sourcePath = view.getSourcePath();

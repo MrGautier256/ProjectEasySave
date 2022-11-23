@@ -1,22 +1,44 @@
 ﻿using System;
 using System.Reflection;
+using TesJson;
 
 namespace ProjetConsole
 {
+    public enum langueEnum {english,french};
     public class View
     {
         string sourcePath = string.Empty;
         string targetPath = string.Empty;
 
+    
+        public langueEnum askLanguage()
+        {
+            Console.WriteLine("Select language");
+            string? inputLanguage = Console.ReadLine()?.ToLower();
+            langueEnum language;
+
+            switch (inputLanguage)
+            {
+                case "french":
+                case "fr":
+                case "français":
+                case "francais": language = langueEnum.french;
+                    break;
+                default: language = langueEnum.english;
+                    break;
+            }
+            return language;
+        }
+
         // --------------Version Console------------------
         public void askSourcePath()
         {
-            Console.WriteLine("Entrez le chemin source: \n Enter source Path:");
+            Console.WriteLine(Traduction.Instance.Langue.EnterSourcePath);
             this.sourcePath = Console.ReadLine() ?? string.Empty; 
         }
         public void askTargetPath()
         {
-            Console.WriteLine("Entrez le chemin de destination: \n Enter target Path:");
+            Console.WriteLine(Traduction.Instance.Langue.EnterTargetPath);
             this.targetPath = Console.ReadLine() ?? string.Empty; 
         }
 
@@ -28,11 +50,11 @@ namespace ProjetConsole
 
         public void sourcePathIsInvalid()
         {
-            Console.WriteLine("Le chemin source n'existe pas ou n'est pas valide! \n Source path does not exist or is invalid!");
+            Console.WriteLine(Traduction.Instance.Langue.SourcePathInvalid);
         }
         public void targetPathIsInvalid()
         {
-            Console.WriteLine("Le chemin de destination n'existe pas ou n'est pas valide! \n Destination path does not exist or is invalid!");
+            Console.WriteLine(Traduction.Instance.Langue.TargetPathInvalid);
         }
 
         // --------------Version Graphique ------------------
