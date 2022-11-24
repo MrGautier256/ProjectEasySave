@@ -12,6 +12,8 @@ namespace TesJson
     {
         public JsonLangueContent? french;
         public JsonLangueContent? english;
+        public JsonLangueContent? spanish;
+
     }
     public class JsonLangueContent
     {
@@ -34,6 +36,10 @@ namespace TesJson
                 if (_langue == langueEnum.french)
                 {
                     return _Language.french;
+                }
+                else if (_langue == langueEnum.spanish)
+                {
+                    return _Language.spanish;
                 }
                 else
                 {

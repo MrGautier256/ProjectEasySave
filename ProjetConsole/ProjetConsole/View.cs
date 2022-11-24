@@ -4,7 +4,7 @@ using TesJson;
 
 namespace ProjetConsole
 {
-    public enum langueEnum {english,french};
+    public enum langueEnum {english,french,spanish };
     public class View
     {
         string sourcePath = string.Empty;
@@ -13,7 +13,12 @@ namespace ProjetConsole
     
         public langueEnum askLanguage()
         {
-            Console.WriteLine("Select language");
+            string langageToPrint = string.Empty; 
+            foreach(var item in Enum.GetValues(typeof(langueEnum)))
+            {
+                langageToPrint += item + ", ";
+            }
+            Console.WriteLine("Select language: " + langageToPrint);
             string? inputLanguage = Console.ReadLine()?.ToLower();
             langueEnum language;
 
@@ -22,7 +27,13 @@ namespace ProjetConsole
                 case "french":
                 case "fr":
                 case "français":
-                case "francais": language = langueEnum.french;
+                case "francais": 
+                    language = langueEnum.french;
+                    break;
+                case "spanish":
+                case "es":
+                case "espagnol":
+                    language = langueEnum.spanish;
                     break;
                 default: language = langueEnum.english;
                     break;
