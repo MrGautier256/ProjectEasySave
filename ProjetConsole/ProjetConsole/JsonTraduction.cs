@@ -21,6 +21,8 @@ namespace ProjetConsole
         public string? TargetPathInvalid;
         public string? EnterSourcePath;
         public string? EnterTargetPath;
+        public string? Buffering;
+        public string? Complete;
 
     }
     public sealed class Traduction

@@ -90,5 +90,9 @@ namespace ProjetConsole
             }
             return isValid;
         }
+        public void buffering()
+        {
+
+        }
     }
 }

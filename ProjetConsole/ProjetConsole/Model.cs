@@ -1,5 +1,6 @@
 ﻿using Newtonsoft.Json;
 using System;
+using System.Diagnostics;
 using System.IO;
 using TesJson;
 
@@ -38,7 +39,16 @@ namespace ProjetConsole
             {
                 countfile++;
                 string targetFilePath = Path.Combine(targetDir, file.Name);
+                
+                Stopwatch stopWatch = new Stopwatch();
+                
+                stopWatch.Start();
                 file.CopyTo(targetFilePath, true);
+                stopWatch.Stop();
+
+                string ElapsedTime = String.Format("{0:00}:{1:00}:{2:00}.{3:00}",
+                    stopWatch.Elapsed.Hours, stopWatch.Elapsed.Minutes, 
+                    stopWatch.Elapsed.Seconds, stopWatch.Elapsed.Milliseconds / 100);
 
                 JsonData jsonFileInfo = new JsonData(
                     file.Name,
@@ -48,7 +58,8 @@ namespace ProjetConsole
                     this.TotalFileToCopy,
                     file.Length,
                     this.TotalFileToCopy - countfile,
-                    (countfile * 100) / this.TotalFileToCopy
+                    (countfile * 100) / this.TotalFileToCopy,
+                    ElapsedTime
                     );
                 TableLog.Add(jsonFileInfo);
             }
@@ -60,14 +71,12 @@ namespace ProjetConsole
                 saveFile(subDir.FullName, newDestinationDir);
 
             }
-            TotalFileToCopy = 0;
         }
-
-        public void writelog()
+            public void writelog()
         {
             string json = JsonConvert.SerializeObject(TableLog.ToArray());
 
-            System.IO.File.AppendAllText(@"C:\Users\Gautier\source\repos\ProjectEasySave\ProjetConsole\ProjetConsole\log.json", json);
+            System.IO.File.AppendAllText(@"C:\Users\Gautier\source\repos\ProjectEasySave\ProjetConsole\ProjetConsole\Backup du "+ DateTime.Now.ToString("dddd, dd MMMM yyyy HH:mm:ss") + ".json", json);
         }
 
     }

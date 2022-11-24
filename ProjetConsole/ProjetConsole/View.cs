@@ -67,28 +67,11 @@ namespace ProjetConsole
         {
             Console.WriteLine(Traduction.Instance.Langue.TargetPathInvalid);
         }
-
-        // --------------Version Graphique ------------------
-        /*
-        public void askSourcePathUser(MainWindow fenetre)
-        { this.inputUser = fenetre.TextInputUser.Text; }
-
-
-        public void askTargetPathUser(MainWindow fenetre)
-        { this.inputUser = fenetre.TextInputUser.Text; }
-        */
-
-        // --------------UpdateView------------------
-        /*
-        public void updateView(string upperText)
+        public void targetPathIsInvalid(bool state)
         {
-            Console.WriteLine(upperText);
+            if (!state) { Console.WriteLine(Traduction.Instance.Langue.Buffering); }
+            else { Console.WriteLine(Traduction.Instance.Langue.Complete); }
         }
-        public void updateView(string upperText, MainWindow fenetre)
-        {
-            fenetre.TextResult.Text = upperText;
-        }
-        */
 
     }
 
