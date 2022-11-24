@@ -6,7 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace TesJson
+namespace ProjetConsole
 {
     public class JsonTraduction
     {
