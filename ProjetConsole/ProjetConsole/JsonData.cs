@@ -1,3 +1,4 @@
+        }
 ﻿namespace TesJson
 {
     public class JsonData

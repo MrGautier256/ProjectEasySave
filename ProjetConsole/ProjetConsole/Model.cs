@@ -71,6 +71,7 @@ namespace ProjetConsole
                 saveFile(subDir.FullName, newDestinationDir);
 
             }
+            TotalFileToCopy = 0;
         }
             public void writelog()
         {
