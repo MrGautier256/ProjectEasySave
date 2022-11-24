@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Diagnostics;
-using TesJson;
 
 namespace ProjetConsole
 {
@@ -30,7 +29,9 @@ namespace ProjetConsole
             {
                 model.sourcePath = sourcePath;
                 model.targetPath = targetPath;
+                model.setTotalFileToCopy();
                 model.saveFile(model.sourcePath, model.targetPath);
+                model.writelog();
             }
         }
 
