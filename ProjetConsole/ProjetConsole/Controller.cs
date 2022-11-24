@@ -30,7 +30,7 @@ namespace ProjetConsole
             {
                 model.sourcePath = sourcePath;
                 model.targetPath = targetPath;
-                model.saveFile();
+                model.saveFile(model.sourcePath, model.targetPath);
             }
         }
 
