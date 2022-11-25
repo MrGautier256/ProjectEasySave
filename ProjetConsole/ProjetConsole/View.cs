@@ -11,9 +11,9 @@ namespace ProjetConsole
         private string sourcePath = string.Empty;
         private string targetPath = string.Empty;
         private string targetFile = string.Empty;
-
         public langueEnum askLanguage()
         {
+            Console.ForegroundColor = ConsoleColor.Cyan;
             string langageToPrint = string.Empty;
             foreach (var item in Enum.GetValues(typeof(langueEnum)))
             {
@@ -43,35 +43,47 @@ namespace ProjetConsole
             return language;
         }
 
-        // --------------Version Console------------------
-        public void askSourcePath()
-        {
-            Console.WriteLine(Traduction.Instance.Langue.EnterSourcePath);
-            this.sourcePath = Console.ReadLine() ?? string.Empty;
-        }
-
-        public void askTargetPath()
-        {
-            Console.WriteLine(Traduction.Instance.Langue.EnterTargetFile);
-            this.targetFile = Console.ReadLine() ?? string.Empty;
-            Console.WriteLine(Traduction.Instance.Langue.EnterTargetPath);
-            this.targetPath = Path.Combine(Console.ReadLine() ?? string.Empty, targetFile);
-        }
-
-
-
+        // --------------Get Info------------------
         public string getSourcePath()
         { return this.sourcePath; }
-
         public string getTargetPath()
         { return this.targetPath; }
         public string getTargetFile()
         { return this.targetFile; }
 
+
+        // --------------Ask Info------------------
+        public void askSourcePath()
+        {
+            Console.WriteLine("\n" + Traduction.Instance.Langue.EnterSourcePath);
+            this.sourcePath = Console.ReadLine() ?? string.Empty;
+        }
+        public void askTargetFile()
+        {
+            Console.WriteLine("\n" + Traduction.Instance.Langue.EnterTargetFile);
+            this.targetFile = Console.ReadLine() ?? string.Empty;
+        }
+        public void askTargetPath()
+        {
+            Console.WriteLine("\n" + Traduction.Instance.Langue.EnterTargetPath);
+            this.targetPath = Path.Combine(Console.ReadLine() ?? string.Empty, targetFile);
+        }
+
+        // --------------Info Invalid------------------
         public void sourcePathIsInvalid()
         {
-            Console.WriteLine(Traduction.Instance.Langue.SourcePathInvalid);
+            Console.WriteLine(Traduction.Instance.Langue.SourcePathInvalid + "\n");
         }
+        public void targetPathIsInvalid()
+        {
+            Console.WriteLine(Traduction.Instance.Langue.TargetPathInvalid + "\n");
+        }
+        public void targetDirInvalid()
+        {
+            Console.WriteLine(Traduction.Instance.Langue.targetDirInvalid + "\n");
+        }
+
+        // --------------------------------
         public void progress(bool state)
         {
             if (!state) { Console.WriteLine("\n" + Traduction.Instance.Langue.Buffering); }
@@ -80,17 +92,9 @@ namespace ProjetConsole
         }
         public void Display(string toDisplay)
         {
+            Console.ForegroundColor = ConsoleColor.Green;
             Console.WriteLine(toDisplay);
-        }
-
-        public void targetPathIsInvalid()
-        {
-            Console.WriteLine(Traduction.Instance.Langue.TargetPathInvalid);
-        }
-        public void targetPathIsInvalid(bool state)
-        {
-            if (!state) { Console.WriteLine(Traduction.Instance.Langue.Buffering); }
-            else { Console.WriteLine(Traduction.Instance.Langue.Complete); }
+            Console.ForegroundColor = ConsoleColor.White;
         }
 
     }

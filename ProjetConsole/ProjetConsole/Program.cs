@@ -11,10 +11,8 @@ namespace ProjetConsole
     {
         static void Main()
         {
-
             IController controller = new Controller();
             controller.execute();
-            }
-
+        }
     }
 }

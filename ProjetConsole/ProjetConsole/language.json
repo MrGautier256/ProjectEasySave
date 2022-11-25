@@ -7,7 +7,8 @@
 		"Buffering": "Sauvegarde en cours ",
 		"Complete": "Sauvegarde éffectuée",
 		"EnterTargetFile": "Nommez le fichier de sauvegarde:",
-		"InCopy": "Copie de: "
+		"InCopy": "fichiers sauvegardés",
+		"targetDirInvalid": "Nom de sauvegarde invalide"
 	},
 	"english": {
 		"EnterSourcePath": "Enter source Path:",
@@ -17,7 +18,8 @@
 		"Buffering": "Backup in progress",
 		"Complete": "Backup complete",
 		"EnterTargetFile": "Put a name on the saved file:",
-		"InCopy": "Copy of: "
+		"InCopy": "file saved: ",
+		"targetDirInvalid": "Invalid save name"
 	},
 	"spanish": {
 		"EnterSourcePath": "Entre el camino raiz:",
@@ -27,6 +29,7 @@
 		"Buffering": "Guardando el archivo",
 		"Complete": "el archivo ha sido guardado",
 		"EnterTargetFile": "Asigne un nombre al archivo guardado:",
-		"InCopy": "Copia de: "
+		"InCopy": "Archivos guardados",
+		"targetDirInvalid": "Nombre de guardado invalido"
 	}
 }

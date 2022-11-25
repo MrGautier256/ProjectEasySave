@@ -25,7 +25,7 @@ namespace ProjetConsole
         public string? Buffering;
         public string? Complete;
         public string? InCopy;
-
+        public string? targetDirInvalid;
     }
     public sealed class Traduction
     {

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Diagnostics;
+using System.Text.RegularExpressions;
 
 namespace ProjetConsole
 {
@@ -11,6 +12,7 @@ namespace ProjetConsole
     {
         private Model model;
         private View view;
+        ~Controller(){}
         public Controller()
         {
             model = new Model(this);
@@ -22,27 +24,47 @@ namespace ProjetConsole
             var language = view.askLanguage();
             Traduction.Instance.setLanguage(language);
             view.askSourcePath();
+            view.askTargetFile();
+            string targetFile = view.getTargetFile();
             view.askTargetPath();
             string sourcePath = view.getSourcePath();
             string targetPath = view.getTargetPath();
-            if (checkPathIntegrity(sourcePath, targetPath))
+            if (checkPathIntegrity(sourcePath, targetPath) && !checkTargetDirectory(targetFile))
             {
                 model.sourcePath = sourcePath;
                 model.targetPath = targetPath;
                 model.targetFile = view.getTargetFile(); ;
                 model.setTotalFileToCopy();
                 view.progress(false);
+                model.setTotalSize(model.sourcePath, model.targetPath);
                 model.saveFile(model.sourcePath, model.targetPath);
                 model.writelog();
                 view.progress(true);
             }
         }
-
-        public void sendFileNameToView(string fileName)
+        public void sendProgressInfoToView(string fileName, double countfile, int totalFileToCopy, double percentage)
         {
-            view.Display(Traduction.Instance.Langue.InCopy + fileName);
+            Console.ForegroundColor = ConsoleColor.Green;
+            string text = percentage + "% | " + countfile + "/" + totalFileToCopy +" "+ Traduction.Instance.Langue.InCopy +" | " + fileName;
+            view.Display(text);
+            Console.ForegroundColor = ConsoleColor.White;
         }
-
+        private bool checkTargetDirectory(string DirName)
+        {
+            bool valid;
+            Regex RgxUrl = new Regex("[^a-zA-Z0-9 ]");
+            if (RgxUrl.IsMatch(DirName))
+            {
+                view.targetDirInvalid();
+                valid = true;
+            }
+            else { 
+                valid = false;
+                
+            }
+            
+            return valid;
+        }
         private bool checkPathIntegrity(string source, string target)
         {
             bool integrity = false;
@@ -67,7 +89,8 @@ namespace ProjetConsole
         }
         private bool pathExist(string Path)
         {
-            return Directory.Exists(Path);
+            bool test = Directory.Exists(Path);
+            return test;
         }
         private bool pathIsValid(string path, bool allowRelativePaths = false)
         {
@@ -91,10 +114,6 @@ namespace ProjetConsole
                 isValid = false;
             }
             return isValid;
-        }
-        public void buffering()
-        {
-
         }
     }
 }
