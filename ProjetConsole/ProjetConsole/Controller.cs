@@ -13,7 +13,7 @@ namespace ProjetConsole
         private View view;
         public Controller()
         {
-            model = new Model();
+            model = new Model(this);
             view = new View();
         }
 
@@ -38,12 +38,17 @@ namespace ProjetConsole
             }
         }
 
+        public void sendFileNameToView(string fileName)
+        {
+            view.Display(Traduction.Instance.Langue.InCopy + fileName);
+        }
+
         private bool checkPathIntegrity(string source, string target)
         {
             bool integrity = false;
             if (pathIsValid(source) && pathExist(source))
             {
-                if (pathIsValid(target) && !pathExist(target) && (target!= ""))
+                if (pathIsValid(target) && !pathExist(target) && (target != ""))
                 {
                     integrity = true;
                 }
@@ -77,7 +82,7 @@ namespace ProjetConsole
                 }
                 else
                 {
-                    string root = Path.GetPathRoot(path) ?? string.Empty;
+                    string root = Path.GetPathRoot(path);
                     isValid = string.IsNullOrEmpty(root.Trim(new char[] { '\\', '/' })) == false;
                 }
             }

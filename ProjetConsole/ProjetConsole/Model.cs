@@ -16,6 +16,14 @@ namespace ProjetConsole
         private List<JsonData>? TableLog { get; set; } = new List<JsonData>();
         public int TotalFileToCopy { get; set; }
 
+        private Controller controller;
+
+        public Model(Controller _controller)
+        {
+            this.controller = _controller;
+        }
+
+
         public void setTotalFileToCopy()
         {
             TotalFileToCopy = TotalFileToCopy = Directory.GetFiles(sourcePath, ".", SearchOption.AllDirectories).Length;
@@ -41,15 +49,17 @@ namespace ProjetConsole
             {
                 countfile++;
                 string targetFilePath = Path.Combine(targetDir, file.Name);
-                
+
                 Stopwatch stopWatch = new Stopwatch();
-                
+
                 stopWatch.Start();
+                controller.sendFileNameToView(file.Name);
                 file.CopyTo(targetFilePath, true);
+
                 stopWatch.Stop();
 
                 string ElapsedTime = String.Format("{0:00}:{1:00}:{2:00}.{3:00}",
-                    stopWatch.Elapsed.Hours, stopWatch.Elapsed.Minutes, 
+                    stopWatch.Elapsed.Hours, stopWatch.Elapsed.Minutes,
                     stopWatch.Elapsed.Seconds, stopWatch.Elapsed.Milliseconds / 100);
 
                 JsonData jsonFileInfo = new JsonData(
@@ -76,11 +86,11 @@ namespace ProjetConsole
             }
             TotalFileToCopy = 0;
         }
-            public void writelog()
+        public void writelog()
         {
             string json = JsonConvert.SerializeObject(TableLog.ToArray());
 
-            System.IO.File.AppendAllText(@"C:\Users\Gautier\source\repos\ProjectEasySave\ProjetConsole\ProjetConsole\Logs\"+ targetFile + DateTime.Now.ToString("MM.dd.yyyy") + ".json", json);
+            System.IO.File.AppendAllText(@"C:\Users\Gautier\source\repos\ProjectEasySave\ProjetConsole\ProjetConsole\Logs\" + targetFile + DateTime.Now.ToString("MM.dd.yyyy") + ".json", json);
         }
 
     }

@@ -1,10 +1,11 @@
 ﻿using System;
+using System.Diagnostics;
 using System.Reflection;
 using TesJson;
 
 namespace ProjetConsole
 {
-    public enum langueEnum {english,french,spanish };
+    public enum langueEnum { english, french, spanish };
     public class View
     {
         private string sourcePath = string.Empty;
@@ -13,8 +14,8 @@ namespace ProjetConsole
 
         public langueEnum askLanguage()
         {
-            string langageToPrint = string.Empty; 
-            foreach(var item in Enum.GetValues(typeof(langueEnum)))
+            string langageToPrint = string.Empty;
+            foreach (var item in Enum.GetValues(typeof(langueEnum)))
             {
                 langageToPrint += item + ", ";
             }
@@ -27,7 +28,7 @@ namespace ProjetConsole
                 case "french":
                 case "fr":
                 case "français":
-                case "francais": 
+                case "francais":
                     language = langueEnum.french;
                     break;
                 case "spanish":
@@ -35,7 +36,8 @@ namespace ProjetConsole
                 case "espagnol":
                     language = langueEnum.spanish;
                     break;
-                default: language = langueEnum.english;
+                default:
+                    language = langueEnum.english;
                     break;
             }
             return language;
@@ -45,13 +47,13 @@ namespace ProjetConsole
         public void askSourcePath()
         {
             Console.WriteLine(Traduction.Instance.Langue.EnterSourcePath);
-            this.sourcePath = Console.ReadLine() ?? string.Empty; 
+            this.sourcePath = Console.ReadLine() ?? string.Empty;
         }
 
         public void askTargetPath()
         {
             Console.WriteLine(Traduction.Instance.Langue.EnterTargetFile);
-            this.targetFile= Console.ReadLine() ?? string.Empty;
+            this.targetFile = Console.ReadLine() ?? string.Empty;
             Console.WriteLine(Traduction.Instance.Langue.EnterTargetPath);
             this.targetPath = Path.Combine(Console.ReadLine() ?? string.Empty, targetFile);
         }
@@ -72,9 +74,13 @@ namespace ProjetConsole
         }
         public void progress(bool state)
         {
-            if(!state) {Console.WriteLine("\n"+Traduction.Instance.Langue.Buffering);}
+            if (!state) { Console.WriteLine("\n" + Traduction.Instance.Langue.Buffering); }
             else if (state) { Console.WriteLine("\n" + Traduction.Instance.Langue.Complete); }
 
+        }
+        public void Display(string toDisplay)
+        {
+            Console.WriteLine(toDisplay);
         }
 
         public void targetPathIsInvalid()
