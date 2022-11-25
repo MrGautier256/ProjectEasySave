@@ -19,6 +19,7 @@ namespace ProjetConsole
     {
         public string? SourcePathInvalid;
         public string? TargetPathInvalid;
+        public string? EnterTargetFile;
         public string? EnterSourcePath;
         public string? EnterTargetPath;
         public string? Buffering;

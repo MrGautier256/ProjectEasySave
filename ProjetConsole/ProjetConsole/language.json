@@ -3,15 +3,16 @@
 		"EnterSourcePath": "Entrez le chemin source:",
 		"EnterTargetPath": "Entrez le chemin de destination:",
 		"SourcePathInvalid": "Le chemin source n'existe pas ou n'est pas valide!",
-		"TargetPathInvalid": "Le chemin de destination n'existe pas ou n'est pas valide!",
-		"Buffering":"Sauvegarde en cours ",
-		"Complete":"Sauvegarde éffectuée"
+		"TargetPathInvalid": "Le chemin de destination existe deja ou n'est pas valide!",
+		"Buffering": "Sauvegarde en cours ",
+		"Complete": "Sauvegarde éffectuée",
+		"EnterTargetFile": "Nommez le fichier de sauvegarde:",
 	},
 	"english": {
 		"EnterSourcePath": "Enter source Path:",
 		"EnterTargetPath": "Enter target Path:",
 		"SourcePathInvalid": "Source path does not exist or is invalid!",
-		"TargetPathInvalid": "Destination path does not exist or is invalid!",
+		"TargetPathInvalid": "Destination path already exists or is invalid!",
 		"Buffering": "Backup in progress",
 		"Complete": "Backup complete"
 	},
@@ -19,7 +20,7 @@
 		"EnterSourcePath": "Entre el camino raiz:",
 		"EnterTargetPath": "Entre el camino de destino:",
 		"SourcePathInvalid": "El camino raiz no existe o es invalido!",
-		"TargetPathInvalid": "El camino de destino no existe o es invalido!",
+		"TargetPathInvalid": "El camino de destino ya existe o es invalido!",
 		"Buffering": "Guardando el archivo",
 		"Complete": "el archivo ha sido guardado"
 	}

@@ -10,6 +10,8 @@ namespace ProjetConsole
     {
         public string sourcePath { get; set; } = string.Empty;
         public string targetPath { get; set; } = string.Empty;
+        public string targetFile { get; set; } = string.Empty;
+
         public int countfile { get; set; }
         private List<JsonData>? TableLog { get; set; } = new List<JsonData>();
         public int TotalFileToCopy { get; set; }
@@ -51,6 +53,7 @@ namespace ProjetConsole
                     stopWatch.Elapsed.Seconds, stopWatch.Elapsed.Milliseconds / 100);
 
                 JsonData jsonFileInfo = new JsonData(
+                    targetFile,
                     file.Name,
                     file.FullName,
                     targetFilePath,
@@ -77,7 +80,7 @@ namespace ProjetConsole
         {
             string json = JsonConvert.SerializeObject(TableLog.ToArray());
 
-            System.IO.File.AppendAllText(@"C:\Users\Gautier\source\repos\ProjectEasySave\ProjetConsole\ProjetConsole\Backup du "+ DateTime.Now.ToString("dddd, dd MMMM yyyy HH:mm:ss") + ".json", json);
+            System.IO.File.AppendAllText(@"C:\Users\Gautier\source\repos\ProjectEasySave\ProjetConsole\ProjetConsole\Logs\"+ targetFile + DateTime.Now.ToString("MM.dd.yyyy") + ".json", json);
         }
 
     }

@@ -29,18 +29,21 @@ namespace ProjetConsole
             {
                 model.sourcePath = sourcePath;
                 model.targetPath = targetPath;
+                model.targetFile = view.getTargetFile(); ;
                 model.setTotalFileToCopy();
+                view.progress(false);
                 model.saveFile(model.sourcePath, model.targetPath);
                 model.writelog();
+                view.progress(true);
             }
         }
 
         private bool checkPathIntegrity(string source, string target)
         {
             bool integrity = false;
-            if (pathIsValid(source) && sourcePathExist(source))
+            if (pathIsValid(source) && pathExist(source))
             {
-                if (pathIsValid(target))
+                if (pathIsValid(target) && !pathExist(target) && (target!= ""))
                 {
                     integrity = true;
                 }
@@ -57,19 +60,13 @@ namespace ProjetConsole
             }
             return integrity;
         }
-        private bool sourcePathExist(string sourcePath)
+        private bool pathExist(string Path)
         {
-            bool exist = Directory.Exists(sourcePath);
-            if (!exist)
-            {
-                view.sourcePathIsInvalid();
-            }
-            return exist;
+            return Directory.Exists(Path);
         }
         private bool pathIsValid(string path, bool allowRelativePaths = false)
         {
             bool isValid;
-
             try
             {
                 string fullPath = Path.GetFullPath(path);
