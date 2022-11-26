@@ -104,9 +104,13 @@ namespace ProjetConsole
         }
         public void writelog()
         {
-            string json = JsonConvert.SerializeObject(TableLog.ToArray());
+            string appdataPath = Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData);
+            string path = appdataPath + "/EasySave/Logs/";
 
-            System.IO.File.AppendAllText(@"C:\Users\Gautier\source\repos\ProjectEasySave\ProjetConsole\ProjetConsole\Logs\" + targetFile + DateTime.Now.ToString("MM.dd.yyyy") + ".json", json);
+            if (!Directory.Exists(path)){Directory.CreateDirectory(path);}
+
+            string json = JsonConvert.SerializeObject(TableLog.ToArray());
+            System.IO.File.AppendAllText(path + targetFile + DateTime.Now.ToString("MM.dd.yyyy") + ".json", json);
         }
 
     }
