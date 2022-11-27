@@ -2,7 +2,6 @@
 using System;
 using System.Diagnostics;
 using System.IO;
-using TesJson;
 
 namespace ProjetConsole
 {
@@ -12,13 +11,10 @@ namespace ProjetConsole
         public string targetPath { get; set; } = string.Empty;
         public string targetFile { get; set; } = string.Empty;
         public long totalSize { get; set; } = 0;
-
         public double countfile { get; set; } = 0;
         public double countSize { get; set; } = 0;
-
-        private List<JsonData>? TableLog { get; set; } = new List<JsonData>();
-        public int TotalFileToCopy { get; set; } = 0;
-
+        private List<JsonData>? tableLog { get; set; } = new List<JsonData>();
+        public int totalFileToCopy { get; set; } = 0;
         private Controller controller;
 
         public Model(Controller _controller)
@@ -26,10 +22,11 @@ namespace ProjetConsole
             this.controller = _controller;
         }
 
-        public void setTotalFileToCopy()
-        {
-            TotalFileToCopy = Directory.GetFiles(sourcePath, ".", SearchOption.AllDirectories).Length;
-        }
+        // Définition du nombre de fichier à copier
+        public void setTotalFileToCopy() 
+        {totalFileToCopy = Directory.GetFiles(sourcePath, ".", SearchOption.AllDirectories).Length;}
+
+        // Définition de la taille du contenu a sauvegarder 
         public void setTotalSize(string sourceDir, string targetDir)
         {
             var dir = new DirectoryInfo(sourceDir);
@@ -48,6 +45,7 @@ namespace ProjetConsole
             }
         }
 
+        // Sauvegarde des fichiers
         public void saveFile(string sourceDir, string targetDir)
         {
             var dir = new DirectoryInfo(sourceDir);
@@ -58,7 +56,7 @@ namespace ProjetConsole
             // Create the destination directory
             Directory.CreateDirectory(targetDir);
 
-            // Get the files in the source directory and copy to the destination directory
+            // Get the files in the source directory, copy to the destination directory, send info to the view, add info to a JsonData object and add to list of JsonData objects
             foreach (FileInfo file in dir.GetFiles())
             {
                 countfile++;
@@ -71,7 +69,7 @@ namespace ProjetConsole
 
                 stopWatch.Start();
                 file.CopyTo(targetFilePath, true);
-                controller.sendProgressInfoToView(file.Name, countfile, this.TotalFileToCopy, percentage);
+                controller.sendProgressInfoToView(file.Name, countfile, this.totalFileToCopy, percentage);
                 stopWatch.Stop();
 
                 string ElapsedTime = String.Format("{0:00}:{1:00}:{2:00}.{3:00}",
@@ -84,13 +82,13 @@ namespace ProjetConsole
                     file.FullName,
                     targetFilePath,
                     countfile,
-                    this.TotalFileToCopy,
+                    this.totalFileToCopy,
                     file.Length,
-                    this.TotalFileToCopy - countfile,
+                    this.totalFileToCopy - countfile,
                     percentage,
                     ElapsedTime
                     );
-                TableLog.Add(jsonFileInfo);
+                tableLog.Add(jsonFileInfo);
 
             }
 
@@ -102,15 +100,17 @@ namespace ProjetConsole
 
             }
         }
-        public void writelog()
+
+        // Ecriture des logs contenus dans tableLog dans un fichier au format json dans C:/User/Appdata/EasySave
+        public void writeLog()
         {
             string appdataPath = Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData);
             string path = appdataPath + "/EasySave/Logs/";
 
             if (!Directory.Exists(path)){Directory.CreateDirectory(path);}
 
-            string json = JsonConvert.SerializeObject(TableLog.ToArray());
-            System.IO.File.AppendAllText(path + targetFile + DateTime.Now.ToString("MM.dd.yyyy") + ".json", json);
+            string json = JsonConvert.SerializeObject(tableLog.ToArray());
+            System.IO.File.AppendAllText(path + targetFile + " - " + DateTime.Now.ToString("MM.dd.yyyy") + ".json", json);
         }
 
     }

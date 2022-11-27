@@ -1,5 +1,6 @@
-﻿namespace TesJson
+﻿namespace ProjetConsole
 {
+    // Classe contenant tout les attributs qui seront enregistré dans le fichier .Log
     public class JsonData
     {
         public JsonData(string _SaveName, 
@@ -19,7 +20,7 @@
             TargetFilePath = _TargetFilePath;    
             FileNumber = Math.Truncate(_FileNumber);
             TotalFilesToCopy = _TotalFilesToCopy;
-            filesSize = _filesSize;
+            FilesSize = _filesSize;
             NbFilesLeftToDo = Math.Truncate(_NbFilesLeftToDo); 
             Progression =  Math.Round(_Progression, 2, MidpointRounding.AwayFromZero);
             TimeStamp = DateTime.Now.ToString("MM/dd/yyyy HH’:’mm’:’ss");
@@ -31,7 +32,7 @@
         public string TargetFilePath { get; set; }
         public double FileNumber { get; set; }
         public double TotalFilesToCopy { get; set; }
-        public long filesSize { get; set; }
+        public long FilesSize { get; set; }
         public double NbFilesLeftToDo { get; set; }
         public double Progression { get; set; }
         public string TimeStamp { get; set; }

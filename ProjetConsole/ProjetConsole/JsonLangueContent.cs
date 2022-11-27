@@ -1,5 +1,6 @@
 ﻿namespace ProjetConsole
 {
+    // Classe contenant les différents éléments textuels à afficher pouvant être traduits
     public class JsonLangueContent
     {
         public string? SourcePathInvalid;

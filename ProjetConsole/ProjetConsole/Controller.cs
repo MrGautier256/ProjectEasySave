@@ -4,10 +4,13 @@ using System.Text.RegularExpressions;
 
 namespace ProjetConsole
 {
+    // Interface Icontroller avec comme méthode execute() commune a tout controller
     public interface IController
     {
         public void execute();
     }
+
+    // Classe Controller
     public class Controller : IController
     {
         private Model model;
@@ -19,6 +22,7 @@ namespace ProjetConsole
             view = new View();
         }
 
+        // Execution sucessive des différentes fonctions necessaire au processus de sauvegarde
         public void execute()
         {
             var language = view.askLanguage();
@@ -38,10 +42,12 @@ namespace ProjetConsole
                 view.progress(false);
                 model.setTotalSize(model.sourcePath, model.targetPath);
                 model.saveFile(model.sourcePath, model.targetPath);
-                model.writelog();
+                model.writeLog();
                 view.progress(true);
             }
         }
+
+        // Envoie des informations de copie en temps réelles à la vue pour les afficher
         public void sendProgressInfoToView(string fileName, double countfile, int totalFileToCopy, double percentage)
         {
             Console.ForegroundColor = ConsoleColor.Green;
@@ -49,6 +55,8 @@ namespace ProjetConsole
             view.Display(text);
             Console.ForegroundColor = ConsoleColor.White;
         }
+
+        // Regex verifiant la validité du nom de sauvegarde
         private bool checkTargetDirectory(string DirName)
         {
             bool valid;
@@ -65,6 +73,8 @@ namespace ProjetConsole
             
             return valid;
         }
+
+        // Execution des différentes fonctions de vérification de chemin
         private bool checkPathIntegrity(string source, string target)
         {
             bool integrity = false;
@@ -87,11 +97,15 @@ namespace ProjetConsole
             }
             return integrity;
         }
+
+        // Verification de l'existence du chemin
         private bool pathExist(string Path)
         {
             bool test = Directory.Exists(Path);
             return test;
         }
+
+        // Verification de la validité du format du chemin
         private bool pathIsValid(string path, bool allowRelativePaths = false)
         {
             bool isValid;

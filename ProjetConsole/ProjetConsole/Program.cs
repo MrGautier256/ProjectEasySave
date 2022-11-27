@@ -11,6 +11,7 @@ namespace ProjetConsole
     {
         static void Main()
         {
+            // Instanciation d'un controller et lancement de la fonction "execute"
             IController controller = new Controller();
             controller.execute();
             Console.ReadKey();

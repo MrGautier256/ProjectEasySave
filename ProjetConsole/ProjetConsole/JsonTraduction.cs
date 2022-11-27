@@ -7,11 +7,11 @@ using System.Threading.Tasks;
 
 namespace ProjetConsole
 {
+    // Classe contenant les différentes traductions disponibles du logiciel 
     public class JsonTraduction
     {
         public JsonLangueContent? french;
         public JsonLangueContent? english;
         public JsonLangueContent? spanish;
-
     }
 }

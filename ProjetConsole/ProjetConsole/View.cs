@@ -1,58 +1,18 @@
 ﻿using System;
 using System.Diagnostics;
 using System.Reflection;
-using TesJson;
 
 namespace ProjetConsole
 {
+    // Enumération des langues disponibles
     public enum langueEnum { english, french, spanish };
     public class View
     {
         private string sourcePath = string.Empty;
         private string targetPath = string.Empty;
         private string targetFile = string.Empty;
-        public langueEnum askLanguage()
-        {
-            Console.ForegroundColor = ConsoleColor.Cyan;
-            string langageToPrint = string.Empty;
-            foreach (var item in Enum.GetValues(typeof(langueEnum)))
-            {
-                langageToPrint += item + ", ";
-            }
-            Console.WriteLine("Select language: " + langageToPrint);
-            string? inputLanguage = Console.ReadLine()?.ToLower();
-            langueEnum language;
 
-            switch (inputLanguage)
-            {
-                case "french":
-                case "fr":
-                case "français":
-                case "francais":
-                    language = langueEnum.french;
-                    break;
-                case "spanish":
-                case "es":
-                case "espagnol":
-                    language = langueEnum.spanish;
-                    break;
-                default:
-                    language = langueEnum.english;
-                    break;
-            }
-            return language;
-        }
-
-        // --------------Get Info------------------
-        public string getSourcePath()
-        { return this.sourcePath; }
-        public string getTargetPath()
-        { return this.targetPath; }
-        public string getTargetFile()
-        { return this.targetFile; }
-
-
-        // --------------Ask Info------------------
+        // --------------Ask Info to user methods ------------------
         public void askSourcePath()
         {
             Console.WriteLine("\n" + Traduction.Instance.Langue.EnterSourcePath);
@@ -69,7 +29,48 @@ namespace ProjetConsole
             this.targetPath = Path.Combine(Console.ReadLine() ?? string.Empty, targetFile);
         }
 
-        // --------------Info Invalid------------------
+        public langueEnum askLanguage()
+        {
+            Console.ForegroundColor = ConsoleColor.Cyan;
+            string langageToPrint = string.Empty;
+            foreach (var item in Enum.GetValues(typeof(langueEnum)))
+            {
+                langageToPrint += item + ", ";
+            }
+            Console.WriteLine("Select language: " + langageToPrint);
+            string? inputLanguage = Console.ReadLine()?.ToLower();
+            langueEnum selectedLanguage;
+
+            switch (inputLanguage)
+            {
+                case "french":
+                case "fr":
+                case "français":
+                case "francais":
+                    selectedLanguage = langueEnum.french;
+                    break;
+                case "spanish":
+                case "es":
+                case "espagnol":
+                    selectedLanguage = langueEnum.spanish;
+                    break;
+                default:
+                    selectedLanguage = langueEnum.english;
+                    break;
+            }
+            return selectedLanguage;
+        }
+
+        // --------------Get Info methods------------------
+        public string getSourcePath()
+        { return this.sourcePath; }
+        public string getTargetPath()
+        { return this.targetPath; }
+        public string getTargetFile()
+        { return this.targetFile; }
+
+
+        // ---Méthodes informant l'utilisateurs que des informations sont invalides---
         public void sourcePathIsInvalid()
         {
             Console.WriteLine(Traduction.Instance.Langue.SourcePathInvalid + "\n");
@@ -83,13 +84,15 @@ namespace ProjetConsole
             Console.WriteLine(Traduction.Instance.Langue.targetDirInvalid + "\n");
         }
 
-        // --------------------------------
+        // Affichage du commencement et de la fin de la sauvegarde
         public void progress(bool state)
         {
             if (!state) { Console.WriteLine("\n" + Traduction.Instance.Langue.Buffering); }
             else if (state) { Console.WriteLine("\n" + Traduction.Instance.Langue.Complete); }
 
         }
+
+        // Affichage en temps réel des informations e la sauvegarde (Pourcentage | Nom du fichier | Nombre de fichier restant)
         public void Display(string toDisplay)
         {
             Console.ForegroundColor = ConsoleColor.Green;
