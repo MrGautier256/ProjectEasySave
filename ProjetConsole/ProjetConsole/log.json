@@ -1,0 +1,92 @@
+[
+    {
+        "Name": "Flowgorithm Installer.msi",
+        "SourceFilePath": "C:\\Users\\Gautier\\OneDrive - Association Cesi Viacesi mail\\CESI\\3ème Année\\Projet 2 - Programmation Système\\Projet\\Source\\Flowgorithm Installer.msi",
+        "TargetFilePath": "C:\\Users\\Gautier\\OneDrive - Association Cesi Viacesi mail\\CESI\\3ème Année\\Projet 2 - Programmation Système\\Projet\\Destination\\Flowgorithm Installer.msi",
+        "FileNumber": 1,
+        "TotalFilesToCopy": 9,
+        "TotalFilesSize": 4349440,
+        "NbFilesLeftToDo": 8,
+        "Progression": 11.0
+    },
+    {
+        "Name": "Program.cs",
+        "SourceFilePath": "C:\\Users\\Gautier\\OneDrive - Association Cesi Viacesi mail\\CESI\\3ème Année\\Projet 2 - Programmation Système\\Projet\\Source\\Program.cs",
+        "TargetFilePath": "C:\\Users\\Gautier\\OneDrive - Association Cesi Viacesi mail\\CESI\\3ème Année\\Projet 2 - Programmation Système\\Projet\\Destination\\Program.cs",
+        "FileNumber": 2,
+        "TotalFilesToCopy": 9,
+        "TotalFilesSize": 827,
+        "NbFilesLeftToDo": 7,
+        "Progression": 22.0
+    },
+    {
+        "Name": "test.txt",
+        "SourceFilePath": "C:\\Users\\Gautier\\OneDrive - Association Cesi Viacesi mail\\CESI\\3ème Année\\Projet 2 - Programmation Système\\Projet\\Source\\test.txt",
+        "TargetFilePath": "C:\\Users\\Gautier\\OneDrive - Association Cesi Viacesi mail\\CESI\\3ème Année\\Projet 2 - Programmation Système\\Projet\\Destination\\test.txt",
+        "FileNumber": 3,
+        "TotalFilesToCopy": 9,
+        "TotalFilesSize": 16,
+        "NbFilesLeftToDo": 6,
+        "Progression": 33.0
+    },
+    {
+        "Name": "Texte.txt",
+        "SourceFilePath": "C:\\Users\\Gautier\\OneDrive - Association Cesi Viacesi mail\\CESI\\3ème Année\\Projet 2 - Programmation Système\\Projet\\Source\\Texte.txt",
+        "TargetFilePath": "C:\\Users\\Gautier\\OneDrive - Association Cesi Viacesi mail\\CESI\\3ème Année\\Projet 2 - Programmation Système\\Projet\\Destination\\Texte.txt",
+        "FileNumber": 4,
+        "TotalFilesToCopy": 9,
+        "TotalFilesSize": 3,
+        "NbFilesLeftToDo": 5,
+        "Progression": 44.0
+    },
+    {
+        "Name": "Undertale.url",
+        "SourceFilePath": "C:\\Users\\Gautier\\OneDrive - Association Cesi Viacesi mail\\CESI\\3ème Année\\Projet 2 - Programmation Système\\Projet\\Source\\Undertale.url",
+        "TargetFilePath": "C:\\Users\\Gautier\\OneDrive - Association Cesi Viacesi mail\\CESI\\3ème Année\\Projet 2 - Programmation Système\\Projet\\Destination\\Undertale.url",
+        "FileNumber": 5,
+        "TotalFilesToCopy": 9,
+        "TotalFilesSize": 222,
+        "NbFilesLeftToDo": 4,
+        "Progression": 55.0
+    },
+    {
+        "Name": "Nouveau Archive WinRAR.rar",
+        "SourceFilePath": "C:\\Users\\Gautier\\OneDrive - Association Cesi Viacesi mail\\CESI\\3ème Année\\Projet 2 - Programmation Système\\Projet\\Source\\banane\\Nouveau Archive WinRAR.rar",
+        "TargetFilePath": "C:\\Users\\Gautier\\OneDrive - Association Cesi Viacesi mail\\CESI\\3ème Année\\Projet 2 - Programmation Système\\Projet\\Destination\\banane\\Nouveau Archive WinRAR.rar",
+        "FileNumber": 6,
+        "TotalFilesToCopy": 9,
+        "TotalFilesSize": 24,
+        "NbFilesLeftToDo": 3,
+        "Progression": 66.0
+    },
+    {
+        "Name": "Nouveau Présentation Microsoft PowerPoint.pptx",
+        "SourceFilePath": "C:\\Users\\Gautier\\OneDrive - Association Cesi Viacesi mail\\CESI\\3ème Année\\Projet 2 - Programmation Système\\Projet\\Source\\banane\\dossier dans banane\\Nouveau Présentation Microsoft PowerPoint.pptx",
+        "TargetFilePath": "C:\\Users\\Gautier\\OneDrive - Association Cesi Viacesi mail\\CESI\\3ème Année\\Projet 2 - Programmation Système\\Projet\\Destination\\banane\\dossier dans banane\\Nouveau Présentation Microsoft PowerPoint.pptx",
+        "FileNumber": 7,
+        "TotalFilesToCopy": 9,
+        "TotalFilesSize": 0,
+        "NbFilesLeftToDo": 2,
+        "Progression": 77.0
+    },
+    {
+        "Name": "Nouveau document RTF.rtf",
+        "SourceFilePath": "C:\\Users\\Gautier\\OneDrive - Association Cesi Viacesi mail\\CESI\\3ème Année\\Projet 2 - Programmation Système\\Projet\\Source\\cerise\\Nouveau document RTF.rtf",
+        "TargetFilePath": "C:\\Users\\Gautier\\OneDrive - Association Cesi Viacesi mail\\CESI\\3ème Année\\Projet 2 - Programmation Système\\Projet\\Destination\\cerise\\Nouveau document RTF.rtf",
+        "FileNumber": 8,
+        "TotalFilesToCopy": 9,
+        "TotalFilesSize": 7,
+        "NbFilesLeftToDo": 1,
+        "Progression": 88.0
+    },
+    {
+        "Name": "Nouveau Archive WinRAR.rar",
+        "SourceFilePath": "C:\\Users\\Gautier\\OneDrive - Association Cesi Viacesi mail\\CESI\\3ème Année\\Projet 2 - Programmation Système\\Projet\\Source\\cerise\\dossier dans cerise\\Nouveau Archive WinRAR.rar",
+        "TargetFilePath": "C:\\Users\\Gautier\\OneDrive - Association Cesi Viacesi mail\\CESI\\3ème Année\\Projet 2 - Programmation Système\\Projet\\Destination\\cerise\\dossier dans cerise\\Nouveau Archive WinRAR.rar",
+        "FileNumber": 9,
+        "TotalFilesToCopy": 9,
+        "TotalFilesSize": 24,
+        "NbFilesLeftToDo": 0,
+        "Progression": 100.0
+    }
+][{"Name":"Flowgorithm Installer.msi","SourceFilePath":"C:\\Users\\Gautier\\OneDrive - Association Cesi Viacesi mail\\CESI\\3ème Année\\Projet 2 - Programmation Système\\Projet\\Source\\Flowgorithm Installer.msi","TargetFilePath":"D:/Flowgorithm Installer.msi","FileNumber":1,"TotalFilesToCopy":9,"TotalFilesSize":4349440,"NbFilesLeftToDo":8,"Progression":11.0},{"Name":"Program.cs","SourceFilePath":"C:\\Users\\Gautier\\OneDrive - Association Cesi Viacesi mail\\CESI\\3ème Année\\Projet 2 - Programmation Système\\Projet\\Source\\Program.cs","TargetFilePath":"D:/Program.cs","FileNumber":2,"TotalFilesToCopy":9,"TotalFilesSize":827,"NbFilesLeftToDo":7,"Progression":22.0},{"Name":"test.txt","SourceFilePath":"C:\\Users\\Gautier\\OneDrive - Association Cesi Viacesi mail\\CESI\\3ème Année\\Projet 2 - Programmation Système\\Projet\\Source\\test.txt","TargetFilePath":"D:/test.txt","FileNumber":3,"TotalFilesToCopy":9,"TotalFilesSize":16,"NbFilesLeftToDo":6,"Progression":33.0},{"Name":"Texte.txt","SourceFilePath":"C:\\Users\\Gautier\\OneDrive - Association Cesi Viacesi mail\\CESI\\3ème Année\\Projet 2 - Programmation Système\\Projet\\Source\\Texte.txt","TargetFilePath":"D:/Texte.txt","FileNumber":4,"TotalFilesToCopy":9,"TotalFilesSize":3,"NbFilesLeftToDo":5,"Progression":44.0},{"Name":"Undertale.url","SourceFilePath":"C:\\Users\\Gautier\\OneDrive - Association Cesi Viacesi mail\\CESI\\3ème Année\\Projet 2 - Programmation Système\\Projet\\Source\\Undertale.url","TargetFilePath":"D:/Undertale.url","FileNumber":5,"TotalFilesToCopy":9,"TotalFilesSize":222,"NbFilesLeftToDo":4,"Progression":55.0},{"Name":"Nouveau Archive WinRAR.rar","SourceFilePath":"C:\\Users\\Gautier\\OneDrive - Association Cesi Viacesi mail\\CESI\\3ème Année\\Projet 2 - Programmation Système\\Projet\\Source\\banane\\Nouveau Archive WinRAR.rar","TargetFilePath":"D:/banane\\Nouveau Archive WinRAR.rar","FileNumber":6,"TotalFilesToCopy":9,"TotalFilesSize":24,"NbFilesLeftToDo":3,"Progression":66.0},{"Name":"Nouveau Présentation Microsoft PowerPoint.pptx","SourceFilePath":"C:\\Users\\Gautier\\OneDrive - Association Cesi Viacesi mail\\CESI\\3ème Année\\Projet 2 - Programmation Système\\Projet\\Source\\banane\\dossier dans banane\\Nouveau Présentation Microsoft PowerPoint.pptx","TargetFilePath":"D:/banane\\dossier dans banane\\Nouveau Présentation Microsoft PowerPoint.pptx","FileNumber":7,"TotalFilesToCopy":9,"TotalFilesSize":0,"NbFilesLeftToDo":2,"Progression":77.0},{"Name":"Nouveau document RTF.rtf","SourceFilePath":"C:\\Users\\Gautier\\OneDrive - Association Cesi Viacesi mail\\CESI\\3ème Année\\Projet 2 - Programmation Système\\Projet\\Source\\cerise\\Nouveau document RTF.rtf","TargetFilePath":"D:/cerise\\Nouveau document RTF.rtf","FileNumber":8,"TotalFilesToCopy":9,"TotalFilesSize":7,"NbFilesLeftToDo":1,"Progression":88.0},{"Name":"Nouveau Archive WinRAR.rar","SourceFilePath":"C:\\Users\\Gautier\\OneDrive - Association Cesi Viacesi mail\\CESI\\3ème Année\\Projet 2 - Programmation Système\\Projet\\Source\\cerise\\dossier dans cerise\\Nouveau Archive WinRAR.rar","TargetFilePath":"D:/cerise\\dossier dans cerise\\Nouveau Archive WinRAR.rar","FileNumber":9,"TotalFilesToCopy":9,"TotalFilesSize":24,"NbFilesLeftToDo":0,"Progression":100.0}]

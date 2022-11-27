@@ -6,7 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace TesJson
+namespace ProjetConsole
 {
     public class JsonTraduction
     {
@@ -21,6 +21,8 @@ namespace TesJson
         public string? TargetPathInvalid;
         public string? EnterSourcePath;
         public string? EnterTargetPath;
+        public string? Buffering;
+        public string? Complete;
 
     }
     public sealed class Traduction
