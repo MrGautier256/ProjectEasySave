@@ -1,34 +1,41 @@
-        }
 ﻿namespace TesJson
 {
     public class JsonData
     {
-        public JsonData(string _Name, string _SourceFilePath, string _TargetFilePath, int _FileNumber, 
-            int _TotalFilesToCopy, long _TotalFilesSize, int _NbFilesLeftToDo, float _Progression, string _Duration) 
+        public JsonData(string _SaveName, 
+            string _FileName, 
+            string _SourceFilePath, 
+            string _TargetFilePath, 
+            double _FileNumber, 
+            int _TotalFilesToCopy, 
+            long _filesSize, 
+            double _NbFilesLeftToDo, 
+            double _Progression, 
+            string _Duration) 
         {
-            Name= _Name;
-            SourceFilePath= _SourceFilePath;    
-            TargetFilePath= _TargetFilePath;    
-            FileNumber= _FileNumber;
-            TotalFilesToCopy= _TotalFilesToCopy;
-            TotalFilesSize= _TotalFilesSize;
-            NbFilesLeftToDo= _NbFilesLeftToDo;
-            Progression = _Progression;
+            SaveName = _SaveName;
+            FileName = _FileName;
+            SourceFilePath = _SourceFilePath;    
+            TargetFilePath = _TargetFilePath;    
+            FileNumber = Math.Truncate(_FileNumber);
+            TotalFilesToCopy = _TotalFilesToCopy;
+            filesSize = _filesSize;
+            NbFilesLeftToDo = Math.Truncate(_NbFilesLeftToDo); 
+            Progression =  Math.Round(_Progression, 2, MidpointRounding.AwayFromZero);
             TimeStamp = DateTime.Now.ToString("MM/dd/yyyy HH’:’mm’:’ss");
             Duration = _Duration;
         }
-        public string Name { get; set; }
+        public string SaveName { get; set; }
+        public string FileName { get; set; }
         public string SourceFilePath { get; set; }
         public string TargetFilePath { get; set; }
-        public int FileNumber { get; set; }
-        public int TotalFilesToCopy { get; set; }
-        public long TotalFilesSize { get; set; }
-        public int NbFilesLeftToDo { get; set; }
-        public float Progression { get; set; }
+        public double FileNumber { get; set; }
+        public double TotalFilesToCopy { get; set; }
+        public long filesSize { get; set; }
+        public double NbFilesLeftToDo { get; set; }
+        public double Progression { get; set; }
         public string TimeStamp { get; set; }
         public string Duration { get; set; }
-
-
 
     }
 

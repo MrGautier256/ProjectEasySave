@@ -1,20 +1,21 @@
 ﻿using System;
+using System.Diagnostics;
 using System.Reflection;
 using TesJson;
 
 namespace ProjetConsole
 {
-    public enum langueEnum {english,french,spanish };
+    public enum langueEnum { english, french, spanish };
     public class View
     {
-        string sourcePath = string.Empty;
-        string targetPath = string.Empty;
-
-    
+        private string sourcePath = string.Empty;
+        private string targetPath = string.Empty;
+        private string targetFile = string.Empty;
         public langueEnum askLanguage()
         {
-            string langageToPrint = string.Empty; 
-            foreach(var item in Enum.GetValues(typeof(langueEnum)))
+            Console.ForegroundColor = ConsoleColor.Cyan;
+            string langageToPrint = string.Empty;
+            foreach (var item in Enum.GetValues(typeof(langueEnum)))
             {
                 langageToPrint += item + ", ";
             }
@@ -27,7 +28,7 @@ namespace ProjetConsole
                 case "french":
                 case "fr":
                 case "français":
-                case "francais": 
+                case "francais":
                     language = langueEnum.french;
                     break;
                 case "spanish":
@@ -35,42 +36,65 @@ namespace ProjetConsole
                 case "espagnol":
                     language = langueEnum.spanish;
                     break;
-                default: language = langueEnum.english;
+                default:
+                    language = langueEnum.english;
                     break;
             }
             return language;
         }
 
-        // --------------Version Console------------------
+        // --------------Get Info------------------
+        public string getSourcePath()
+        { return this.sourcePath; }
+        public string getTargetPath()
+        { return this.targetPath; }
+        public string getTargetFile()
+        { return this.targetFile; }
+
+
+        // --------------Ask Info------------------
         public void askSourcePath()
         {
-            Console.WriteLine(Traduction.Instance.Langue.EnterSourcePath);
-            this.sourcePath = Console.ReadLine() ?? string.Empty; 
+            Console.WriteLine("\n" + Traduction.Instance.Langue.EnterSourcePath);
+            this.sourcePath = Console.ReadLine() ?? string.Empty;
+        }
+        public void askTargetFile()
+        {
+            Console.WriteLine("\n" + Traduction.Instance.Langue.EnterTargetFile);
+            this.targetFile = Console.ReadLine() ?? string.Empty;
         }
         public void askTargetPath()
         {
-            Console.WriteLine(Traduction.Instance.Langue.EnterTargetPath);
-            this.targetPath = Console.ReadLine() ?? string.Empty; 
+            Console.WriteLine("\n" + Traduction.Instance.Langue.EnterTargetPath);
+            this.targetPath = Path.Combine(Console.ReadLine() ?? string.Empty, targetFile);
         }
 
-        public string getSourcePath()
-        { return this.sourcePath; }
-
-        public string getTargetPath()
-        { return this.targetPath; }
-
+        // --------------Info Invalid------------------
         public void sourcePathIsInvalid()
         {
-            Console.WriteLine(Traduction.Instance.Langue.SourcePathInvalid);
+            Console.WriteLine(Traduction.Instance.Langue.SourcePathInvalid + "\n");
         }
         public void targetPathIsInvalid()
         {
-            Console.WriteLine(Traduction.Instance.Langue.TargetPathInvalid);
+            Console.WriteLine(Traduction.Instance.Langue.TargetPathInvalid + "\n");
         }
-        public void targetPathIsInvalid(bool state)
+        public void targetDirInvalid()
         {
-            if (!state) { Console.WriteLine(Traduction.Instance.Langue.Buffering); }
-            else { Console.WriteLine(Traduction.Instance.Langue.Complete); }
+            Console.WriteLine(Traduction.Instance.Langue.targetDirInvalid + "\n");
+        }
+
+        // --------------------------------
+        public void progress(bool state)
+        {
+            if (!state) { Console.WriteLine("\n" + Traduction.Instance.Langue.Buffering); }
+            else if (state) { Console.WriteLine("\n" + Traduction.Instance.Langue.Complete); }
+
+        }
+        public void Display(string toDisplay)
+        {
+            Console.ForegroundColor = ConsoleColor.Green;
+            Console.WriteLine(toDisplay);
+            Console.ForegroundColor = ConsoleColor.White;
         }
 
     }
