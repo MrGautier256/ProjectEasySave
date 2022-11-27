@@ -1,2 +1,75 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<ClassDiagram /> 
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="ProjetConsole.Controller" Collapsed="true">
+    <Position X="6.5" Y="0.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AABAAAAAEAAAABAAAAAEAAAAAAAAAAAAAQAEAAAIBAA=</HashCode>
+      <FileName>Controller.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="TesJson.JsonData" Collapsed="true">
+    <Position X="10.5" Y="3" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAACAACAAAICACAMAAAAAAAAAAAAAAABAAAgAABCAAA=</HashCode>
+      <FileName>JsonData.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ProjetConsole.JsonLangueContent" Collapsed="true">
+    <Position X="10.25" Y="0.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAADAAAAAAAAAAICAACAAAACAAAAAAgCAAAAAAAEAAA=</HashCode>
+      <FileName>JsonLangueContent.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ProjetConsole.JsonTraduction" Collapsed="true">
+    <Position X="12.5" Y="5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AIAAAAAAAAAAAAAAAAAAAAAAABAAAAQAAAAAAAAAAAA=</HashCode>
+      <FileName>JsonTraduction.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ProjetConsole.Model" Collapsed="true">
+    <Position X="12.75" Y="3.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAgAACAAACAgQAEAAgABAABAABAECAAAAAAAAgAAAAA=</HashCode>
+      <FileName>Model.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ProjetConsole.Program" Collapsed="true">
+    <Position X="13.5" Y="4" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABAAAAAA=</HashCode>
+      <FileName>Program.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ProjetConsole.Traduction" Collapsed="true">
+    <Position X="9" Y="4.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAEAAAAAAAAAAAAAAAAAAQAAgAAAIAASAAAAAAAAAA=</HashCode>
+      <FileName>Traduction.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ProjetConsole.View" Collapsed="true">
+    <Position X="6" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAABEAAACCCAQAAAAAAACQBAIBAAAACABIAAABAAAAA=</HashCode>
+      <FileName>View.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Interface Name="ProjetConsole.IController" Collapsed="true">
+    <Position X="6.5" Y="2" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAEAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Controller.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Enum Name="ProjetConsole.langueEnum" Collapsed="true">
+    <Position X="6" Y="4.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AIAAAAAAAAAAAAAAAAAAAAAAABAAAAQAAAAAAAAAAAA=</HashCode>
+      <FileName>View.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>
