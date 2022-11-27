@@ -5,6 +5,7 @@ using System.Reflection;
 namespace ProjetConsole
 {
     // Enumération des langues disponibles
+    //Enumeration of the available languages
     public enum langueEnum { english, french, spanish };
     public class View
     {
@@ -12,7 +13,8 @@ namespace ProjetConsole
         private string targetPath = string.Empty;
         private string targetFile = string.Empty;
 
-        // --------------Ask Info to user methods ------------------
+        // --------------Demande d'informations à l'utilisateur (méthode) ------------------
+        // --------------Ask Informations to user (methods) ------------------
         public void askSourcePath()
         {
             Console.WriteLine("\n" + Traduction.Instance.Langue.EnterSourcePath);
@@ -61,7 +63,8 @@ namespace ProjetConsole
             return selectedLanguage;
         }
 
-        // --------------Get Info methods------------------
+        // --------------Récupération d'information (méthode)------------------
+        // --------------Get Info (methods)------------------
         public string getSourcePath()
         { return this.sourcePath; }
         public string getTargetPath()
@@ -71,6 +74,7 @@ namespace ProjetConsole
 
 
         // ---Méthodes informant l'utilisateurs que des informations sont invalides---
+        // ---methods informing the user that information is invalid---
         public void sourcePathIsInvalid()
         {
             Console.WriteLine(Traduction.Instance.Langue.SourcePathInvalid + "\n");
@@ -85,6 +89,7 @@ namespace ProjetConsole
         }
 
         // Affichage du commencement et de la fin de la sauvegarde
+        // Display of the beginning and the end of the back-up
         public void progress(bool state)
         {
             if (!state) { Console.WriteLine("\n" + Traduction.Instance.Langue.Buffering); }
@@ -92,7 +97,8 @@ namespace ProjetConsole
 
         }
 
-        // Affichage en temps réel des informations e la sauvegarde (Pourcentage | Nom du fichier | Nombre de fichier restant)
+        // Affichage en temps réel des informations de la sauvegarde (Pourcentage | Nom du fichier | Nombre de fichier restant)
+        // Display in real time the informations of the back-up (Percentage | File's name | Number of remaining files)
         public void Display(string toDisplay)
         {
             Console.ForegroundColor = ConsoleColor.Green;

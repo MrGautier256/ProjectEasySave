@@ -22,11 +22,13 @@ namespace ProjetConsole
             this.controller = _controller;
         }
 
-        // Définition du nombre de fichier à copier
+        // Calcul du nombre de fichier à copier
+        // Calculating the number of files to copy
         public void setTotalFileToCopy() 
         {totalFileToCopy = Directory.GetFiles(sourcePath, ".", SearchOption.AllDirectories).Length;}
 
-        // Définition de la taille du contenu a sauvegarder 
+        // Calcul de la taille du contenu a sauvegarder 
+        // Calculating the size of the contents to back-up
         public void setTotalSize(string sourceDir, string targetDir)
         {
             var dir = new DirectoryInfo(sourceDir);
@@ -46,17 +48,21 @@ namespace ProjetConsole
         }
 
         // Sauvegarde des fichiers
+        // Backing-up the files 
         public void saveFile(string sourceDir, string targetDir)
         {
             var dir = new DirectoryInfo(sourceDir);
 
+            // Stock des dossiers dans un tableau
             // Cache directories in a array
             DirectoryInfo[] dirs = dir.GetDirectories();
 
+            // Création du dossier destination
             // Create the destination directory
             Directory.CreateDirectory(targetDir);
 
-            // Get the files in the source directory, copy to the destination directory, send info to the view, add info to a JsonData object and add to list of JsonData objects
+            //Récupération des fichiers dans le dossier source, copie vers le dossier destination, envoie des informations vers la view, ajout des informations à un objet de type JsonData et ajout à une liste de d'objets JsonData 
+            // Get the files in the source directory, copy to the destination directory, send info to the view, add info to a JsonData object and add it to a list of JsonData objects
             foreach (FileInfo file in dir.GetFiles())
             {
                 countfile++;
@@ -92,6 +98,7 @@ namespace ProjetConsole
 
             }
 
+            // Si il y a des sous-dossiers, copie les sous-dossiers et appelle la méthode récursivement 
             // If there is subdirecories, copying subdirectories and recursively call this method
             foreach (DirectoryInfo subDir in dirs)
             {
@@ -101,7 +108,8 @@ namespace ProjetConsole
             }
         }
 
-        // Ecriture des logs contenus dans tableLog dans un fichier au format json dans C:/User/Appdata/EasySave
+        // Ecriture des logs contenus dans tableLog dans un fichier au format json dans C:/User/Utilisateur/Appdata/EasySave/Logs
+        // Writing of the logs contained in tableLog in a json file in C:/User/Utilisateur/Appdata/EasySave/Logs
         public void writeLog()
         {
             string appdataPath = Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData);

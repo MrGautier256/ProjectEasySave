@@ -5,12 +5,14 @@ using System.Text.RegularExpressions;
 namespace ProjetConsole
 {
     // Interface Icontroller avec comme méthode execute() commune a tout controller
+    // Icontroller interface with execute() as shared method to all the controllers
     public interface IController
     {
         public void execute();
     }
 
     // Classe Controller
+    // Class Controller
     public class Controller : IController
     {
         private Model model;
@@ -23,6 +25,7 @@ namespace ProjetConsole
         }
 
         // Execution sucessive des différentes fonctions necessaire au processus de sauvegarde
+        // Sucessive execution of the multiple functions necessary to the process of back-up 
         public void execute()
         {
             var language = view.askLanguage();
@@ -48,6 +51,7 @@ namespace ProjetConsole
         }
 
         // Envoie des informations de copie en temps réelles à la vue pour les afficher
+        // Sending the informations to copy in real time to the view in order to display them
         public void sendProgressInfoToView(string fileName, double countfile, int totalFileToCopy, double percentage)
         {
             Console.ForegroundColor = ConsoleColor.Green;
@@ -57,6 +61,7 @@ namespace ProjetConsole
         }
 
         // Regex verifiant la validité du nom de sauvegarde
+        // Regex checking the validity of the Back-up's name
         private bool checkTargetDirectory(string DirName)
         {
             bool valid;
@@ -75,6 +80,7 @@ namespace ProjetConsole
         }
 
         // Execution des différentes fonctions de vérification de chemin
+        // Execution of the different path control functions 
         private bool checkPathIntegrity(string source, string target)
         {
             bool integrity = false;
@@ -99,6 +105,7 @@ namespace ProjetConsole
         }
 
         // Verification de l'existence du chemin
+        // Verifying the path existence 
         private bool pathExist(string Path)
         {
             bool test = Directory.Exists(Path);
@@ -106,6 +113,8 @@ namespace ProjetConsole
         }
 
         // Verification de la validité du format du chemin
+        // Verifying the validity of the path format
+
         private bool pathIsValid(string path, bool allowRelativePaths = false)
         {
             bool isValid;

@@ -1,6 +1,7 @@
 ﻿namespace ProjetConsole
 {
     // Classe contenant tout les attributs qui seront enregistré dans le fichier .Log
+    // Class containing all the attributes who will be saved in the .Log file
     public class JsonData
     {
         public JsonData(string _SaveName, 
