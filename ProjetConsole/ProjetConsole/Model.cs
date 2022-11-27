@@ -70,7 +70,7 @@ namespace ProjetConsole
                 Stopwatch stopWatch = new Stopwatch();
 
                 stopWatch.Start();
-                //file.CopyTo(targetFilePath, true);
+                file.CopyTo(targetFilePath, true);
                 controller.sendProgressInfoToView(file.Name, countfile, this.TotalFileToCopy, percentage);
                 stopWatch.Stop();
 

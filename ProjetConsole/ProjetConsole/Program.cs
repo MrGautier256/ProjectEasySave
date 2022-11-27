@@ -13,6 +13,7 @@ namespace ProjetConsole
         {
             IController controller = new Controller();
             controller.execute();
+            Console.ReadKey();
         }
     }
 }
