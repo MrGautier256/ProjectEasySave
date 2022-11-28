@@ -78,12 +78,20 @@ namespace ProjetConsole
         public void writeLog()
         {
             string appdataPath = Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData);
-            string path = $"{appdataPath}/EasySave/Logs/";
-
+            string path = $"{appdataPath}\\EasySave\\Logs\\";
+            string fileFullName = $"{path}{targetFile} - {DateTime.Now.ToString("MM.dd.yyyy")}.json";
             if (!Directory.Exists(path)) { Directory.CreateDirectory(path); }
 
+            int i = 1;
+             while (File.Exists(fileFullName))
+            {
+                i++;
+                fileFullName = $"{path}{targetFile}{i} - {DateTime.Now.ToString("MM.dd.yyyy")}.json";
+            }
+
+            Console.WriteLine(fileFullName);
             string json = JsonConvert.SerializeObject(tableLog.ToArray());
-            System.IO.File.AppendAllText($"{path}{targetFile} - {DateTime.Now.ToString("MM.dd.yyyy")}.json", json);
+            System.IO.File.AppendAllText(fileFullName, json);
         }
 
     }
