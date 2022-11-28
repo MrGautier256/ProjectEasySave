@@ -17,15 +17,17 @@ namespace ProjetConsole
     {
         private Model model;
         private View view;
-        ~Controller(){}
+        ~Controller() { }
         public Controller()
         {
             model = new Model(this);
             view = new View();
         }
 
-        // Execution sucessive des différentes fonctions necessaire au processus de sauvegarde
-        // Sucessive execution of the multiple functions necessary to the process of back-up 
+        /// <summary>
+        /// Execution sucessive des différentes fonctions necessaire au processus de sauvegarde
+        /// Sucessive execution of the multiple functions necessary to the process of back-up 
+        /// </summary>
         public void execute()
         {
             var language = view.askLanguage();
@@ -41,22 +43,28 @@ namespace ProjetConsole
                 model.sourcePath = sourcePath;
                 model.targetPath = targetPath;
                 model.targetFile = view.getTargetFile(); ;
-                model.setTotalFileToCopy();
                 view.progress(false);
-                model.setTotalSize(model.sourcePath, model.targetPath);
                 model.saveFile(model.sourcePath, model.targetPath);
                 model.writeLog();
                 view.progress(true);
             }
         }
 
-        // Envoie des informations de copie en temps réelles à la vue pour les afficher
-        // Sending the informations to copy in real time to the view in order to display them
+
+
+        /// <summary>
+        ///Envoie des informations de copie en temps réelles à la vue pour les afficher
+        /// Sending the informations to copy in real time to the view in order to display them
+        /// </summary>
+        /// <param name="fileName">toto</param>
+        /// <param name="countfile"></param>
+        /// <param name="totalFileToCopy"></param>
+        /// <param name="percentage"></param>
         public void sendProgressInfoToView(string fileName, double countfile, int totalFileToCopy, double percentage)
         {
             Console.ForegroundColor = ConsoleColor.Green;
-            string text = percentage + "% | " + countfile + "/" + totalFileToCopy +" "+ Traduction.Instance.Langue.InCopy +" | " + fileName;
-            view.Display(text);
+            string text = $"{percentage}% | {countfile}/{totalFileToCopy} {Traduction.Instance.Langue.InCopy} | {fileName}";
+            view.display(text);
             Console.ForegroundColor = ConsoleColor.White;
         }
 
@@ -71,11 +79,9 @@ namespace ProjetConsole
                 view.targetDirInvalid();
                 valid = true;
             }
-            else { 
-                valid = false;
-                
-            }
-            
+            else
+            {valid = false;}
+
             return valid;
         }
 
@@ -86,7 +92,7 @@ namespace ProjetConsole
             bool integrity = false;
             if (pathIsValid(source) && pathExist(source))
             {
-                if (pathIsValid(target) && !pathExist(target) && (target != ""))
+                if (pathIsValid(target) && (target != ""))
                 {
                     integrity = true;
                 }
@@ -128,8 +134,8 @@ namespace ProjetConsole
                 }
                 else
                 {
-                    string root = Path.GetPathRoot(path);
-                    isValid = string.IsNullOrEmpty(root.Trim(new char[] { '\\', '/' })) == false;
+                    string? root = Path.GetPathRoot(path);
+                    isValid = string.IsNullOrEmpty(root?.Trim(new char[] { '\\', '/' })) == false;
                 }
             }
             catch

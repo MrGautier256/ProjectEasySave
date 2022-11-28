@@ -37,7 +37,7 @@ namespace ProjetConsole
             string langageToPrint = string.Empty;
             foreach (var item in Enum.GetValues(typeof(langueEnum)))
             {
-                langageToPrint += item + ", ";
+                langageToPrint += $"{item}, ";
             }
             Console.WriteLine("Select language: " + langageToPrint);
             string? inputLanguage = Console.ReadLine()?.ToLower();
@@ -99,7 +99,7 @@ namespace ProjetConsole
 
         // Affichage en temps réel des informations de la sauvegarde (Pourcentage | Nom du fichier | Nombre de fichier restant)
         // Display in real time the informations of the back-up (Percentage | File's name | Number of remaining files)
-        public void Display(string toDisplay)
+        public void display(string toDisplay)
         {
             Console.ForegroundColor = ConsoleColor.Green;
             Console.WriteLine(toDisplay);
