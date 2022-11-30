@@ -32,14 +32,19 @@ namespace ProjetConsole
         {
             var language = view.askLanguage();
             Traduction.Instance.setLanguage(language);
+            string logType = view.asklogType();
+
             view.askSourcePath();
             view.askTargetFile();
-            string targetFile = view.getTargetFile();
             view.askTargetPath();
+
+            string targetFile = view.getTargetFile();
             string sourcePath = view.getSourcePath();
             string targetPath = view.getTargetPath();
+
             if (checkPathIntegrity(sourcePath, targetPath) && !checkTargetDirectory(targetFile))
             {
+                model.logType = setLogType(logType);
                 model.sourcePath = sourcePath;
                 model.targetPath = targetPath;
                 model.targetFile = view.getTargetFile(); ;
@@ -50,6 +55,17 @@ namespace ProjetConsole
             }
         }
 
+        private string setLogType(string logtype)
+        {
+            if (logtype == "xml")
+            {
+                return "xml";
+            }
+            else
+            {
+                return "json";
+            }
+        }
 
 
         /// <summary>
@@ -80,7 +96,7 @@ namespace ProjetConsole
                 valid = true;
             }
             else
-            {valid = false;}
+            { valid = false; }
 
             return valid;
         }

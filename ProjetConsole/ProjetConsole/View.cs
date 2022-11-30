@@ -30,6 +30,11 @@ namespace ProjetConsole
             Console.WriteLine("\n" + Traduction.Instance.Langue.EnterTargetPath);
             this.targetPath = Path.Combine(Console.ReadLine() ?? string.Empty, targetFile);
         }
+        public string asklogType()
+        {
+            Console.WriteLine("\n" + Traduction.Instance.Langue.EnterLogType);
+            return Console.ReadLine().ToLower() ?? string.Empty;
+        }
 
         public langueEnum askLanguage()
         {
@@ -76,17 +81,11 @@ namespace ProjetConsole
         // ---Méthodes informant l'utilisateurs que des informations sont invalides---
         // ---methods informing the user that information is invalid---
         public void sourcePathIsInvalid()
-        {
-            Console.WriteLine(Traduction.Instance.Langue.SourcePathInvalid + "\n");
-        }
+        { Console.WriteLine(Traduction.Instance.Langue.SourcePathInvalid + "\n"); }
         public void targetPathIsInvalid()
-        {
-            Console.WriteLine(Traduction.Instance.Langue.TargetPathInvalid + "\n");
-        }
+        { Console.WriteLine(Traduction.Instance.Langue.TargetPathInvalid + "\n"); }
         public void targetDirInvalid()
-        {
-            Console.WriteLine(Traduction.Instance.Langue.targetDirInvalid + "\n");
-        }
+        { Console.WriteLine(Traduction.Instance.Langue.targetDirInvalid + "\n"); }
 
         // Affichage du commencement et de la fin de la sauvegarde
         // Display of the beginning and the end of the back-up
@@ -94,7 +93,6 @@ namespace ProjetConsole
         {
             if (!state) { Console.WriteLine("\n" + Traduction.Instance.Langue.Buffering); }
             else if (state) { Console.WriteLine("\n" + Traduction.Instance.Langue.Complete); }
-
         }
 
         // Affichage en temps réel des informations de la sauvegarde (Pourcentage | Nom du fichier | Nombre de fichier restant)

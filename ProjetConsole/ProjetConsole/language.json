@@ -8,7 +8,8 @@
 		"Complete": "Sauvegarde éffectuée",
 		"EnterTargetFile": "Nommez le fichier de sauvegarde:",
 		"InCopy": "fichiers sauvegardés",
-		"targetDirInvalid": "Nom de sauvegarde invalide"
+		"targetDirInvalid": "Nom de sauvegarde invalide",
+		"EnterLogType": "Entrez le type de fichier de log: json, Xml \n(Json par defaut)"
 	},
 	"english": {
 		"EnterSourcePath": "Enter source Path:",

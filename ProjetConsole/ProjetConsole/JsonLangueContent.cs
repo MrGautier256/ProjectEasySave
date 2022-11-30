@@ -13,5 +13,6 @@
         public string? Complete;
         public string? InCopy;
         public string? targetDirInvalid;
+        public string? EnterLogType;
     }
 }

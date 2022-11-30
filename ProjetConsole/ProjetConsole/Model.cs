@@ -2,6 +2,11 @@
 using System;
 using System.Diagnostics;
 using System.IO;
+using System.Runtime.Serialization.Json;
+using System.Text;
+using System.Xml;
+using System.Xml.Linq;
+using System.Xml.Serialization;
 
 namespace ProjetConsole
 {
@@ -10,6 +15,7 @@ namespace ProjetConsole
         public string sourcePath { get; set; } = string.Empty;
         public string targetPath { get; set; } = string.Empty;
         public string targetFile { get; set; } = string.Empty;
+        public string logType { get; set; } = string.Empty;
         public double countfile { get; set; } = 0;
         public double countSize { get; set; } = 0;
         private List<JsonData> tableLog { get; set; } = new List<JsonData>();
@@ -28,10 +34,14 @@ namespace ProjetConsole
             var dir = new DirectoryInfo(sourceDir);
             long totalSize = 0;
             var files = dir.GetFiles("*", SearchOption.AllDirectories);
+            var dirs = dir.GetDirectories("*", SearchOption.AllDirectories);
 
             // Calcul de la taille du contenu a sauvegarder  
             // Calculating the size of the contents to back-up 
-            foreach (FileInfo file in files) { totalSize += file.Length; }
+            foreach (FileInfo file in files)
+            {
+                totalSize += file.Length;
+            }
 
             // Calcul du nombre de fichier à copier
             // Calculating the number of files to copy
@@ -49,10 +59,15 @@ namespace ProjetConsole
                 countSize += file.Length;
                 double percentage = Math.Round((countSize * 100) / totalSize, 2, MidpointRounding.AwayFromZero);
 
-                string targetFilePath = Path.Combine(targetDir, file.Name);
+                string? fileDirectoryName = file.DirectoryName;
+                string? targetFilePath = fileDirectoryName?.Replace(sourceDir, targetDir);
 
+                if (!Directory.Exists(targetFilePath)) { Directory.CreateDirectory(targetFilePath); }
+
+                targetFilePath = Path.Combine(targetFilePath, file.Name);
                 string ElapsedTime = ChronoTimer.Chrono(() =>
-                {file.CopyTo(targetFilePath, true);});
+                {//file.CopyTo(targetFilePath, true);
+                });
 
                 controller.sendProgressInfoToView(file.Name, countfile, totalFileToCopy, percentage);
 
@@ -73,8 +88,8 @@ namespace ProjetConsole
             }
         }
 
-        // Ecriture des logs contenus dans tableLog dans un fichier au format json dans C:/User/Utilisateur/Appdata/EasySave/Logs
-        // Writing of the logs contained in tableLog in a json file in C:/User/Utilisateur/Appdata/EasySave/Logs
+        // Ecriture des logs contenus dans tableLog dans un fichier au format jsonFile dans C:/User/Utilisateur/Appdata/EasySave/Logs
+        // Writing of the logs contained in tableLog in a jsonFile file in C:/User/Utilisateur/Appdata/EasySave/Logs
         public void writeLog()
         {
             string appdataPath = Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData);
@@ -82,8 +97,21 @@ namespace ProjetConsole
 
             if (!Directory.Exists(path)) { Directory.CreateDirectory(path); }
 
-            string json = JsonConvert.SerializeObject(tableLog.ToArray());
-            System.IO.File.AppendAllText($"{path}{targetFile} - {DateTime.Now.ToString("MM.dd.yyyy")}.json", json);
+            string jsonFile = JsonConvert.SerializeObject(tableLog.ToArray());
+
+            if (logType == "xml")
+            {
+                var xml = XDocument.Load(JsonReaderWriterFactory.CreateJsonReader(
+                Encoding.ASCII.GetBytes(jsonFile), new XmlDictionaryReaderQuotas()));
+                string xmlFile = xml.ToString();
+                System.IO.File.AppendAllText($"{path}{targetFile} - {DateTime.Now.ToString("MM.dd.yyyy")}.xml", xmlFile);
+            }
+            else
+            {
+                System.IO.File.AppendAllText($"{path}{targetFile} - {DateTime.Now.ToString("MM.dd.yyyy")}.json", jsonFile);
+
+            }
+
         }
 
     }
