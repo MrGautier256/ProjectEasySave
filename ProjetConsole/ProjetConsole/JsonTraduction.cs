@@ -6,9 +6,12 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace ProjetConsole
-{
-    // Classe contenant les différentes traductions disponibles du logiciel 
-    // Class containing the different available translations of the software 
+{   
+    /// <summary>
+    /// Classe contenant les différentes traductions disponibles du logiciel 
+    /// Class containing the different available translations of the software
+    /// </summary>
+     
     public class JsonTraduction
     {
         public JsonLangueContent? french;

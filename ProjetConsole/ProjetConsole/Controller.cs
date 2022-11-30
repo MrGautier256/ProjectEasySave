@@ -3,16 +3,20 @@ using System.Diagnostics;
 using System.Text.RegularExpressions;
 
 namespace ProjetConsole
-{
-    // Interface Icontroller avec comme méthode execute() commune a tout controller
-    // Icontroller interface with execute() as shared method to all the controllers
+{   /// <summary>
+    /// Interface Icontroller avec comme méthode execute() commune a tout controller
+    /// Icontroller interface with execute() as shared method to all the controllers
+    /// </summary>
     public interface IController
     {
         public void execute();
     }
 
-    // Classe Controller
-    // Class Controller
+    /// <summary>
+    ///  Classe Controller
+    ///  Class Controller
+    /// </summary>
+
     public class Controller : IController
     {
         private Model model;
@@ -83,9 +87,13 @@ namespace ProjetConsole
             view.display(text);
             Console.ForegroundColor = ConsoleColor.White;
         }
+        /// <summary>
+        /// Regex verifiant la validité du nom de sauvegarde
+        /// Regex checking the validity of the Back-up's name
+        /// </summary>
+        /// <param name="DirName"></param>
+        /// <returns></returns>
 
-        // Regex verifiant la validité du nom de sauvegarde
-        // Regex checking the validity of the Back-up's name
         private bool checkTargetDirectory(string DirName)
         {
             bool valid;
@@ -100,9 +108,14 @@ namespace ProjetConsole
 
             return valid;
         }
+        /// <summary>
+        /// Execution des différentes fonctions de vérification de chemin
+        /// Execution of the different path control functions 
+        /// </summary>
+        /// <param name="source"></param>
+        /// <param name="target"></param>
+        /// <returns></returns>
 
-        // Execution des différentes fonctions de vérification de chemin
-        // Execution of the different path control functions 
         private bool checkPathIntegrity(string source, string target)
         {
             bool integrity = false;
@@ -125,17 +138,26 @@ namespace ProjetConsole
             }
             return integrity;
         }
-
-        // Verification de l'existence du chemin
-        // Verifying the path existence 
+        /// <summary>
+        /// Verification de l'existence du chemin
+        /// Verifying the path existence 
+        /// </summary>
+        /// <param name="Path"></param>
+        /// <returns></returns>
+        
         private bool pathExist(string Path)
         {
             bool test = Directory.Exists(Path);
             return test;
         }
-
-        // Verification de la validité du format du chemin
-        // Verifying the validity of the path format
+        /// <summary>
+        /// Verification de la validité du format du chemin
+        /// Verifying the validity of the path format
+        /// </summary>
+        /// <param name="path"></param>
+        /// <param name="allowRelativePaths"></param>
+        /// <returns></returns>
+        
 
         private bool pathIsValid(string path, bool allowRelativePaths = false)
         {

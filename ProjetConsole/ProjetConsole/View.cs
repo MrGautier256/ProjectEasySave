@@ -3,18 +3,23 @@ using System.Diagnostics;
 using System.Reflection;
 
 namespace ProjetConsole
-{
-    // Enumération des langues disponibles
-    //Enumeration of the available languages
+{   
+    /// <summary>
+    /// Enumération des langues disponibles
+    /// Enumeration of the available languages
+    /// </summary>
+    
     public enum langueEnum { english, french, spanish };
     public class View
     {
         private string sourcePath = string.Empty;
         private string targetPath = string.Empty;
         private string targetFile = string.Empty;
-
-        // --------------Demande d'informations à l'utilisateur (méthode) ------------------
-        // --------------Ask Informations to user (methods) ------------------
+        /// <summary>
+        /// --------------Demande d'informations à l'utilisateur (méthode) ------------------
+        /// --------------Ask Informations to user (methods) ------------------
+        /// </summary>
+        
         public void askSourcePath()
         {
             Console.WriteLine("\n" + Traduction.Instance.Langue.EnterSourcePath);
@@ -68,8 +73,12 @@ namespace ProjetConsole
             return selectedLanguage;
         }
 
-        // --------------Récupération d'information (méthode)------------------
-        // --------------Get Info (methods)------------------
+        /// <summary>
+        /// --------------Récupération d'information (méthode)------------------
+        /// --------------Get Info (methods)------------------
+        /// </summary>
+        /// <returns></returns>
+        
         public string getSourcePath()
         { return this.sourcePath; }
         public string getTargetPath()
@@ -77,9 +86,11 @@ namespace ProjetConsole
         public string getTargetFile()
         { return this.targetFile; }
 
-
-        // ---Méthodes informant l'utilisateurs que des informations sont invalides---
-        // ---methods informing the user that information is invalid---
+        /// <summary>
+        /// ---Méthodes informant l'utilisateurs que des informations sont invalides---
+        /// ---methods informing the user that information is invalid---
+        /// </summary>
+        
         public void sourcePathIsInvalid()
         { Console.WriteLine(Traduction.Instance.Langue.SourcePathInvalid + "\n"); }
         public void targetPathIsInvalid()
@@ -87,16 +98,23 @@ namespace ProjetConsole
         public void targetDirInvalid()
         { Console.WriteLine(Traduction.Instance.Langue.targetDirInvalid + "\n"); }
 
-        // Affichage du commencement et de la fin de la sauvegarde
-        // Display of the beginning and the end of the back-up
+        /// <summary>
+        /// Affichage du commencement et de la fin de la sauvegarde
+        /// Display of the beginning and the end of the back-up
+        /// </summary>
+        /// <param name="state"></param>
+        
         public void progress(bool state)
         {
             if (!state) { Console.WriteLine("\n" + Traduction.Instance.Langue.Buffering); }
             else if (state) { Console.WriteLine("\n" + Traduction.Instance.Langue.Complete); }
         }
-
-        // Affichage en temps réel des informations de la sauvegarde (Pourcentage | Nom du fichier | Nombre de fichier restant)
-        // Display in real time the informations of the back-up (Percentage | File's name | Number of remaining files)
+        /// <summary>
+        /// Affichage en temps réel des informations de la sauvegarde (Pourcentage | Nom du fichier | Nombre de fichier restant)
+        /// Display in real time the informations of the back-up (Percentage | File's name | Number of remaining files)
+        /// </summary>
+        /// <param name="toDisplay"></param>
+        
         public void display(string toDisplay)
         {
             Console.ForegroundColor = ConsoleColor.Green;

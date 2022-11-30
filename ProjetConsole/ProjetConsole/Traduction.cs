@@ -3,16 +3,22 @@
 namespace ProjetConsole
 {
     public sealed class Traduction
-    {
-        // Constructeur lisant le fichier de langue "language.json"
-        // Constructor reading the language file "language.json"
+    {   
+        /// <summary>
+        /// Constructeur lisant le fichier de langue "language.json"
+        /// Constructor reading the language file "language.json"
+        /// </summary>
+        
         public Traduction()
         {
             language = JsonConvert.DeserializeObject<JsonTraduction>(File.ReadAllText(@"language.json"));
         }
 
-        // Récupération des éléments textuels de JsonLangueContent en fonction de la langue choisie (Anglais par défaut)
-        // Recovery of textual elements from JsonLangueContent according to the selected language (English by default)
+        /// <summary>
+        /// Récupération des éléments textuels de JsonLangueContent en fonction de la langue choisie (Anglais par défaut)
+        /// Recovery of textual elements from JsonLangueContent according to the selected language (English by default)
+        /// </summary>
+        
         public JsonLangueContent Langue
         {
             get
@@ -36,9 +42,12 @@ namespace ProjetConsole
         private JsonTraduction language;
         private static Traduction? _instance;
         private static langueEnum _langue;
-
-        // Attribution de la langue choisie dans la fonction askLanguage
-        // Assignment of the language chosen in the askLanguage fonction
+        /// <summary>
+        /// Attribution de la langue choisie dans la fonction askLanguage
+        /// Assignment of the language chosen in the askLanguage fonction
+        /// </summary>
+        /// <param name="langue"></param>
+        
         public void setLanguage(langueEnum langue)
         {
             _langue = langue;

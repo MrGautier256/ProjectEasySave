@@ -9,10 +9,13 @@ namespace ProjetConsole
 {
     public class Program
     {
+        /// <summary>
+        /// Instanciation d'un controller et lancement de la fonction "execute"
+        /// Instantiation of a controller and launch of the function 'execute"
+        /// </summary>
         static void Main()
-        {
-            // Instanciation d'un controller et lancement de la fonction "execute"
-            // Instantiation of a controller and launch of the function 'execute"
+        {   
+            
             IController controller = new Controller();
             controller.execute();
             Console.ReadKey();

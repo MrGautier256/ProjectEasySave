@@ -26,9 +26,13 @@ namespace ProjetConsole
             this.controller = _controller;
         }
 
-
-        // Sauvegarde des fichiers
-        // Backing-up the files 
+        /// <summary>
+        /// Sauvegarde des fichiers
+        /// Backing-up the files 
+        /// </summary>
+        /// <param name="sourceDir"></param>
+        /// <param name="targetDir"></param>
+        
         public void saveFile(string sourceDir, string targetDir)
         {
             var dir = new DirectoryInfo(sourceDir);
@@ -42,15 +46,15 @@ namespace ProjetConsole
             {
                 totalSize += file.Length;
             }
-
+            
             // Calcul du nombre de fichier à copier
             // Calculating the number of files to copy
             int totalFileToCopy = files.Length;
-
+            
             // Création du dossier destination
             // Create the destination directory
             Directory.CreateDirectory(targetDir);
-
+            
             //Récupération des fichiers dans le dossier source, copie vers le dossier destination, envoie des informations vers la view, ajout des informations à un objet de type JsonData et ajout à une liste de d'objets JsonData 
             // Get the files in the source directory, copy to the destination directory, send info to the view, add info to a JsonData object and add it to a list of JsonData objects
             foreach (FileInfo file in files)
@@ -88,9 +92,11 @@ namespace ProjetConsole
 
             }
         }
-
-        // Ecriture des logs contenus dans tableLog dans un fichier au format jsonFile dans C:/User/Utilisateur/Appdata/EasySave/Logs
-        // Writing of the logs contained in tableLog in a jsonFile file in C:/User/Utilisateur/Appdata/EasySave/Logs
+        /// <summary>
+        /// Ecriture des logs contenus dans tableLog dans un fichier au format jsonFile dans C:/User/Utilisateur/Appdata/EasySave/Logs
+        /// Writing of the logs contained in tableLog in a jsonFile file in C:/User/Utilisateur/Appdata/EasySave/Logs
+        /// </summary>
+        
         public void writeLog()
         {
             string appdataPath = Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData);
