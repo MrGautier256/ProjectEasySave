@@ -95,29 +95,28 @@ namespace ProjetConsole
         {
             string appdataPath = Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData);
             string path = $"{appdataPath}\\EasySave\\Logs\\";
-            string fileFullName = $"{path}{targetFile} - {DateTime.Now.ToString("MM.dd.yyyy")}.json";
+            string fileFullName = $"{path}{targetFile} - {DateTime.Now.ToString("MM.dd.yyyy")}";
             if (!Directory.Exists(path)) { Directory.CreateDirectory(path); }
 
             string jsonFile = JsonConvert.SerializeObject(tableLog.ToArray());
-
+            int i = 0;
+            while (File.Exists(fileFullName+
+                ".json") || File.Exists(fileFullName + ".xml"))
+            {
+                i++;
+                fileFullName = $"{path}{targetFile}{i} - {DateTime.Now.ToString("MM.dd.yyyy")}";
+            }
             if (logType == "xml")
             {
                 var xml = XDocument.Load(JsonReaderWriterFactory.CreateJsonReader(
                 Encoding.ASCII.GetBytes(jsonFile), new XmlDictionaryReaderQuotas()));
                 string xmlFile = xml.ToString();
-                System.IO.File.AppendAllText($"{path}{targetFile} - {DateTime.Now.ToString("MM.dd.yyyy")}.xml", xmlFile);
+                System.IO.File.AppendAllText($"{fileFullName}.xml", xmlFile);
             }
             else
             {
-                System.IO.File.AppendAllText($"{path}{targetFile} - {DateTime.Now.ToString("MM.dd.yyyy")}.json", jsonFile);
+                System.IO.File.AppendAllText($"{fileFullName}.json", jsonFile);
 
-            }
-
-            int i = 1;
-             while (File.Exists(fileFullName))
-            {
-                i++;
-                fileFullName = $"{path}{targetFile}{i} - {DateTime.Now.ToString("MM.dd.yyyy")}.json";
             }
         }
 
