@@ -20,7 +20,8 @@
 		"Complete": "Backup complete",
 		"EnterTargetFile": "Put a name on the saved file:",
 		"InCopy": "files saved: ",
-		"targetDirInvalid": "Invalid save name"
+		"targetDirInvalid": "Invalid save name",
+		"EnterLogType": "Enter the log file type : json, Xml \n(The default is Json)"
 	},
 	"spanish": {
 		"EnterSourcePath": "Entre el camino raiz:",
@@ -31,6 +32,7 @@
 		"Complete": "el archivo ha sido guardado",
 		"EnterTargetFile": "Asigne un nombre al archivo guardado:",
 		"InCopy": "Archivos guardados",
-		"targetDirInvalid": "Nombre de guardado invalido"
+		"targetDirInvalid": "Nombre de guardado invalido",
+		"EnterLogType": "Entre el tipo del archivo de log  : json, Xml \n(El predefinido es Json)"
 	}
 }
