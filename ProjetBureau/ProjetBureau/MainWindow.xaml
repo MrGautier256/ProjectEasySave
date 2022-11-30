@@ -1,0 +1,51 @@
+﻿<Window x:Class="ProjetBureau.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:ProjetBureau"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="450" Width="800">
+    <Grid>
+        <TextBox Text="{Binding Path=FlexString1,Mode=TwoWay}" 
+         Height="23" 
+         HorizontalAlignment="Left" 
+         Margin="46,121,0,0" Name="textPath" 
+         VerticalAlignment="Top" 
+         Width="666" />
+        <Button Height="23" 
+        HorizontalAlignment="Left" 
+        Margin="717,121,0,0" 
+        Name="btnBrowseFile" 
+        Padding="1" VerticalAlignment="Top" 
+        Width="41" Click="btnBrowseFile_Click">
+            <TextBlock FontSize="10" 
+                FontWeight="Normal" 
+                Foreground="#FF3C3C3C" 
+                Text="Browse" 
+                TextWrapping="Wrap" />
+        </Button>
+
+        <TextBox Text="{Binding FlexString1, Mode=TwoWay}" 
+            Height="23" 
+            HorizontalAlignment="Left" 
+            Margin="46,217,0,0" x:Name="textPath_Copy" 
+            VerticalAlignment="Top" 
+            Width="666" />
+        <Button Height="23" 
+            HorizontalAlignment="Left" 
+            Margin="717,217,0,0" 
+            x:Name="btnBrowseFile_Copy" 
+            Padding="1" VerticalAlignment="Top" 
+            Width="41" Click="btnBrowseFile_Click">
+            <TextBlock FontSize="10" 
+                FontWeight="Normal" 
+                Foreground="#FF3C3C3C" 
+                Text="Browse" 
+                TextWrapping="Wrap" />
+        </Button>
+        <Label Content="Indiqué le chemin de la source de vos fichiers" HorizontalAlignment="Center" Margin="0,74,0,0" VerticalAlignment="Top" Width="254"/>
+        <Label Content="Indiqué le chemin de la destination de votre sauvegarde" HorizontalAlignment="Left" Margin="252,179,0,0" VerticalAlignment="Top" Width="309"/>
+
+    </Grid>
+</Window>
