@@ -10,11 +10,9 @@ namespace ProjetConsole
         public string sourcePath { get; set; } = string.Empty;
         public string targetPath { get; set; } = string.Empty;
         public string targetFile { get; set; } = string.Empty;
-        public long totalSize { get; set; } = 0;
         public double countfile { get; set; } = 0;
         public double countSize { get; set; } = 0;
-        private List<JsonData>? tableLog { get; set; } = new List<JsonData>();
-        public int totalFileToCopy { get; set; } = 0;
+        private List<JsonData> tableLog { get; set; } = new List<JsonData>();
         private Controller controller;
 
         public Model(Controller _controller)
@@ -22,40 +20,22 @@ namespace ProjetConsole
             this.controller = _controller;
         }
 
-        // Calcul du nombre de fichier à copier
-        // Calculating the number of files to copy
-        public void setTotalFileToCopy() 
-        {totalFileToCopy = Directory.GetFiles(sourcePath, ".", SearchOption.AllDirectories).Length;}
-
-        // Calcul de la taille du contenu a sauvegarder 
-        // Calculating the size of the contents to back-up
-        public void setTotalSize(string sourceDir, string targetDir)
-        {
-            var dir = new DirectoryInfo(sourceDir);
-            DirectoryInfo[] dirs = dir.GetDirectories();
-
-            foreach (FileInfo file in dir.GetFiles())
-            {
-                totalSize += file.Length;
-
-            }
-            foreach (DirectoryInfo subDir in dirs)
-            {
-                string newDestinationDir = Path.Combine(targetDir, subDir.Name);
-                setTotalSize(subDir.FullName, newDestinationDir);
-
-            }
-        }
 
         // Sauvegarde des fichiers
         // Backing-up the files 
         public void saveFile(string sourceDir, string targetDir)
         {
             var dir = new DirectoryInfo(sourceDir);
+            long totalSize = 0;
+            var files = dir.GetFiles("*", SearchOption.AllDirectories);
 
-            // Stock des dossiers dans un tableau
-            // Cache directories in a array
-            DirectoryInfo[] dirs = dir.GetDirectories();
+            // Calcul de la taille du contenu a sauvegarder  
+            // Calculating the size of the contents to back-up 
+            foreach (FileInfo file in files) { totalSize += file.Length; }
+
+            // Calcul du nombre de fichier à copier
+            // Calculating the number of files to copy
+            int totalFileToCopy = files.Length;
 
             // Création du dossier destination
             // Create the destination directory
@@ -63,7 +43,7 @@ namespace ProjetConsole
 
             //Récupération des fichiers dans le dossier source, copie vers le dossier destination, envoie des informations vers la view, ajout des informations à un objet de type JsonData et ajout à une liste de d'objets JsonData 
             // Get the files in the source directory, copy to the destination directory, send info to the view, add info to a JsonData object and add it to a list of JsonData objects
-            foreach (FileInfo file in dir.GetFiles())
+            foreach (FileInfo file in files)
             {
                 countfile++;
                 countSize += file.Length;
@@ -71,16 +51,10 @@ namespace ProjetConsole
 
                 string targetFilePath = Path.Combine(targetDir, file.Name);
 
-                Stopwatch stopWatch = new Stopwatch();
+                string ElapsedTime = ChronoTimer.Chrono(() =>
+                {file.CopyTo(targetFilePath, true);});
 
-                stopWatch.Start();
-                file.CopyTo(targetFilePath, true);
-                controller.sendProgressInfoToView(file.Name, countfile, this.totalFileToCopy, percentage);
-                stopWatch.Stop();
-
-                string ElapsedTime = String.Format("{0:00}:{1:00}:{2:00}.{3:00}",
-                    stopWatch.Elapsed.Hours, stopWatch.Elapsed.Minutes,
-                    stopWatch.Elapsed.Seconds, stopWatch.Elapsed.Milliseconds / 100);
+                controller.sendProgressInfoToView(file.Name, countfile, totalFileToCopy, percentage);
 
                 JsonData jsonFileInfo = new JsonData(
                     targetFile,
@@ -88,22 +62,13 @@ namespace ProjetConsole
                     file.FullName,
                     targetFilePath,
                     countfile,
-                    this.totalFileToCopy,
+                    totalFileToCopy,
                     file.Length,
-                    this.totalFileToCopy - countfile,
+                    totalFileToCopy - countfile,
                     percentage,
                     ElapsedTime
                     );
                 tableLog.Add(jsonFileInfo);
-
-            }
-
-            // Si il y a des sous-dossiers, copie les sous-dossiers et appelle la méthode récursivement 
-            // If there is subdirecories, copying subdirectories and recursively call this method
-            foreach (DirectoryInfo subDir in dirs)
-            {
-                string newDestinationDir = Path.Combine(targetDir, subDir.Name);
-                saveFile(subDir.FullName, newDestinationDir);
 
             }
         }
@@ -113,12 +78,20 @@ namespace ProjetConsole
         public void writeLog()
         {
             string appdataPath = Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData);
-            string path = appdataPath + "/EasySave/Logs/";
+            string path = $"{appdataPath}\\EasySave\\Logs\\";
+            string fileFullName = $"{path}{targetFile} - {DateTime.Now.ToString("MM.dd.yyyy")}.json";
+            if (!Directory.Exists(path)) { Directory.CreateDirectory(path); }
 
-            if (!Directory.Exists(path)){Directory.CreateDirectory(path);}
+            int i = 1;
+             while (File.Exists(fileFullName))
+            {
+                i++;
+                fileFullName = $"{path}{targetFile}{i} - {DateTime.Now.ToString("MM.dd.yyyy")}.json";
+            }
 
+            Console.WriteLine(fileFullName);
             string json = JsonConvert.SerializeObject(tableLog.ToArray());
-            System.IO.File.AppendAllText(path + targetFile + " - " + DateTime.Now.ToString("MM.dd.yyyy") + ".json", json);
+            System.IO.File.AppendAllText(fileFullName, json);
         }
 
     }
