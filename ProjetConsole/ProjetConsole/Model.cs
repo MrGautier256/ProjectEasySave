@@ -66,7 +66,8 @@ namespace ProjetConsole
 
                 targetFilePath = Path.Combine(targetFilePath, file.Name);
                 string ElapsedTime = ChronoTimer.Chrono(() =>
-                {//file.CopyTo(targetFilePath, true);
+                {
+                    file.CopyTo(targetFilePath, true);
                 });
 
                 controller.sendProgressInfoToView(file.Name, countfile, totalFileToCopy, percentage);

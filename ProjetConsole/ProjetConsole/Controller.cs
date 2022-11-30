@@ -69,7 +69,7 @@ namespace ProjetConsole
 
 
         /// <summary>
-        ///Envoie des informations de copie en temps réelles à la vue pour les afficher
+        /// Envoie des informations de copie en temps réelles à la vue pour les afficher
         /// Sending the informations to copy in real time to the view in order to display them
         /// </summary>
         /// <param name="fileName">toto</param>
