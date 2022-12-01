@@ -10,7 +10,6 @@ namespace ProjetBureau
     /// Enumeration of the available languages
     /// </summary>
     
-    public enum langueEnum { english, french, spanish };
     public class View
     {
         private string sourcePath = string.Empty;

@@ -17,5 +17,6 @@
         public string? InCopy;
         public string? targetDirInvalid;
         public string? EnterLogType;
+        public string? SelectLanguage;
     }
 }

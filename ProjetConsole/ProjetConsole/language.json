@@ -9,7 +9,8 @@
 		"EnterTargetFile": "Nommez le fichier de sauvegarde:",
 		"InCopy": "fichiers sauvegardés",
 		"targetDirInvalid": "Nom de sauvegarde invalide",
-		"EnterLogType": "Entrez le type de fichier de log: json, Xml \n(Json par defaut)"
+		"EnterLogType": "Entrez le type de fichier de log: json, Xml \n(Json par defaut)",
+		"Language": "Langue:"
 	},
 	"english": {
 		"EnterSourcePath": "Enter source Path:",
@@ -21,7 +22,8 @@
 		"EnterTargetFile": "Put a name on the saved file:",
 		"InCopy": "files saved: ",
 		"targetDirInvalid": "Invalid save name",
-		"EnterLogType": "Enter the log file type : json, Xml \n(The default is Json)"
+		"EnterLogType": "Enter the log file type : json, Xml \n(The default is Json)",
+		"Language": "Language:"
 	},
 	"spanish": {
 		"EnterSourcePath": "Entre el camino raiz:",
@@ -33,6 +35,7 @@
 		"EnterTargetFile": "Asigne un nombre al archivo guardado:",
 		"InCopy": "Archivos guardados",
 		"targetDirInvalid": "Nombre de guardado invalido",
-		"EnterLogType": "Entre el tipo del archivo de log  : json, Xml \n(El predefinido es Json)"
+		"EnterLogType": "Entre el tipo del archivo de log  : json, Xml \n(El predefinido es Json)",
+		"Language": "Idioma:"
 	}
 }

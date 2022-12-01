@@ -48,7 +48,13 @@ namespace ProjetBureau
         /// Assignment of the language chosen in the askLanguage fonction
         /// </summary>
         /// <param name="langue"></param>
-        
+
+        public void SetInterfaceLanguage(string langue)
+        {
+            if (langue == "francais") { setLanguage(langueEnum.french); }
+            else if (langue == "español") { setLanguage(langueEnum.spanish); }
+            else {setLanguage(langueEnum.english);}
+        }
         public void setLanguage(langueEnum langue)
         {
             _langue = langue;

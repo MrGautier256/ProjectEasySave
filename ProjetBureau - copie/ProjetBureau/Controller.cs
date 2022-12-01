@@ -23,11 +23,13 @@ namespace ProjetBureau
     {
         private Model model;
         private View view;
-        ~Controller() { }
-        public Controller()
+        private MainWindow mainWindow;
+        private string typeOfMode;
+        public Controller(MainWindow _mainWindow)
         {
             model = new Model(this);
             view = new View();
+            mainWindow = _mainWindow;
         }
 
         /// <summary>
@@ -36,6 +38,8 @@ namespace ProjetBureau
         /// </summary>
         public void execute()
         {
+            typeOfMode = "Console";
+
             var language = view.askLanguage();
             Traduction.Instance.setLanguage(language);
             string logType = view.asklogType();
@@ -63,12 +67,11 @@ namespace ProjetBureau
             }
         }
 
-        private string combinePathAndName(string targetPath, string saveName)
-        {
-            return Path.Combine(targetPath, saveName);
-        }
         public void execute(string sourcePath, string targetPath, string logType, string saveName)
         {
+            typeOfMode = "Graphic";
+
+            targetPath = combinePathAndName(targetPath, saveName);
 
             if (checkPathIntegrity(sourcePath, targetPath) && !checkTargetDirectory(saveName))
             {
@@ -80,19 +83,16 @@ namespace ProjetBureau
                 model.writeLog();
             }
         }
-        
-        
+
+        private string combinePathAndName(string targetPath, string saveName)
+        {
+            return Path.Combine(targetPath, saveName);
+        }
 
         private string setLogType(string logtype)
         {
-            if (logtype == "xml")
-            {
-                return "xml";
-            }
-            else
-            {
-                return "json";
-            }
+            if (logtype == "xml") {return "xml";}
+            else{return "json";}
         }
 
 
@@ -106,11 +106,21 @@ namespace ProjetBureau
         /// <param name="percentage"></param>
         public void sendProgressInfoToView(string fileName, double countfile, int totalFileToCopy, double percentage)
         {
-            Console.ForegroundColor = ConsoleColor.Green;
-            string text = $"{percentage}% | {countfile}/{totalFileToCopy} {Traduction.Instance.Langue.InCopy} | {fileName}";
-            view.display(text);
-            Console.ForegroundColor = ConsoleColor.White;
+            if (typeOfMode == "Console") 
+            { 
+                Console.ForegroundColor = ConsoleColor.Green;
+                string text = $"{percentage}% | {countfile}/{totalFileToCopy} {Traduction.Instance.Langue.InCopy} | {fileName}";
+                view.display(text);
+                Console.ForegroundColor = ConsoleColor.White;
+            }
+            else if (typeOfMode == "Graphic")
+            {
+                mainWindow.display(percentage);
+
+            }
+
         }
+
         /// <summary>
         /// Regex verifiant la validité du nom de sauvegarde
         /// Regex checking the validity of the Back-up's name
@@ -124,7 +134,8 @@ namespace ProjetBureau
             Regex RgxUrl = new Regex("[^a-zA-Z0-9 ]");
             if (RgxUrl.IsMatch(DirName))
             {
-                view.targetDirInvalid();
+                if (typeOfMode == "Console") { view.targetDirInvalid(); }
+                else if (typeOfMode == "Graphic") { mainWindow.targetDirInvalid(); }
                 valid = true;
             }
             else
@@ -151,13 +162,16 @@ namespace ProjetBureau
                 }
                 else
                 {
-                    view.targetPathIsInvalid();
+                    if (typeOfMode == "Console"){view.targetPathIsInvalid();} 
+                    else if (typeOfMode == "Graphic"){ mainWindow.targetPathIsInvalid();}
                     integrity = false;
+
                 }
             }
             else
             {
-                view.sourcePathIsInvalid();
+                if (typeOfMode == "Console") { view.sourcePathIsInvalid(); }
+                else if (typeOfMode == "Graphic") { mainWindow.sourcePathIsInvalid(); }
                 integrity = false;
             }
             return integrity;
@@ -206,5 +220,7 @@ namespace ProjetBureau
             }
             return isValid;
         }
+        ~Controller() { }
+
     }
 }

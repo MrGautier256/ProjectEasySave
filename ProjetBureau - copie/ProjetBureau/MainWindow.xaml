@@ -18,7 +18,7 @@
         Margin="710,132,0,0" 
         Name="btnBrowseFile" 
         Padding="1" VerticalAlignment="Top" 
-        Width="42" Click="btnBrowseFile_Click">
+        Width="42">
             <TextBlock FontSize="10" 
                 FontWeight="Normal" 
                 Foreground="#FF3C3C3C" 
@@ -37,15 +37,15 @@
             Margin="710,318,0,0" 
             x:Name="btnBrowseFile_Copy" 
             Padding="1" VerticalAlignment="Top" 
-            Width="42" Click="btnBrowseFile_Click">
+            Width="42">
             <TextBlock FontSize="10" 
                 FontWeight="Normal" 
                 Foreground="#FF3C3C3C" 
                 Text="Browse" 
                 TextWrapping="Wrap" />
         </Button>
-        <Label Content="Indiqué le chemin de la source de vos fichiers" HorizontalAlignment="Center" Margin="0,92,0,0" VerticalAlignment="Top" Width="254"/>
-        <Label Content="Indiqué le chemin de la destination de votre sauvegarde" HorizontalAlignment="Center" Margin="0,280,0,0" VerticalAlignment="Top" Width="308"/>
+        <Label x:Name="TextEnterSourcePath" Content="" HorizontalAlignment="Center" Margin="0,92,0,0" VerticalAlignment="Top" Width="254"/>
+        <Label x:Name="TextEnterTargetPath" Content="" HorizontalAlignment="Center" Margin="0,280,0,0" VerticalAlignment="Top" Width="308"/>
         <Label Content="EasySave" HorizontalAlignment="Center" Margin="0,18,0,0" VerticalAlignment="Top" Width="152" Height="69" FontSize="36"/>
         <TextBox Text="{Binding FlexString1, Mode=TwoWay}"
             Height="23" 
@@ -53,19 +53,21 @@
             Margin="154,233,0,0" x:Name="textBoxNameSave" 
             VerticalAlignment="Top" 
             Width="190" />
-        <Label Content="Indiqué le nom de la sauvegarde" HorizontalAlignment="Left" Margin="154,202,0,0" VerticalAlignment="Top" Width="190"/>
-        <Label Content="Format du fichier log   " HorizontalAlignment="Left" Margin="461,202,0,0" VerticalAlignment="Top" Width="120"/>
-        <ComboBox x:Name="formatLog" HorizontalAlignment="Left" Margin="461,234,0,0" VerticalAlignment="Top" Width="120">
-            <ComboBoxItem IsSelected="True" Content="json"></ComboBoxItem>
+        <Label x:Name="TextEnterTargetFile" Content="" HorizontalAlignment="Left" Margin="154,202,0,0" VerticalAlignment="Top" Width="190"/>
+        <Label x:Name="TextEnterLogType" Content="" HorizontalAlignment="Left" Margin="461,202,0,0" VerticalAlignment="Top" Width="120"/>
+        <ComboBox x:Name="LogType" HorizontalAlignment="Left" Margin="461,234,0,0" VerticalAlignment="Top" Width="120">
+            <ComboBoxItem IsSelected="true" Content="json"></ComboBoxItem>
             <ComboBoxItem Content="xml"></ComboBoxItem>
         </ComboBox>
-        <ComboBox x:Name="Langue" HorizontalAlignment="Left" Margin="682,31,0,0" VerticalAlignment="Top" Width="98">
-            <ComboBoxItem IsSelected="True" Content="english"></ComboBoxItem>
+        <ComboBox x:Name="SelectLanguage" HorizontalAlignment="Left" Margin="682,31,0,0" VerticalAlignment="Top" Width="98" DropDownClosed="SelectLanguage_DropDownClosed">
+            <ComboBoxItem IsSelected="true" Content="english"></ComboBoxItem>
             <ComboBoxItem Content="francais"></ComboBoxItem>
             <ComboBoxItem Content="español"></ComboBoxItem>
         </ComboBox>
-        <Label Content="Langue   " HorizontalAlignment="Left" Margin="704,0,0,0" VerticalAlignment="Top" Width="54"/>
+        <Label x:Name="TextLanguage" Content="" HorizontalAlignment="Left" Margin="704,4,0,0" VerticalAlignment="Top" Width="54"/>
         <Button x:Name="copier" Content="Copier" HorizontalAlignment="Center" Margin="0,365,0,0" VerticalAlignment="Top" Height="33" Width="54" Click="Button_Click"/>
-
+        <ProgressBar Minimum="0" Maximum="100" Value="0" Name="ProgressBarSave" Margin="24,31,533,347" RenderTransformOrigin="0.5,0.5" >
+        </ProgressBar>
+        <TextBlock Text="{Binding ElementName=ProgressBarSave, Path=Value, StringFormat={}{0:0}%}" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="139,37,0,0" RenderTransformOrigin="0.598,1.608" />
     </Grid>
 </Window>
