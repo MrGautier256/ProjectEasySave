@@ -44,8 +44,8 @@
                 Text="Browse" 
                 TextWrapping="Wrap" />
         </Button>
-        <Label Content="Indiqué le chemin de la source de vos fichiers" HorizontalAlignment="Center" Margin="0,92,0,0" VerticalAlignment="Top" Width="254"/>
-        <Label Content="Indiqué le chemin de la destination de votre sauvegarde" HorizontalAlignment="Center" Margin="0,280,0,0" VerticalAlignment="Top" Width="308"/>
+        <Label x:Name="EnterSourcePath" Content="Indiqué le chemin de la source de vos fichiers" HorizontalAlignment="Center" Margin="0,92,0,0" VerticalAlignment="Top" Width="254"/>
+        <Label x:Name="EnterTargetPath" Content="Indiqué le chemin de la destination de votre sauvegarde" HorizontalAlignment="Center" Margin="0,280,0,0" VerticalAlignment="Top" Width="308"/>
         <Label Content="EasySave" HorizontalAlignment="Center" Margin="0,18,0,0" VerticalAlignment="Top" Width="152" Height="69" FontSize="36"/>
         <TextBox Text="{Binding FlexString1, Mode=TwoWay}" 
             Height="23" 
@@ -55,8 +55,15 @@
             Width="190" />
         <Label Content="Indiqué le nom de la sauvegarde" HorizontalAlignment="Left" Margin="154,202,0,0" VerticalAlignment="Top" Width="190"/>
         <Label Content="Format du fichier log   " HorizontalAlignment="Left" Margin="461,202,0,0" VerticalAlignment="Top" Width="120"/>
-        <ComboBox HorizontalAlignment="Left" Margin="461,234,0,0" VerticalAlignment="Top" Width="120"/>
-        <ComboBox HorizontalAlignment="Left" Margin="682,31,0,0" VerticalAlignment="Top" Width="98"/>
+        <ComboBox HorizontalAlignment="Left" Margin="461,234,0,0" VerticalAlignment="Top" Width="120">
+            <ComboBoxItem IsSelected="True">Json</ComboBoxItem>
+            <ComboBoxItem>Xml</ComboBoxItem>
+        </ComboBox>
+        <ComboBox HorizontalAlignment="Left" Margin="682,31,0,0" VerticalAlignment="Top" Width="98" Cursor="">
+            <ComboBoxItem IsSelected="True">English</ComboBoxItem>
+            <ComboBoxItem>Francais</ComboBoxItem>
+            <ComboBoxItem>Spanish</ComboBoxItem>
+        </ComboBox>
         <Label Content="Langue   " HorizontalAlignment="Left" Margin="704,0,0,0" VerticalAlignment="Top" Width="54"/>
 
     </Grid>
