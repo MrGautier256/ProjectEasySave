@@ -42,11 +42,13 @@ namespace ProjetConsole
             view.askTargetFile();
             view.askTargetPath();
 
-            string targetFile = view.getTargetFile();
+            string saveName = view.getTargetFile();
             string sourcePath = view.getSourcePath();
             string targetPath = view.getTargetPath();
 
-            if (checkPathIntegrity(sourcePath, targetPath) && !checkTargetDirectory(targetFile))
+            targetPath = combinePathAndName(targetPath, saveName);
+
+            if (checkPathIntegrity(sourcePath, targetPath) && !checkTargetDirectory(saveName))
             {
                 model.logType = setLogType(logType);
                 model.sourcePath = sourcePath;
@@ -57,6 +59,11 @@ namespace ProjetConsole
                 model.writeLog();
                 view.progress(true);
             }
+        }
+
+        private string combinePathAndName(string targetPath, string saveName)
+        {
+            return Path.Combine(targetPath, saveName);
         }
 
         private string setLogType(string logtype)

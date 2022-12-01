@@ -33,7 +33,7 @@ namespace ProjetConsole
         public void askTargetPath()
         {
             Console.WriteLine("\n" + Traduction.Instance.Langue.EnterTargetPath);
-            this.targetPath = Path.Combine(Console.ReadLine() ?? string.Empty, targetFile);
+            this.targetPath = Console.ReadLine() ?? string.Empty;
         }
         public string asklogType()
         {
