@@ -168,7 +168,7 @@ namespace ProjetBureau
             return textBoxDestPath.Text;
         }
 
-        private void btnBrowseFile_Click(object sender, RoutedEventArgs e)
+        private void btnBrowseFolder_Click(object sender, RoutedEventArgs e)
         {
             var folderDlg = new System.Windows.Forms.FolderBrowserDialog();
             folderDlg.ShowNewFolderButton = true;
@@ -181,7 +181,7 @@ namespace ProjetBureau
             }
         }
 
-        private void btnBrowseFile_Copy_Click(object sender, RoutedEventArgs e)
+        private void btnBrowseFolder_Copy_Click(object sender, RoutedEventArgs e)
         {
             var folderDlg = new System.Windows.Forms.FolderBrowserDialog();
             folderDlg.ShowNewFolderButton = true;
