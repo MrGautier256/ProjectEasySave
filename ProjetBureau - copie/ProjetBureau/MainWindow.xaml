@@ -6,24 +6,38 @@
         xmlns:local="clr-namespace:ProjetBureau"
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="800" Background="LightSkyBlue">
-    <Grid>
+    <Grid RenderTransformOrigin="0.513,0.499">
         <TextBox Text="{Binding Path=FlexString1,Mode=TwoWay}" 
-         Height="23" 
-         HorizontalAlignment="Center" 
-         Margin="0,132,0,0" x:Name="textBoxSourcePath" 
-         VerticalAlignment="Top" 
-         Width="610"/>
-        <Button Height="23" 
-        HorizontalAlignment="Left" 
-        Margin="710,132,0,0" 
-        Name="btnBrowseFile" 
-        Padding="1" VerticalAlignment="Top" 
-        Width="42" Click="btnBrowseFolder_Click">
+            Height="23" 
+            HorizontalAlignment="Center" 
+            Margin="0,132,0,0" x:Name="textBoxSourcePath" 
+            VerticalAlignment="Top" 
+            Width="610"
+            FontWeight="Bold"
+            BorderBrush="Black"
+            >
+            <TextBox.Resources>
+                <Style TargetType="Border">
+                    <Setter Property="CornerRadius" Value="5"/>
+                </Style>
+            </TextBox.Resources>
+        </TextBox>
+        <Button 
+            Height="23" 
+            HorizontalAlignment="Left" 
+            Margin="710,132,0,0" 
+            Name="btnBrowseFile" 
+            Padding="1" VerticalAlignment="Top" 
+            Width="42" Click="btnBrowseFolder_Click"
+            Background="SeaShell"
+            Foreground="Black"        
+            BorderBrush="Black">   
             <TextBlock FontSize="10" 
-                FontWeight="Normal" 
+                FontWeight="Bold" 
                 Foreground="#FF3C3C3C" 
                 Text="Browse" 
-                TextWrapping="Wrap" />
+                TextWrapping="Wrap" 
+                />
             <Button.Resources>
                 <Style TargetType="Border">
                     <Setter Property="CornerRadius" Value="5"/>
@@ -36,15 +50,25 @@
             HorizontalAlignment="Center" 
             Margin="0,318,0,0" x:Name="textBoxDestPath" 
             VerticalAlignment="Top" 
-            Width="610" />
+            Width="610"
+            BorderBrush="Black">
+            <TextBox.Resources>
+                <Style TargetType="Border">
+                    <Setter Property="CornerRadius" Value="5"/>
+                </Style>
+            </TextBox.Resources>
+        </TextBox>
         <Button Height="23" 
             HorizontalAlignment="Left" 
             Margin="710,318,0,0" 
             x:Name="btnBrowseFile_Copy" 
             Padding="1" VerticalAlignment="Top" 
-            Width="42" Click="btnBrowseFolder_Copy_Click">
+            Width="42" Click="btnBrowseFolder_Copy_Click"
+            Background="SeaShell"
+            Foreground="Black"
+            BorderBrush="Black">
             <TextBlock FontSize="10" 
-                FontWeight="Normal" 
+                FontWeight="Bold" 
                 Foreground="#FF3C3C3C" 
                 Text="Browse" 
                 TextWrapping="Wrap" />
@@ -90,7 +114,13 @@
             HorizontalAlignment="Left" 
             Margin="95,233,0,0" x:Name="textBoxNameSave" 
             VerticalAlignment="Top" 
-            Width="274" >
+            Width="274" 
+            BorderBrush="Black">
+            <TextBox.Resources>
+                <Style TargetType="Border">
+                    <Setter Property="CornerRadius" Value="5"/>
+                </Style>
+            </TextBox.Resources>
             <UIElement.RenderTransform>
                 <TransformGroup>
                     <ScaleTransform/>
@@ -127,12 +157,9 @@
             Margin="507,233,0,0" 
             VerticalAlignment="Top" 
             Width="145" 
-            Height="23">
-            <ComboBox.Resources>
-                <Style TargetType="Border">
-                    <Setter Property="CornerRadius" Value="5"/>
-                </Style>
-            </ComboBox.Resources>
+            Height="23"
+            FontWeight="Bold"
+            >
             <ComboBoxItem IsSelected="true" Content="json"></ComboBoxItem>
             <ComboBoxItem Content="xml"></ComboBoxItem>
         </ComboBox>
@@ -141,8 +168,19 @@
             HorizontalAlignment="Left" 
             Margin="682,31,0,0" 
             VerticalAlignment="Top" 
-            Width="98" 
+            Width="98"
+            FontWeight="Bold"
             DropDownClosed="SelectLanguage_DropDownClosed">
+            <ComboBox.Style>
+        <Style TargetType="ComboBox">
+            <Setter Property="BorderBrush" Value="Black"/>
+            <Style.Triggers>
+                <DataTrigger Binding="{Binding Value}" Value="{x:Null}">
+                    <Setter Property="BorderBrush" Value="Black" />
+                </DataTrigger>
+            </Style.Triggers>
+        </Style>
+    </ComboBox.Style>
             <ComboBoxItem IsSelected="true" Content="english"></ComboBoxItem>
             <ComboBoxItem Content="francais"></ComboBoxItem>
             <ComboBoxItem Content="español"></ComboBoxItem>
@@ -158,13 +196,17 @@
             FontSize="18"/>
         <Button 
             x:Name="copier" 
-            Content="Sauvergarder" 
+            Content="Sauvegarder" 
             HorizontalAlignment="Center" 
             Margin="0,366,0,0" 
             VerticalAlignment="Top" 
             Height="33" 
             Width="190" 
-            Click="Button_Click">
+            FontWeight="Bold"
+            Click="Button_Click"
+            Background="SeaShell"
+            Foreground="Black"
+            BorderBrush="Black">
             <Button.Resources>
                 <Style TargetType="Border">
                     <Setter Property="CornerRadius" Value="5"/>
