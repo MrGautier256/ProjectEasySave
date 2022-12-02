@@ -22,6 +22,7 @@ namespace ProjetBureau
 {
     public partial class MainWindow : Window, IView
     {
+        ProgressWindow progressWindow = new ProgressWindow();
         public MainWindow()
         {
             InitializeComponent();
@@ -140,30 +141,37 @@ namespace ProjetBureau
             TextEnterLogType.Content = Traduction.Instance.Langue.EnterLogType;
         }
 
-        public void sendProgressInfoToView(string fileName, double countfile, int totalFileToCopy, double percentage)
+        public progressState controlProgress(string fileName, double countfile, int totalFileToCopy, double percentage)
         {
             this.display(percentage);
+            return progressWindow.progress;
         }
         public void progress(bool state)
         {
-            //if (!state) { Console.WriteLine("\n" + Traduction.Instance.Langue.Buffering); }
-            //else if (state) { Console.WriteLine("\n" + Traduction.Instance.Langue.Complete); }
+            if (!state)
+            {
+                progressWindow.Show();
+            }
+            else if (state) 
+            {
+                progressWindow.Hide();
+            }
         }
         langueEnum IView.askLanguage() { return langueEnum.english; }
 
         public string asklogType() { return "json"; }
 
-        public string askSourcePath() 
+        public string askSourcePath()
         {
             return textBoxSourcePath.Text;
         }
 
-        public string askTargetFile() 
+        public string askTargetFile()
         {
             return textBoxNameSave.Text;
         }
 
-        public string askTargetPath() 
+        public string askTargetPath()
         {
             return textBoxDestPath.Text;
         }
