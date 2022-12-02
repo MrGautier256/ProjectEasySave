@@ -167,5 +167,31 @@ namespace ProjetBureau
         {
             return textBoxDestPath.Text;
         }
+
+        private void btnBrowseFile_Click(object sender, RoutedEventArgs e)
+        {
+            var folderDlg = new System.Windows.Forms.FolderBrowserDialog();
+            folderDlg.ShowNewFolderButton = true;
+            // Show the FolderBrowserDialog.  
+            var result = folderDlg.ShowDialog();
+            if (result == System.Windows.Forms.DialogResult.OK)
+            {
+                textBoxSourcePath.Text = folderDlg.SelectedPath;
+                Environment.SpecialFolder root = folderDlg.RootFolder;
+            }
+        }
+
+        private void btnBrowseFile_Copy_Click(object sender, RoutedEventArgs e)
+        {
+            var folderDlg = new System.Windows.Forms.FolderBrowserDialog();
+            folderDlg.ShowNewFolderButton = true;
+            // Show the FolderBrowserDialog.  
+            var result = folderDlg.ShowDialog();
+            if (result == System.Windows.Forms.DialogResult.OK)
+            {
+                textBoxDestPath.Text = folderDlg.SelectedPath;
+                Environment.SpecialFolder root = folderDlg.RootFolder;
+            }
+        }
     }
 }

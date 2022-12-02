@@ -18,7 +18,7 @@
         Margin="710,132,0,0" 
         Name="btnBrowseFile" 
         Padding="1" VerticalAlignment="Top" 
-        Width="42">
+        Width="42" Click="btnBrowseFile_Click">
             <TextBlock FontSize="10" 
                 FontWeight="Normal" 
                 Foreground="#FF3C3C3C" 
@@ -37,7 +37,7 @@
             Margin="710,318,0,0" 
             x:Name="btnBrowseFile_Copy" 
             Padding="1" VerticalAlignment="Top" 
-            Width="42">
+            Width="42" Click="btnBrowseFile_Copy_Click">
             <TextBlock FontSize="10" 
                 FontWeight="Normal" 
                 Foreground="#FF3C3C3C" 
