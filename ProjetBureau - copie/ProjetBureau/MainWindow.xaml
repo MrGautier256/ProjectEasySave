@@ -5,14 +5,14 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:ProjetBureau"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
+        Title="MainWindow" Height="450" Width="800" Background="LightSkyBlue">
     <Grid>
         <TextBox Text="{Binding Path=FlexString1,Mode=TwoWay}" 
          Height="23" 
-         HorizontalAlignment="Left" 
-         Margin="40,132,0,0" x:Name="textBoxSourcePath" 
+         HorizontalAlignment="Center" 
+         Margin="0,132,0,0" x:Name="textBoxSourcePath" 
          VerticalAlignment="Top" 
-         Width="666"/>
+         Width="610"/>
         <Button Height="23" 
         HorizontalAlignment="Left" 
         Margin="710,132,0,0" 
@@ -24,14 +24,19 @@
                 Foreground="#FF3C3C3C" 
                 Text="Browse" 
                 TextWrapping="Wrap" />
+            <Button.Resources>
+                <Style TargetType="Border">
+                    <Setter Property="CornerRadius" Value="5"/>
+                </Style>
+            </Button.Resources>
         </Button>
 
         <TextBox Text="{Binding FlexString1, Mode=TwoWay}" 
             Height="23" 
-            HorizontalAlignment="Left" 
-            Margin="40,318,0,0" x:Name="textBoxDestPath" 
+            HorizontalAlignment="Center" 
+            Margin="0,318,0,0" x:Name="textBoxDestPath" 
             VerticalAlignment="Top" 
-            Width="666" />
+            Width="610" />
         <Button Height="23" 
             HorizontalAlignment="Left" 
             Margin="710,318,0,0" 
@@ -43,28 +48,130 @@
                 Foreground="#FF3C3C3C" 
                 Text="Browse" 
                 TextWrapping="Wrap" />
+            <Button.Resources>
+                <Style TargetType="Border">
+                    <Setter Property="CornerRadius" Value="5"/>
+                </Style>
+            </Button.Resources>
         </Button>
-        <Label x:Name="TextEnterSourcePath" Content="" HorizontalAlignment="Center" Margin="0,92,0,0" VerticalAlignment="Top" Width="254"/>
-        <Label x:Name="TextEnterTargetPath" Content="" HorizontalAlignment="Center" Margin="0,280,0,0" VerticalAlignment="Top" Width="308"/>
-        <Label Content="EasySave" HorizontalAlignment="Center" Margin="0,18,0,0" VerticalAlignment="Top" Width="152" Height="69" FontSize="36"/>
+        <Label 
+            x:Name="TextEnterSourcePath" 
+            Content="Entrez le chemin source :" 
+            HorizontalAlignment="Center" 
+            Margin="0,101,0,0" 
+            VerticalAlignment="Top" 
+            Width="610" 
+            HorizontalContentAlignment="Center" 
+            FontSize="18"
+        />
+        <Label 
+            x:Name="TextEnterTargetPath" 
+            Content="Entrez le chemin de destination :" 
+            HorizontalAlignment="Center" 
+            Margin="0,287,0,0" 
+            VerticalAlignment="Top" 
+            Width="610" 
+            HorizontalContentAlignment="Center" 
+            FontSize="18"
+        />
+        <Label 
+            Content="EasySave" 
+            HorizontalAlignment="Center" 
+            Margin="0,4,0,0" 
+            VerticalAlignment="Top" 
+            Width="504" 
+            Height="92" 
+            FontSize="72" 
+            HorizontalContentAlignment="Center" 
+            FontFamily="Times New Roman"
+        />
         <TextBox Text="{Binding FlexString1, Mode=TwoWay}"
             Height="23" 
             HorizontalAlignment="Left" 
-            Margin="154,233,0,0" x:Name="textBoxNameSave" 
+            Margin="95,233,0,0" x:Name="textBoxNameSave" 
             VerticalAlignment="Top" 
-            Width="190" />
-        <Label x:Name="TextEnterTargetFile" Content="" HorizontalAlignment="Left" Margin="154,202,0,0" VerticalAlignment="Top" Width="190"/>
-        <Label x:Name="TextEnterLogType" Content="" HorizontalAlignment="Left" Margin="461,202,0,0" VerticalAlignment="Top" Width="120"/>
-        <ComboBox x:Name="LogType" HorizontalAlignment="Left" Margin="461,234,0,0" VerticalAlignment="Top" Width="120">
+            Width="274" >
+            <UIElement.RenderTransform>
+                <TransformGroup>
+                    <ScaleTransform/>
+                    <SkewTransform/>
+                    <RotateTransform/>
+                    <TranslateTransform/>
+                </TransformGroup>
+            </UIElement.RenderTransform>
+        </TextBox>
+        <Label 
+            x:Name="TextEnterTargetFile" 
+            Content="Nommez le fichier de sauvegarde :" 
+            HorizontalAlignment="Left" 
+            Margin="79,0,0,0" 
+            VerticalAlignment="Center" 
+            Width="306" 
+            HorizontalContentAlignment="Center" 
+            FontSize="18"
+        />
+        <Label 
+            x:Name="TextEnterLogType" 
+            Content="Entrez le type de fichier de log :&#xA;" 
+            HorizontalAlignment="Left" 
+            Margin="448,200,0,0" 
+            VerticalAlignment="Top" 
+            Width="271" 
+            Height="37" 
+            HorizontalContentAlignment="Center" 
+            FontSize="18"
+        />
+        <ComboBox 
+            x:Name="LogType" 
+            HorizontalAlignment="Left" 
+            Margin="507,233,0,0" 
+            VerticalAlignment="Top" 
+            Width="145" 
+            Height="23">
+            <ComboBox.Resources>
+                <Style TargetType="Border">
+                    <Setter Property="CornerRadius" Value="5"/>
+                </Style>
+            </ComboBox.Resources>
             <ComboBoxItem IsSelected="true" Content="json"></ComboBoxItem>
             <ComboBoxItem Content="xml"></ComboBoxItem>
         </ComboBox>
-        <ComboBox x:Name="SelectLanguage" HorizontalAlignment="Left" Margin="682,31,0,0" VerticalAlignment="Top" Width="98" DropDownClosed="SelectLanguage_DropDownClosed">
+        <ComboBox 
+            x:Name="SelectLanguage" 
+            HorizontalAlignment="Left" 
+            Margin="682,31,0,0" 
+            VerticalAlignment="Top" 
+            Width="98" 
+            DropDownClosed="SelectLanguage_DropDownClosed">
             <ComboBoxItem IsSelected="true" Content="english"></ComboBoxItem>
             <ComboBoxItem Content="francais"></ComboBoxItem>
             <ComboBoxItem Content="español"></ComboBoxItem>
         </ComboBox>
-        <Label x:Name="TextLanguage" Content="" HorizontalAlignment="Left" Margin="704,4,0,0" VerticalAlignment="Top" Width="54"/>
-        <Button x:Name="copier" Content="Copier" HorizontalAlignment="Center" Margin="0,365,0,0" VerticalAlignment="Top" Height="33" Width="54" Click="Button_Click"/>
+        <Label 
+            x:Name="TextLanguage" 
+            Content="Langue" 
+            HorizontalAlignment="Left" 
+            Margin="682,-3,0,0" 
+            VerticalAlignment="Top" 
+            Width="98" 
+            HorizontalContentAlignment="Center" 
+            FontSize="18"/>
+        <Button 
+            x:Name="copier" 
+            Content="Sauvergarder" 
+            HorizontalAlignment="Center" 
+            Margin="0,366,0,0" 
+            VerticalAlignment="Top" 
+            Height="33" 
+            Width="190" 
+            Click="Button_Click">
+            <Button.Resources>
+                <Style TargetType="Border">
+                    <Setter Property="CornerRadius" Value="5"/>
+                </Style>
+            </Button.Resources>
+        </Button>
     </Grid>
 </Window>
+    
+ 
