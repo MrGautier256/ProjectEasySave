@@ -66,8 +66,5 @@
         </ComboBox>
         <Label x:Name="TextLanguage" Content="" HorizontalAlignment="Left" Margin="704,4,0,0" VerticalAlignment="Top" Width="54"/>
         <Button x:Name="copier" Content="Copier" HorizontalAlignment="Center" Margin="0,365,0,0" VerticalAlignment="Top" Height="33" Width="54" Click="Button_Click"/>
-        <ProgressBar Minimum="0" Maximum="100" Value="0" Name="ProgressBarSave" Margin="24,31,533,347" RenderTransformOrigin="0.5,0.5" >
-        </ProgressBar>
-        <TextBlock Text="{Binding ElementName=ProgressBarSave, Path=Value, StringFormat={}{0:0}%}" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="139,37,0,0" RenderTransformOrigin="0.598,1.608" />
     </Grid>
 </Window>

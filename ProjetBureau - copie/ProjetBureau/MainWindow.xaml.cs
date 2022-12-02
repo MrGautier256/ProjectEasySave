@@ -22,10 +22,11 @@ namespace ProjetBureau
 {
     public partial class MainWindow : Window, IView
     {
+        ProgressWindow progressWindow = new ProgressWindow();
         public MainWindow()
         {
             InitializeComponent();
-            Traduction.Instance.SetInterfaceLanguage("default");
+            Traduction.Instance.SetInterfaceLanguage(SelectLanguage.Text);
             TextEnterSourcePath.Content = Traduction.Instance.Langue.EnterSourcePath;
             TextLanguage.Content = Traduction.Instance.Langue.SelectLanguage;
             TextEnterTargetPath.Content = Traduction.Instance.Langue.EnterTargetPath;
@@ -107,12 +108,6 @@ namespace ProjetBureau
             MessageBox.Show(messageBoxText, caption, button, icon, MessageBoxResult.Yes);
         }
 
-        /// <summary>
-        /// Affichage du commencement et de la fin de la sauvegarde
-        /// Display of the beginning and the end of the back-up
-        /// </summary>
-        /// <param name="state"></param>
-
 
         /// <summary>
         /// Affichage en temps réel des informations de la sauvegarde (Pourcentage | Nom du fichier | Nombre de fichier restant)
@@ -122,7 +117,7 @@ namespace ProjetBureau
 
         public void display(double toDisplay)
         {
-            ProgressBarSave.Dispatcher.Invoke(() => ProgressBarSave.Value = toDisplay, DispatcherPriority.Background);
+            progressWindow.ProgressBarSave.Dispatcher.Invoke(() => progressWindow.ProgressBarSave.Value = toDisplay, DispatcherPriority.Background);
         }
         private void Button_Click(object sender, RoutedEventArgs e)
         {
@@ -140,30 +135,37 @@ namespace ProjetBureau
             TextEnterLogType.Content = Traduction.Instance.Langue.EnterLogType;
         }
 
-        public void sendProgressInfoToView(string fileName, double countfile, int totalFileToCopy, double percentage)
+        public progressState controlProgress(string fileName, double countfile, int totalFileToCopy, double percentage)
         {
             this.display(percentage);
+            return progressWindow.progress;
         }
         public void progress(bool state)
         {
-            //if (!state) { Console.WriteLine("\n" + Traduction.Instance.Langue.Buffering); }
-            //else if (state) { Console.WriteLine("\n" + Traduction.Instance.Langue.Complete); }
+            if (!state)
+            {
+                progressWindow.Show();
+            }
+            else if (state) 
+            {
+                progressWindow.Hide();
+            }
         }
         langueEnum IView.askLanguage() { return langueEnum.english; }
 
         public string asklogType() { return "json"; }
 
-        public string askSourcePath() 
+        public string askSourcePath()
         {
             return textBoxSourcePath.Text;
         }
 
-        public string askTargetFile() 
+        public string askTargetFile()
         {
             return textBoxNameSave.Text;
         }
 
-        public string askTargetPath() 
+        public string askTargetPath()
         {
             return textBoxDestPath.Text;
         }

@@ -25,7 +25,7 @@ namespace CommonCode
         private IView view;
         public Controller(IView _view)
         {
-            model = new Model(this);
+            model = new Model();
             view = _view;
         }
 
@@ -52,8 +52,8 @@ namespace CommonCode
                 model.targetPath = targetPath;
                 model.targetFile = saveName;
                 view.progress(false);
-                model.saveFile(model.sourcePath, model.targetPath);
-                model.writeLog();
+                var tableLog = SaveService.saveFile(model.sourcePath, model.targetPath, model.targetFile, model.logType,view.controlProgress);
+                SaveService.writeLog(tableLog, model.targetFile, model.logType);
                 view.progress(true);
             }
         }
@@ -69,19 +69,6 @@ namespace CommonCode
             else{return "json";}
         }
 
-
-        /// <summary>
-        /// Envoie des informations de copie en temps réelles à la vue pour les afficher
-        /// Sending the informations to copy in real time to the view in order to display them
-        /// </summary>
-        /// <param name="fileName">toto</param>
-        /// <param name="countfile"></param>
-        /// <param name="totalFileToCopy"></param>
-        /// <param name="percentage"></param>
-        public void sendProgressInfoToView(string fileName, double countfile, int totalFileToCopy, double percentage)
-        {
-            view.sendProgressInfoToView(fileName, countfile, totalFileToCopy, percentage);
-        }
 
         /// <summary>
         /// Regex verifiant la validité du nom de sauvegarde
