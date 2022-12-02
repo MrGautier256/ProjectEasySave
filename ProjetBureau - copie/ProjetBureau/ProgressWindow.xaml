@@ -5,18 +5,12 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:ProjetBureau"
         mc:Ignorable="d"
-        Title="Window1" Height="450" Width="800">
-    <Grid>
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="193*"/>
-            <ColumnDefinition Width="38*"/>
-            <ColumnDefinition Width="169*"/>
-        </Grid.ColumnDefinitions>
-        <ProgressBar Minimum="0" Maximum="100" Value="0" Name="ProgressBarSave" Margin="24,31,41,347" RenderTransformOrigin="0.5,0.5" >
+        Title="Window1" Height="391" Width="736">
+    <Grid Margin="0,-15,0,15">
+        <ProgressBar Minimum="0" Maximum="100" Value="0" Name="ProgressBarSave" Margin="41,58,41,258">
         </ProgressBar>
-        <TextBlock Text="{Binding ElementName=ProgressBarSave, Path=Value, StringFormat={}{0:0}%}" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="139,37,0,0" RenderTransformOrigin="0.598,1.608" />
-        <Button Name ="Play" Content="Play" HorizontalAlignment="Left" Margin="96,230,0,0" VerticalAlignment="Top" Height="43" Width="122" Click="Play_Click"/>
-        <Button Name ="Pause" Content="Pause" HorizontalAlignment="Left" Margin="339,230,0,0" VerticalAlignment="Top" Height="43" Width="122" Grid.ColumnSpan="2" Click="Pause_Click"/>
-        <Button Name ="Stop" Content="Stop" HorizontalAlignment="Left" Margin="125,230,0,0" VerticalAlignment="Top" Height="43" Width="122" Grid.Column="2" Click="Stop_Click"/>
+        <TextBlock Text="{Binding ElementName=ProgressBarSave, Path=Value, StringFormat={}{0:0}%}" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="0,61,0,0" RenderTransformOrigin="0.598,1.608" Height="53" Width="98" FontSize="36" TextAlignment="Center" />
+        <Button Name ="PlayPauseButton" Content="Pause" HorizontalAlignment="Left" Margin="419,198,0,0" VerticalAlignment="Top" Height="97" Width="237" Click="PlayPauseButton_Click"/>
+        <Button Name ="Stop" Content="Stop" HorizontalAlignment="Left" Margin="90,198,0,0" VerticalAlignment="Top" Height="97" Width="237" Click="Stop_Click"/>
     </Grid>
 </Window>

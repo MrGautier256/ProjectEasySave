@@ -3,6 +3,7 @@ using System.Runtime.Serialization.Json;
 using System.Text;
 using System.Xml.Linq;
 using System.Xml;
+using System;
 
 namespace CommonCode
 {
@@ -88,6 +89,7 @@ namespace CommonCode
                     );
                 tableLog.Add(jsonFileInfo);
             }
+            controlProgress = null;
             return tableLog;
         }
         /// <summary>

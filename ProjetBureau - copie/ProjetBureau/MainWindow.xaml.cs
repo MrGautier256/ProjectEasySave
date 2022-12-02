@@ -26,7 +26,7 @@ namespace ProjetBureau
         public MainWindow()
         {
             InitializeComponent();
-            Traduction.Instance.SetInterfaceLanguage("default");
+            Traduction.Instance.SetInterfaceLanguage(SelectLanguage.Text);
             TextEnterSourcePath.Content = Traduction.Instance.Langue.EnterSourcePath;
             TextLanguage.Content = Traduction.Instance.Langue.SelectLanguage;
             TextEnterTargetPath.Content = Traduction.Instance.Langue.EnterTargetPath;
@@ -108,12 +108,6 @@ namespace ProjetBureau
             MessageBox.Show(messageBoxText, caption, button, icon, MessageBoxResult.Yes);
         }
 
-        /// <summary>
-        /// Affichage du commencement et de la fin de la sauvegarde
-        /// Display of the beginning and the end of the back-up
-        /// </summary>
-        /// <param name="state"></param>
-
 
         /// <summary>
         /// Affichage en temps réel des informations de la sauvegarde (Pourcentage | Nom du fichier | Nombre de fichier restant)
@@ -123,7 +117,7 @@ namespace ProjetBureau
 
         public void display(double toDisplay)
         {
-            ProgressBarSave.Dispatcher.Invoke(() => ProgressBarSave.Value = toDisplay, DispatcherPriority.Background);
+            progressWindow.ProgressBarSave.Dispatcher.Invoke(() => progressWindow.ProgressBarSave.Value = toDisplay, DispatcherPriority.Background);
         }
         private void Button_Click(object sender, RoutedEventArgs e)
         {
