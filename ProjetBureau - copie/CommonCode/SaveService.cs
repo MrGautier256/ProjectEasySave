@@ -89,7 +89,6 @@ namespace CommonCode
                     );
                 tableLog.Add(jsonFileInfo);
             }
-            controlProgress = null;
             return tableLog;
         }
         /// <summary>

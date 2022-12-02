@@ -17,6 +17,7 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 using System.Windows.Threading;
 using Windows.Globalization;
+using static System.Net.Mime.MediaTypeNames;
 
 namespace ProjetBureau
 {
@@ -115,10 +116,22 @@ namespace ProjetBureau
         /// </summary>
         /// <param name="toDisplay"></param>
 
-        public void display(double toDisplay)
+        public void display(double percentage, string textToDisplay)
         {
-            progressWindow.ProgressBarSave.Dispatcher.Invoke(() => progressWindow.ProgressBarSave.Value = toDisplay, DispatcherPriority.Background);
+
+            progressWindow.ProgressText.Dispatcher.Invoke(() => progressWindow.ProgressText.Text = textToDisplay, DispatcherPriority.Background);
+            progressWindow.ProgressBarSave.Dispatcher.Invoke(() => progressWindow.ProgressBarSave.Value = percentage, DispatcherPriority.Background);
         }
+        public progressState controlProgress(string fileName, double countfile, int totalFileToCopy, double percentage)
+        {
+            if (progressWindow.progress != progressState.pause)
+            {
+                string text = $"{countfile}/{totalFileToCopy} {Traduction.Instance.Langue.InCopy} | {fileName}\n {progressWindow.ProgressText.Text}";
+                this.display(percentage, text);
+            }
+            return progressWindow.progress;
+        }
+
         private void Button_Click(object sender, RoutedEventArgs e)
         {
             IController controller = new Controller(this);
@@ -129,21 +142,16 @@ namespace ProjetBureau
         {
             Traduction.Instance.SetInterfaceLanguage(SelectLanguage.Text);
             TextEnterSourcePath.Content = Traduction.Instance.Langue.EnterSourcePath;
-            //TextLanguage.Content = Traduction.Instance.Langue.SelectLanguage;
+            TextLanguage.Content = Traduction.Instance.Langue.SelectLanguage;
             TextEnterTargetPath.Content = Traduction.Instance.Langue.EnterTargetPath;
             TextEnterTargetFile.Content = Traduction.Instance.Langue.EnterTargetFile;
             TextEnterLogType.Content = Traduction.Instance.Langue.EnterLogType;
-        }
-
-        public progressState controlProgress(string fileName, double countfile, int totalFileToCopy, double percentage)
-        {
-            this.display(percentage);
-            return progressWindow.progress;
         }
         public void progress(bool state)
         {
             if (!state)
             {
+                progressWindow.progress = progressState.play;
                 progressWindow.Show();
             }
             else if (state) 
@@ -151,7 +159,7 @@ namespace ProjetBureau
                 progressWindow.Hide();
             }
         }
-        langueEnum IView.askLanguage() { return langueEnum.english; }
+        langueEnum IView.askLanguage() { return Traduction.Instance.convertLanguage(SelectLanguage.Text); }
 
         public string asklogType() { return "json"; }
 

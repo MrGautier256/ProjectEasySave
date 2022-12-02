@@ -5,12 +5,12 @@ using System.IO;
 namespace CommonCode
 {
     public sealed class Traduction
-    {   
+    {
         /// <summary>
         /// Constructeur lisant le fichier de langue "language.json"
         /// Constructor reading the language file "language.json"
         /// </summary>
-        
+
         public Traduction()
         {
             language = JsonConvert.DeserializeObject<JsonTraduction>(File.ReadAllText(@"language.json"));
@@ -20,7 +20,7 @@ namespace CommonCode
         /// Récupération des éléments textuels de JsonLangueContent en fonction de la langue choisie (Anglais par défaut)
         /// Recovery of textual elements from JsonLangueContent according to the selected language (English by default)
         /// </summary>
-         
+
         public JsonLangueContent Langue
         {
             get
@@ -52,9 +52,14 @@ namespace CommonCode
 
         public void SetInterfaceLanguage(string langue)
         {
-            if (langue == "francais") { setLanguage(langueEnum.french); }
-            else if (langue == "español") { setLanguage(langueEnum.spanish); }
-            else {setLanguage(langueEnum.english);}
+            setLanguage(convertLanguage(langue)); 
+        }   
+        public langueEnum convertLanguage(string langue)
+        {
+            if (langue == "francais") { return langueEnum.french; }
+            else if (langue == "español") { return langueEnum.spanish; }
+            else { return langueEnum.english; }
+
         }
         public void setLanguage(langueEnum langue)
         {

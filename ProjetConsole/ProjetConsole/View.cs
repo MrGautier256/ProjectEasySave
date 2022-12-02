@@ -107,12 +107,13 @@ namespace ProjetConsole
             Console.WriteLine(toDisplay);
         }
 
-        public void controlProgress(string fileName, double countfile, int totalFileToCopy, double percentage)
+        public progressState controlProgress(string fileName, double countfile, int totalFileToCopy, double percentage)
         {
             Console.ForegroundColor = ConsoleColor.Green;
             string text = $"{percentage}% | {countfile}/{totalFileToCopy} {Traduction.Instance.Langue.InCopy} | {fileName}";
             display(text);
             Console.ForegroundColor = ConsoleColor.White;
+            return progressState.play;
         }
     }
 

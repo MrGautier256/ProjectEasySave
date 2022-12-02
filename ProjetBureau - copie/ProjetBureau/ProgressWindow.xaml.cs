@@ -43,8 +43,14 @@ namespace ProjetBureau
 
         private void PlayPauseButton_Click(object sender, RoutedEventArgs e)
         {
-            if (progress == progressState.play) { progress = progressState.pause; PlayPauseButton.Content = "Pause";} 
-            else if (progress == progressState.pause) { progress = progressState.play; PlayPauseButton.Content = "Play";}
+            if (progress == progressState.play) 
+            { 
+                progress = progressState.pause; 
+              PlayPauseButton.Content = "Pause";
+            } 
+            else if (progress == progressState.pause) { 
+                progress = progressState.play; 
+                PlayPauseButton.Content = "Play";}
         }
     }
 }
