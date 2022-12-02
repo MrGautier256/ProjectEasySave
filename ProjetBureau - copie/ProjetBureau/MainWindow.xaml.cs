@@ -116,19 +116,23 @@ namespace ProjetBureau
         /// </summary>
         /// <param name="toDisplay"></param>
 
-        public void display(double percentage, string textToDisplay)
+        public void display(string[] textToDisplay)
         {
 
-            progressWindow.ProgressText.Dispatcher.Invoke(() => progressWindow.ProgressText.Text = textToDisplay, DispatcherPriority.Background);
-            progressWindow.ProgressBarSave.Dispatcher.Invoke(() => progressWindow.ProgressBarSave.Value = percentage, DispatcherPriority.Background);
+            progressWindow.ContentCountsize.Dispatcher.Invoke(() => progressWindow.ContentCountsize.Text = textToDisplay[0], DispatcherPriority.Background);
+            progressWindow.ContentFilename.Dispatcher.Invoke(() => progressWindow.ContentFilename.Text = textToDisplay[1], DispatcherPriority.Background);
+            progressWindow.ContentHistory.Dispatcher.Invoke(() => progressWindow.ContentHistory.Text = textToDisplay[2], DispatcherPriority.Background);
+            progressWindow.ProgressBarSave.Dispatcher.Invoke(() => progressWindow.ProgressBarSave.Value = Convert.ToDouble(textToDisplay[3]), DispatcherPriority.Background);
         }
         public progressState controlProgress(string fileName, double countfile, int totalFileToCopy, double percentage)
         {
             if (progressWindow.progress != progressState.pause)
             {
-                string text = $"{countfile}/{totalFileToCopy} {Traduction.Instance.Langue.InCopy} | {fileName}\n {progressWindow.ProgressText.Text}";
-                this.display(percentage, text);
+                string[] text = { $"{countfile}/{totalFileToCopy}", $" | {fileName}", $"{progressWindow.ContentHistory.Text}", $"{percentage}" };
+                this.display(text);
             }
+            progressWindow.ContentHistory.Text = $"{countfile}/{totalFileToCopy} | {fileName}\n {progressWindow.ContentHistory.Text}"; ;
+
             return progressWindow.progress;
         }
 
@@ -163,20 +167,11 @@ namespace ProjetBureau
 
         public string asklogType() { return "json"; }
 
-        public string askSourcePath()
-        {
-            return textBoxSourcePath.Text;
-        }
+        public string askSourcePath() {return textBoxSourcePath.Text;}
 
-        public string askTargetFile()
-        {
-            return textBoxNameSave.Text;
-        }
+        public string askTargetFile() {return textBoxNameSave.Text;}
 
-        public string askTargetPath()
-        {
-            return textBoxDestPath.Text;
-        }
+        public string askTargetPath() {return textBoxDestPath.Text;}
 
         private void btnBrowseFolder_Click(object sender, RoutedEventArgs e)
         {

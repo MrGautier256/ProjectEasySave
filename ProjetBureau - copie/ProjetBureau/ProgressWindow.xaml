@@ -10,8 +10,10 @@
         <ProgressBar Minimum="0" Maximum="100" Value="0" Name="ProgressBarSave" Margin="41,58,41,258">
         </ProgressBar>
         <TextBlock Text="{Binding ElementName=ProgressBarSave, Path=Value, StringFormat={}{0:0}%}" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="0,61,0,0" RenderTransformOrigin="0.598,1.608" Height="53" Width="98" FontSize="36" TextAlignment="Center" />
-        <Button Name ="PlayPauseButton" Content="Pause" HorizontalAlignment="Left" Margin="41,134,0,0" VerticalAlignment="Top" Height="97" Width="168" Click="PlayPauseButton_Click"/>
-        <Button Name ="Stop" Content="Stop" HorizontalAlignment="Left" Margin="41,253,0,0" VerticalAlignment="Top" Height="97" Width="168" Click="Stop_Click"/>
-        <TextBlock x:Name="ProgressText" HorizontalAlignment="Left" Margin="244,134,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Height="216" Width="451" Text=""/>
+        <Button Name ="PlayPauseButton" Content="Pause" HorizontalAlignment="Left" Margin="41,0,0,0" VerticalAlignment="Center" Height="97" Width="168" Click="PlayPauseButton_Click"/>
+        <Button Name ="Stop" Content="Stop" HorizontalAlignment="Left" Margin="41,269,0,0" VerticalAlignment="Top" Height="97" Width="168" Click="Stop_Click"/>
+        <TextBlock x:Name="ContentCountsize" HorizontalAlignment="Left" Margin="244,134,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Height="31" Width="25"><Run Language="fr-fr" Text="eee"/></TextBlock>
+        <TextBlock x:Name="ContentFilename" HorizontalAlignment="Left" Margin="268,134,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Height="31" Width="427"><Run Language="fr-fr" Text="eee"/></TextBlock>
+        <TextBlock x:Name="ContentHistory" HorizontalAlignment="Left" Margin="244,154,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Height="207" Width="451"><Run Language="fr-fr" Text="eee"/></TextBlock>
     </Grid>
 </Window>

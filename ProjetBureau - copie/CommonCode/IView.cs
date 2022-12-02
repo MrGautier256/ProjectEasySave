@@ -15,5 +15,7 @@
         void sourcePathIsInvalid();
         void targetDirInvalid();
         void targetPathIsInvalid();
+        void display(string[] toDisplay);
+
     }
 }

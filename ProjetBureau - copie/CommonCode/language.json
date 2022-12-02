@@ -20,7 +20,7 @@
 		"Buffering": "Backup in progress",
 		"Complete": "Backup complete",
 		"EnterTargetFile": "Put a name on the saved file :",
-		"InCopy": "files saved: ",
+		"InCopy": "files saved",
 		"targetDirInvalid": "Invalid save name",
 		"EnterLogType": "Enter the log file type :",
 		"SelectLanguage": "Language :"
