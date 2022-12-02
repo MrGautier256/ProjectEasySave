@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ProjetBureau
+namespace CommonCode
 {   
     /// <summary>
     /// Classe contenant les différentes traductions disponibles du logiciel 

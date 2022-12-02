@@ -1,4 +1,5 @@
-﻿using Newtonsoft.Json;
+﻿using CommonCode;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -9,7 +10,7 @@ using System.Xml;
 using System.Xml.Linq;
 using System.Xml.Serialization;
 
-namespace ProjetBureau
+namespace CommonCode
 {
     public class Model
     {
@@ -106,13 +107,7 @@ namespace ProjetBureau
             if (!Directory.Exists(path)) { Directory.CreateDirectory(path); }
 
             string jsonFile = JsonConvert.SerializeObject(tableLog.ToArray());
-            int i = 0;
-            while (File.Exists(fileFullName+
-                ".json") || File.Exists(fileFullName + ".xml"))
-            {
-                i++;
-                fileFullName = $"{path}{targetFile}{i} - {DateTime.Now.ToString("MM.dd.yyyy")}";
-            }
+            fileFullName = RenameLogFile(path, fileFullName);
             if (logType == "xml")
             {
                 var xml = XDocument.Load(JsonReaderWriterFactory.CreateJsonReader(
@@ -125,6 +120,18 @@ namespace ProjetBureau
                 System.IO.File.AppendAllText($"{fileFullName}.json", jsonFile);
 
             }
+        }
+
+        private string RenameLogFile(string path, string fileFullName)
+        {
+            int i = 0;
+            while (File.Exists(fileFullName + ".json") || File.Exists(fileFullName + ".xml"))
+            {
+                i++;
+                fileFullName = $"{path}{targetFile}{i} - {DateTime.Now.ToString("MM.dd.yyyy")}";
+            }
+
+            return fileFullName;
         }
 
     }

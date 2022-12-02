@@ -4,6 +4,7 @@ using System.IO;
 using System.Text.Json;
 using Newtonsoft.Json.Linq;
 using Newtonsoft.Json;
+using CommonCode;
 
 namespace ProjetConsole
 {
@@ -16,7 +17,7 @@ namespace ProjetConsole
         static void Main()
         {   
             
-            IController controller = new Controller();
+            IController controller = new Controller(new View());
             controller.execute();
             Console.ReadKey();
         }

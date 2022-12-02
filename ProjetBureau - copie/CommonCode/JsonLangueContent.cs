@@ -1,4 +1,4 @@
-﻿namespace ProjetBureau
+﻿namespace CommonCode
 {   
     /// <summary>
     /// Classe contenant les différents éléments textuels à afficher pouvant être traduits

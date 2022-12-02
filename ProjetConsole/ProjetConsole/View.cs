@@ -1,4 +1,5 @@
-﻿using System;
+﻿using CommonCode;
+using System;
 using System.Diagnostics;
 using System.Reflection;
 
@@ -9,31 +10,30 @@ namespace ProjetConsole
     /// Enumeration of the available languages
     /// </summary>
     
-    public enum langueEnum { english, french, spanish };
-    public class View
+    public class View:IView
     {
-        private string sourcePath = string.Empty;
-        private string targetPath = string.Empty;
-        private string targetFile = string.Empty;
+        public string typeOfMode => "Console";
+        // Peut s'écrire: public string typeOfMode { get { return "Console"; } }
+
         /// <summary>
         /// --------------Demande d'informations à l'utilisateur (méthode) ------------------
         /// --------------Ask Informations to user (methods) ------------------
         /// </summary>
-        
-        public void askSourcePath()
+
+        public string askSourcePath()
         {
             Console.WriteLine("\n" + Traduction.Instance.Langue.EnterSourcePath);
-            this.sourcePath = Console.ReadLine() ?? string.Empty;
+            return Console.ReadLine() ?? string.Empty;
         }
-        public void askTargetFile()
+        public string askTargetFile()
         {
             Console.WriteLine("\n" + Traduction.Instance.Langue.EnterTargetFile);
-            this.targetFile = Console.ReadLine() ?? string.Empty;
+            return Console.ReadLine() ?? string.Empty;
         }
-        public void askTargetPath()
+        public string askTargetPath()
         {
             Console.WriteLine("\n" + Traduction.Instance.Langue.EnterTargetPath);
-            this.targetPath = Console.ReadLine() ?? string.Empty;
+            return Console.ReadLine() ?? string.Empty;
         }
         public string asklogType()
         {
@@ -74,19 +74,6 @@ namespace ProjetConsole
         }
 
         /// <summary>
-        /// --------------Récupération d'information (méthode)------------------
-        /// --------------Get Info (methods)------------------
-        /// </summary>
-        /// <returns></returns>
-        
-        public string getSourcePath()
-        { return this.sourcePath; }
-        public string getTargetPath()
-        { return this.targetPath; }
-        public string getTargetFile()
-        { return this.targetFile; }
-
-        /// <summary>
         /// ---Méthodes informant l'utilisateurs que des informations sont invalides---
         /// ---methods informing the user that information is invalid---
         /// </summary>
@@ -117,11 +104,16 @@ namespace ProjetConsole
         
         public void display(string toDisplay)
         {
-            Console.ForegroundColor = ConsoleColor.Green;
             Console.WriteLine(toDisplay);
-            Console.ForegroundColor = ConsoleColor.White;
         }
 
+        public void sendProgressInfoToView(string fileName, double countfile, int totalFileToCopy, double percentage)
+        {
+            Console.ForegroundColor = ConsoleColor.Green;
+            string text = $"{percentage}% | {countfile}/{totalFileToCopy} {Traduction.Instance.Langue.InCopy} | {fileName}";
+            display(text);
+            Console.ForegroundColor = ConsoleColor.White;
+        }
     }
 
 }

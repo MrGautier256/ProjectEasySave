@@ -1,7 +1,8 @@
-﻿using Newtonsoft.Json;
+﻿using CommonCode;
+using Newtonsoft.Json;
 using System.IO;
 
-namespace ProjetBureau
+namespace CommonCode
 {
     public sealed class Traduction
     {   

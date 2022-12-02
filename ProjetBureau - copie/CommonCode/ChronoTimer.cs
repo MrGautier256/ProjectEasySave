@@ -1,6 +1,7 @@
-﻿using System.Diagnostics;
+﻿using System;
+using System.Diagnostics;
 
-namespace ProjetConsole
+namespace CommonCode
 {
     public static class ChronoTimer
     {

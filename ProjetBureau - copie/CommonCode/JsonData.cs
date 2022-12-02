@@ -1,4 +1,6 @@
-﻿namespace ProjetConsole
+﻿using System;
+
+namespace CommonCode
 {   
     /// <summary>
     /// Classe contenant tout les attributs qui seront enregistré dans le fichier .Log

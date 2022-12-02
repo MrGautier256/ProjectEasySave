@@ -1,4 +1,5 @@
-﻿using Microsoft.Win32;
+﻿using CommonCode;
+using Microsoft.Win32;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -19,8 +20,7 @@ using Windows.Globalization;
 
 namespace ProjetBureau
 {
-    public enum langueEnum { english, french, spanish };
-    public partial class MainWindow : Window
+    public partial class MainWindow : Window, IView
     {
         public MainWindow()
         {
@@ -36,6 +36,9 @@ namespace ProjetBureau
         private string sourcePath = string.Empty;
         private string targetPath = string.Empty;
         private string targetFile = string.Empty;
+
+        public string typeOfMode => "Graphic";
+
         /// <summary>
         /// --------------Demande d'informations à l'utilisateur (méthode) ------------------
         /// --------------Ask Informations to user (methods) ------------------
@@ -74,22 +77,6 @@ namespace ProjetBureau
             return selectedLanguage;
         }
 
-
-
-
-        /// <summary>
-        /// --------------Récupération d'information (méthode)------------------
-        /// --------------Get Info (methods)------------------
-        /// </summary>
-        /// <returns></returns>
-
-        public string getSourcePath()
-        { return this.sourcePath; }
-        public string getTargetPath()
-        { return this.targetPath; }
-        public string getTargetFile()
-        { return this.targetFile; }
-
         /// <summary>
         /// ---Méthodes informant l'utilisateurs que des informations sont invalides---
         /// ---methods informing the user that information is invalid---
@@ -104,7 +91,7 @@ namespace ProjetBureau
             MessageBox.Show(messageBoxText, caption, button, icon, MessageBoxResult.Yes);
         }
         public void targetPathIsInvalid()
-        { 
+        {
             string? messageBoxText = Traduction.Instance.Langue.TargetPathInvalid;
             string caption = "Source Path Invalid";
             MessageBoxButton button = MessageBoxButton.OK;
@@ -112,7 +99,7 @@ namespace ProjetBureau
             MessageBox.Show(messageBoxText, caption, button, icon, MessageBoxResult.Yes);
         }
         public void targetDirInvalid()
-        { 
+        {
             string? messageBoxText = Traduction.Instance.Langue.targetDirInvalid;
             string caption = "Source Path Invalid";
             MessageBoxButton button = MessageBoxButton.OK;
@@ -126,11 +113,7 @@ namespace ProjetBureau
         /// </summary>
         /// <param name="state"></param>
 
-        public void progress(bool state)
-        {
-            if (!state) { Console.WriteLine("\n" + Traduction.Instance.Langue.Buffering); }
-            else if (state) { Console.WriteLine("\n" + Traduction.Instance.Langue.Complete); }
-        }
+
         /// <summary>
         /// Affichage en temps réel des informations de la sauvegarde (Pourcentage | Nom du fichier | Nombre de fichier restant)
         /// Display in real time the informations of the back-up (Percentage | File's name | Number of remaining files)
@@ -144,7 +127,7 @@ namespace ProjetBureau
         private void Button_Click(object sender, RoutedEventArgs e)
         {
             IController controller = new Controller(this);
-            controller.execute(textBoxSourcePath.Text, textBoxDestPath.Text, LogType.Text, textBoxNameSave.Text);
+            controller.execute();
         }
 
         private void SelectLanguage_DropDownClosed(object sender, EventArgs e)
@@ -155,6 +138,34 @@ namespace ProjetBureau
             TextEnterTargetPath.Content = Traduction.Instance.Langue.EnterTargetPath;
             TextEnterTargetFile.Content = Traduction.Instance.Langue.EnterTargetFile;
             TextEnterLogType.Content = Traduction.Instance.Langue.EnterLogType;
+        }
+
+        public void sendProgressInfoToView(string fileName, double countfile, int totalFileToCopy, double percentage)
+        {
+            this.display(percentage);
+        }
+        public void progress(bool state)
+        {
+            //if (!state) { Console.WriteLine("\n" + Traduction.Instance.Langue.Buffering); }
+            //else if (state) { Console.WriteLine("\n" + Traduction.Instance.Langue.Complete); }
+        }
+        langueEnum IView.askLanguage() { return langueEnum.english; }
+
+        public string asklogType() { return "json"; }
+
+        public string askSourcePath() 
+        {
+            return textBoxSourcePath.Text;
+        }
+
+        public string askTargetFile() 
+        {
+            return textBoxNameSave.Text;
+        }
+
+        public string askTargetPath() 
+        {
+            return textBoxDestPath.Text;
         }
     }
 }

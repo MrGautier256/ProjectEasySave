@@ -3,7 +3,7 @@ using System.Diagnostics;
 using System.IO;
 using System.Text.RegularExpressions;
 
-namespace ProjetBureau
+namespace CommonCode
 {   /// <summary>
     /// Interface Icontroller avec comme méthode execute() commune a tout controller
     /// Icontroller interface with execute() as shared method to all the controllers
@@ -11,7 +11,7 @@ namespace ProjetBureau
     public interface IController
     {
         public void execute();
-        public void execute(string sourcePath, string targetPath, string logType, string saveName);
+        //public void execute(string sourcePath, string targetPath, string logType, string saveName);
     }
 
     /// <summary>
@@ -22,14 +22,11 @@ namespace ProjetBureau
     public class Controller : IController
     {
         private Model model;
-        private View view;
-        private MainWindow mainWindow;
-        private string typeOfMode;
-        public Controller(MainWindow _mainWindow)
+        private IView view;
+        public Controller(IView _view)
         {
             model = new Model(this);
-            view = new View();
-            mainWindow = _mainWindow;
+            view = _view;
         }
 
         /// <summary>
@@ -38,19 +35,13 @@ namespace ProjetBureau
         /// </summary>
         public void execute()
         {
-            typeOfMode = "Console";
-
             var language = view.askLanguage();
             Traduction.Instance.setLanguage(language);
             string logType = view.asklogType();
 
-            view.askSourcePath();
-            view.askTargetFile();
-            view.askTargetPath();
-
-            string saveName = view.getTargetFile();
-            string sourcePath = view.getSourcePath();
-            string targetPath = view.getTargetPath();
+            string saveName = view.askTargetFile();
+            string sourcePath = view.askSourcePath();
+            string targetPath = view.askTargetPath();
 
             targetPath = combinePathAndName(targetPath, saveName);
 
@@ -59,28 +50,11 @@ namespace ProjetBureau
                 model.logType = setLogType(logType);
                 model.sourcePath = sourcePath;
                 model.targetPath = targetPath;
-                model.targetFile = view.getTargetFile(); ;
+                model.targetFile = saveName;
                 view.progress(false);
                 model.saveFile(model.sourcePath, model.targetPath);
                 model.writeLog();
                 view.progress(true);
-            }
-        }
-
-        public void execute(string sourcePath, string targetPath, string logType, string saveName)
-        {
-            typeOfMode = "Graphic";
-
-            targetPath = combinePathAndName(targetPath, saveName);
-
-            if (checkPathIntegrity(sourcePath, targetPath) && !checkTargetDirectory(saveName))
-            {
-                model.logType = setLogType(logType);
-                model.sourcePath = sourcePath;
-                model.targetPath = targetPath;
-                model.targetFile = view.getTargetFile(); 
-                model.saveFile(model.sourcePath, model.targetPath);
-                model.writeLog();
             }
         }
 
@@ -106,19 +80,7 @@ namespace ProjetBureau
         /// <param name="percentage"></param>
         public void sendProgressInfoToView(string fileName, double countfile, int totalFileToCopy, double percentage)
         {
-            if (typeOfMode == "Console") 
-            { 
-                Console.ForegroundColor = ConsoleColor.Green;
-                string text = $"{percentage}% | {countfile}/{totalFileToCopy} {Traduction.Instance.Langue.InCopy} | {fileName}";
-                view.display(text);
-                Console.ForegroundColor = ConsoleColor.White;
-            }
-            else if (typeOfMode == "Graphic")
-            {
-                mainWindow.display(percentage);
-
-            }
-
+            view.sendProgressInfoToView(fileName, countfile, totalFileToCopy, percentage);
         }
 
         /// <summary>
@@ -134,8 +96,7 @@ namespace ProjetBureau
             Regex RgxUrl = new Regex("[^a-zA-Z0-9 ]");
             if (RgxUrl.IsMatch(DirName))
             {
-                if (typeOfMode == "Console") { view.targetDirInvalid(); }
-                else if (typeOfMode == "Graphic") { mainWindow.targetDirInvalid(); }
+                view.targetDirInvalid();
                 valid = true;
             }
             else
@@ -154,7 +115,7 @@ namespace ProjetBureau
         private bool checkPathIntegrity(string source, string target)
         {
             bool integrity = false;
-            if (pathIsValid(source) && pathExist(source))
+            if (pathIsValid(source) && Directory.Exists(source))
             {
                 if (pathIsValid(target) && (target != ""))
                 {
@@ -162,32 +123,19 @@ namespace ProjetBureau
                 }
                 else
                 {
-                    if (typeOfMode == "Console"){view.targetPathIsInvalid();} 
-                    else if (typeOfMode == "Graphic"){ mainWindow.targetPathIsInvalid();}
+                    view.targetPathIsInvalid();
                     integrity = false;
 
                 }
             }
             else
             {
-                if (typeOfMode == "Console") { view.sourcePathIsInvalid(); }
-                else if (typeOfMode == "Graphic") { mainWindow.sourcePathIsInvalid(); }
+                view.sourcePathIsInvalid();
                 integrity = false;
             }
             return integrity;
         }
-        /// <summary>
-        /// Verification de l'existence du chemin
-        /// Verifying the path existence 
-        /// </summary>
-        /// <param name="Path"></param>
-        /// <returns></returns>
-        
-        private bool pathExist(string Path)
-        {
-            bool test = Directory.Exists(Path);
-            return test;
-        }
+
         /// <summary>
         /// Verification de la validité du format du chemin
         /// Verifying the validity of the path format
