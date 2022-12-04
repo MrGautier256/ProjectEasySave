@@ -10,7 +10,8 @@
 		"InCopy": "fichiers sauvegardés",
 		"targetDirInvalid": "Nom de sauvegarde invalide",
 		"EnterLogType": "Entrez le type de fichier de log :",
-		"SelectLanguage": "Langue :"
+		"SelectLanguage": "Langue :",
+		"Save": "Sauvegarder"
 	},
 	"english": {
 		"EnterSourcePath": "Enter source Path :",
@@ -23,7 +24,8 @@
 		"InCopy": "files saved",
 		"targetDirInvalid": "Invalid save name",
 		"EnterLogType": "Enter the log file type :",
-		"SelectLanguage": "Language :"
+		"SelectLanguage": "Language :",
+		"Save": "Save"
 	},
 	"spanish": {
 		"EnterSourcePath": "Entre el camino raiz :",
@@ -36,6 +38,7 @@
 		"InCopy": "Archivos guardados",
 		"targetDirInvalid": "Nombre de guardado invalido",
 		"EnterLogType": "Entre el tipo del archivo de log :",
-		"SelectLanguage": "Idioma :"
+		"SelectLanguage": "Idioma :",
+		"Save": "Guardado"
 	}
 }

@@ -18,5 +18,6 @@
         public string? targetDirInvalid;
         public string? EnterLogType;
         public string? SelectLanguage;
+        public string? Save;
     }
 }

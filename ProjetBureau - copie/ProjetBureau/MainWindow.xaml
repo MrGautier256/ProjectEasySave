@@ -101,7 +101,7 @@
             HorizontalAlignment="Center" 
             Margin="0,287,0,0" 
             VerticalAlignment="Top" 
-            Width="610" 
+            Width="Auto" 
             HorizontalContentAlignment="Center" 
             FontSize="18"
         />
@@ -110,8 +110,8 @@
             HorizontalAlignment="Center" 
             Margin="0,4,0,0" 
             VerticalAlignment="Top" 
-            Width="504" 
-            Height="92" 
+            Width="Auto" 
+            Height="Auto" 
             FontSize="72" 
             HorizontalContentAlignment="Center" 
             FontFamily="Times New Roman"
@@ -206,7 +206,7 @@
             HorizontalContentAlignment="Center" 
             FontSize="18"/>
         <Button 
-            x:Name="copier" 
+            x:Name="SaveButton" 
             Content="Sauvegarder" 
             HorizontalAlignment="Center" 
             Margin="0,366,0,0" 
