@@ -1,0 +1,106 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="CommonCode.ChronoTimer">
+    <Position X="22.5" Y="2.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAEAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>ChronoTimer.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="CommonCode.Controller">
+    <Position X="27.5" Y="2.25" Width="1.5" />
+    <AssociationLine Name="view" Type="CommonCode.IView" FixedFromPoint="true" FixedToPoint="true">
+      <Path>
+        <Point X="28.25" Y="2.25" />
+        <Point X="28.25" Y="1.875" />
+        <Point X="24.625" Y="1.875" />
+        <Point X="24.625" Y="4.625" />
+        <Point X="25" Y="4.625" />
+      </Path>
+    </AssociationLine>
+    <TypeIdentifier>
+      <HashCode>AABAAAAAEAAAEBAAAAAEAgAAAAAAAAAAAQAAAAAIAAA=</HashCode>
+      <FileName>Controller.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Field Name="model" />
+      <Field Name="view" />
+    </ShowAsAssociation>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="CommonCode.JsonData">
+    <Position X="22.5" Y="4.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAACAACAAAICACAMAAAAAAAAAAEAAAAAAAAgAABCAAA=</HashCode>
+      <FileName>JsonData.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="CommonCode.JsonLangueContent">
+    <Position X="18" Y="4.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAADAAAAAAAAAAICAACAAAACAAIAAAgCgAAAAAAEAAA=</HashCode>
+      <FileName>JsonLangueContent.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="CommonCode.JsonTraduction">
+    <Position X="20.5" Y="8.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AIAAAAAAAAAAAAAAAAAAAAAAABAAAAQAAAAAAAAAAAA=</HashCode>
+      <FileName>JsonTraduction.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="CommonCode.Model">
+    <Position X="28" Y="5.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAACAAQAAAAAIAAAAAABAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Model.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="CommonCode.SaveService">
+    <Position X="22.75" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAABAAAAEAAAAAAABAAAAAAA=</HashCode>
+      <FileName>SaveService.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="CommonCode.Traduction">
+    <Position X="24.25" Y="8.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAEIAAAAAAAAAgEAAAAAAAAAgAAAIAASAAAAAAAAAA=</HashCode>
+      <FileName>Traduction.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Field Name="language" />
+      <Field Name="_langue" />
+    </ShowAsAssociation>
+  </Class>
+  <Interface Name="CommonCode.IController">
+    <Position X="29.25" Y="2.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAEAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>IController.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="CommonCode.IView">
+    <Position X="25" Y="2.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAABEAABAACBAAAAAAAACgBAIAEAAACAAIAAAAAAAAA=</HashCode>
+      <FileName>IView.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Enum Name="CommonCode.langueEnum">
+    <Position X="25" Y="6" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AIAAAAAAAAAAAAAAAAAAAAAAABAAAAQAAAAAAAAAAAA=</HashCode>
+      <FileName>IView.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Enum Name="CommonCode.progressState">
+    <Position X="27.5" Y="8.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAACgAAAAAAAAAAAAIAA=</HashCode>
+      <FileName>SaveService.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>
