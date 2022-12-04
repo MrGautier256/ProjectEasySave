@@ -67,9 +67,7 @@
             TextWrapping="Wrap" 
             VerticalAlignment="Center" 
             Height="19" 
-            Width="58" Margin="9,0,0,0">
-            <Run Language="fr-fr" Text="eee"/>
-            </TextBlock>
+            Width="58" Margin="6,0,0,0"><Run/><LineBreak/><Run/></TextBlock>
         </Border>
         <Border 
             Margin="312,132,0,0"
@@ -83,9 +81,7 @@
             x:Name="ContentFilename" 
             TextWrapping="Wrap" 
             VerticalAlignment="Center" 
-            Height="18" Margin="9,0,1,0">
-            <Run Language="fr-fr" Text="fff"/>
-            </TextBlock>
+            Height="18" Margin="5,0,-2,0" Text=""/>
         </Border>
         <Border 
             Margin="239,161,41,19" 
@@ -102,13 +98,11 @@
             </Border.RenderTransform>
             <TextBlock 
             x:Name="ContentHistory" 
-            HorizontalAlignment="Center" 
+            HorizontalAlignment="Left" 
             TextWrapping="Wrap" 
             VerticalAlignment="Top" 
             Height="252" 
-            Width="501" Margin="0,1,0,0">
-            <Run Language="fr-fr" Text="rrr"/>
-            </TextBlock>
+            Width="507" Margin="6,1,0,0" Text=""/>
         </Border>
     </Grid>
 </Window>

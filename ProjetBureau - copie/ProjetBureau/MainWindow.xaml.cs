@@ -33,6 +33,7 @@ namespace ProjetBureau
             TextEnterTargetPath.Content = Traduction.Instance.Langue.EnterTargetPath;
             TextEnterTargetFile.Content = Traduction.Instance.Langue.EnterTargetFile;
             TextEnterLogType.Content = Traduction.Instance.Langue.EnterLogType;
+            SaveButton.Content = Traduction.Instance.Langue.Save;
         }
 
         private string sourcePath = string.Empty;
@@ -128,10 +129,10 @@ namespace ProjetBureau
         {
             if (progressWindow.progress != progressState.pause)
             {
-                string[] text = { $"{countfile}/{totalFileToCopy} |", $" {fileName}", $"{progressWindow.ContentHistory.Text}", $"{percentage}" };
+                string[] text = { $"{countfile}/{totalFileToCopy}", $" {fileName}", $"{progressWindow.ContentHistory.Text}", $"{percentage}" };
                 display(text);
             }
-            progressWindow.ContentHistory.Text = $"{countfile}/{totalFileToCopy} | {fileName}\n {progressWindow.ContentHistory.Text}"; ;
+            progressWindow.ContentHistory.Text = $"{countfile}/{totalFileToCopy} | {fileName}\n{progressWindow.ContentHistory.Text}"; ;
 
             return progressWindow.progress;
         }
@@ -150,6 +151,7 @@ namespace ProjetBureau
             TextEnterTargetPath.Content = Traduction.Instance.Langue.EnterTargetPath;
             TextEnterTargetFile.Content = Traduction.Instance.Langue.EnterTargetFile;
             TextEnterLogType.Content = Traduction.Instance.Langue.EnterLogType;
+            SaveButton.Content = Traduction.Instance.Langue.Save;
         }
         public void progress(bool state)
         {
