@@ -10,12 +10,13 @@
         <TextBox Text="{Binding Path=FlexString1,Mode=TwoWay}" 
             Height="23" 
             HorizontalAlignment="Center" 
-            Margin="0,132,0,0" x:Name="textBoxSourcePath" 
+            Margin="0,132,0,0" 
+            x:Name="textBoxSourcePath" 
             VerticalAlignment="Top" 
             Width="610"
             FontWeight="Bold"
             BorderBrush="Black"
-            >
+            BorderThickness="2">
             <TextBox.Resources>
                 <Style TargetType="Border">
                     <Setter Property="CornerRadius" Value="5"/>
@@ -31,7 +32,8 @@
             Width="42" Click="btnBrowseFolder_Click"
             Background="SeaShell"
             Foreground="Black"        
-            BorderBrush="Black">   
+            BorderBrush="Black"
+            BorderThickness="2">
             <TextBlock FontSize="10" 
                 FontWeight="Bold" 
                 Foreground="#FF3C3C3C" 
@@ -51,7 +53,9 @@
             Margin="0,318,0,0" x:Name="textBoxDestPath" 
             VerticalAlignment="Top" 
             Width="610"
-            BorderBrush="Black">
+            FontWeight="Bold"
+            BorderBrush="Black"
+            BorderThickness="2">
             <TextBox.Resources>
                 <Style TargetType="Border">
                     <Setter Property="CornerRadius" Value="5"/>
@@ -66,7 +70,8 @@
             Width="42" Click="btnBrowseFolder_Copy_Click"
             Background="SeaShell"
             Foreground="Black"
-            BorderBrush="Black">
+            BorderBrush="Black"
+            BorderThickness="2">
             <TextBlock FontSize="10" 
                 FontWeight="Bold" 
                 Foreground="#FF3C3C3C" 
@@ -81,6 +86,7 @@
         <Label 
             x:Name="TextEnterSourcePath" 
             Content="Entrez le chemin source :" 
+            FontWeight="Bold"
             HorizontalAlignment="Center" 
             Margin="0,101,0,0" 
             VerticalAlignment="Top" 
@@ -91,6 +97,7 @@
         <Label 
             x:Name="TextEnterTargetPath" 
             Content="Entrez le chemin de destination :" 
+            FontWeight="Bold"
             HorizontalAlignment="Center" 
             Margin="0,287,0,0" 
             VerticalAlignment="Top" 
@@ -114,8 +121,10 @@
             HorizontalAlignment="Left" 
             Margin="95,233,0,0" x:Name="textBoxNameSave" 
             VerticalAlignment="Top" 
-            Width="274" 
-            BorderBrush="Black">
+            Width="274"
+            FontWeight="Bold"
+            BorderBrush="Black"
+            BorderThickness="2">
             <TextBox.Resources>
                 <Style TargetType="Border">
                     <Setter Property="CornerRadius" Value="5"/>
@@ -133,16 +142,18 @@
         <Label 
             x:Name="TextEnterTargetFile" 
             Content="Nommez le fichier de sauvegarde :" 
+            FontWeight="Bold"
             HorizontalAlignment="Left" 
-            Margin="79,0,0,0" 
+            Margin="80,0,0,0" 
             VerticalAlignment="Center" 
-            Width="306" 
+            Width="304" 
             HorizontalContentAlignment="Center" 
             FontSize="18"
         />
         <Label 
             x:Name="TextEnterLogType" 
             Content="Entrez le type de fichier de log :&#xA;" 
+            FontWeight="Bold"
             HorizontalAlignment="Left" 
             Margin="448,200,0,0" 
             VerticalAlignment="Top" 
@@ -158,8 +169,7 @@
             VerticalAlignment="Top" 
             Width="145" 
             Height="23"
-            FontWeight="Bold"
-            >
+            FontWeight="Bold">
             <ComboBoxItem IsSelected="true" Content="json"></ComboBoxItem>
             <ComboBoxItem Content="xml"></ComboBoxItem>
         </ComboBox>
@@ -172,15 +182,15 @@
             FontWeight="Bold"
             DropDownClosed="SelectLanguage_DropDownClosed">
             <ComboBox.Style>
-        <Style TargetType="ComboBox">
-            <Setter Property="BorderBrush" Value="Black"/>
-            <Style.Triggers>
-                <DataTrigger Binding="{Binding Value}" Value="{x:Null}">
-                    <Setter Property="BorderBrush" Value="Black" />
-                </DataTrigger>
-            </Style.Triggers>
-        </Style>
-    </ComboBox.Style>
+                <Style TargetType="ComboBox">
+                    <Setter Property="BorderBrush" Value="Black"/>
+                    <Style.Triggers>
+                        <DataTrigger Binding="{Binding Value}" Value="{x:Null}">
+                            <Setter Property="BorderBrush" Value="Black" />
+                        </DataTrigger>
+                    </Style.Triggers>
+                </Style>
+            </ComboBox.Style>
             <ComboBoxItem IsSelected="true" Content="english"></ComboBoxItem>
             <ComboBoxItem Content="francais"></ComboBoxItem>
             <ComboBoxItem Content="español"></ComboBoxItem>
@@ -189,6 +199,7 @@
             x:Name="TextLanguage" 
             Content="Langue" 
             HorizontalAlignment="Left" 
+            FontWeight="Bold"
             Margin="682,-3,0,0" 
             VerticalAlignment="Top" 
             Width="98" 
@@ -206,7 +217,8 @@
             Click="Button_Click"
             Background="SeaShell"
             Foreground="Black"
-            BorderBrush="Black">
+            BorderBrush="Black"
+            BorderThickness="2">
             <Button.Resources>
                 <Style TargetType="Border">
                     <Setter Property="CornerRadius" Value="5"/>

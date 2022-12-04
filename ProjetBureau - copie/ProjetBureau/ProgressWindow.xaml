@@ -5,15 +5,107 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:ProjetBureau"
         mc:Ignorable="d"
-        Title="Window1" Height="391" Width="736">
+        Title="Window1" Height="450" Width="800" Background="LightSkyBlue">
     <Grid Margin="0,-15,0,15">
-        <ProgressBar Minimum="0" Maximum="100" Value="0" Name="ProgressBarSave" Margin="41,58,41,246">
+        <ProgressBar 
+            Minimum="0" 
+            Maximum="100" 
+            Value="0" 
+            Name="ProgressBarSave" 
+            Margin="41,58,41,312" 
+            Background="White" 
+            BorderBrush="Black" 
+            BorderThickness="2">
         </ProgressBar>
-        <TextBlock Text="{Binding ElementName=ProgressBarSave, Path=Value, StringFormat={}{0:0}%}" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="0,61,0,0" RenderTransformOrigin="0.598,1.608" Height="53" Width="98" FontSize="36" TextAlignment="Center" />
-        <Button Name ="PlayPauseButton" Content="Pause" HorizontalAlignment="Left" Margin="41,0,0,0" VerticalAlignment="Center" Height="97" Width="168" Click="PlayPauseButton_Click"/>
-        <Button Name ="Stop" Content="Stop" HorizontalAlignment="Left" Margin="41,269,0,0" VerticalAlignment="Top" Height="97" Width="168" Click="Stop_Click"/>
-        <TextBlock x:Name="ContentCountsize" HorizontalAlignment="Left" Margin="244,140,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Height="19" Width="70"><Run Language="fr-fr" Text="eee"/></TextBlock>
-        <TextBlock x:Name="ContentFilename" HorizontalAlignment="Left" Margin="319,140,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Height="19" Width="376"><Run Language="fr-fr" Text="fff"/></TextBlock>
-        <TextBlock x:Name="ContentHistory" HorizontalAlignment="Left" Margin="244,168,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Height="198" Width="451"><Run Language="fr-fr" Text="rrr"/></TextBlock>
+        <TextBlock 
+            Text="{Binding ElementName=ProgressBarSave, Path=Value, StringFormat={}{0:0}%}" 
+            HorizontalAlignment="Center" 
+            VerticalAlignment="Top" 
+            Margin="0,55,0,0" 
+            RenderTransformOrigin="0.598,1.608" 
+            Height="53" 
+            Width="98" 
+            FontSize="36" 
+            TextAlignment="Center" />
+        <Button Name ="PlayPauseButton" Content="Pause" HorizontalAlignment="Left" Margin="41,145,0,0" VerticalAlignment="Top" Height="96" Width="168" Click="PlayPauseButton_Click"
+            Background="SeaShell"
+            Foreground="Black"
+            BorderBrush="Black"
+            BorderThickness="2">
+            <Button.Resources>
+                <Style TargetType="Border">
+                    <Setter Property="CornerRadius" Value="5"/>
+                </Style>
+            </Button.Resources>
+        </Button>
+        <Button Name ="Stop" Content="Stop" HorizontalAlignment="Left" Margin="41,281,0,0" VerticalAlignment="Top" Height="97" Width="168" Click="Stop_Click"
+            Background="SeaShell"
+            Foreground="Black"
+            BorderBrush="Black"
+            BorderThickness="2">
+            <Button.Resources>
+                <Style TargetType="Border">
+                    <Setter Property="CornerRadius" Value="5"/>
+                </Style>
+            </Button.Resources>
+        </Button>
+        <Border 
+            Margin="239,132,0,0"
+            BorderThickness="2"
+            BorderBrush="Black"
+            HorizontalAlignment="Left"
+            VerticalAlignment="Top"
+            Height="19" 
+            Width="68"
+            Background="Transparent">
+            <TextBlock 
+            x:Name="ContentCountsize" 
+            HorizontalAlignment="Left"
+            TextWrapping="Wrap" 
+            VerticalAlignment="Center" 
+            Height="19" 
+            Width="58" Margin="9,0,0,0">
+            <Run Language="fr-fr" Text="eee"/>
+            </TextBlock>
+        </Border>
+        <Border 
+            Margin="312,132,0,0"
+            BorderThickness="2"
+            BorderBrush="Black" 
+            HorizontalAlignment="Left" 
+            VerticalAlignment="Top" 
+            Height="19"
+            Background="Transparent" Width="433">
+            <TextBlock 
+            x:Name="ContentFilename" 
+            TextWrapping="Wrap" 
+            VerticalAlignment="Center" 
+            Height="18" Margin="9,0,1,0">
+            <Run Language="fr-fr" Text="fff"/>
+            </TextBlock>
+        </Border>
+        <Border 
+            Margin="239,161,41,19" 
+            BorderThickness="2"
+            BorderBrush="Black"
+            Background="Transparent" RenderTransformOrigin="0.5,0.5">
+            <Border.RenderTransform>
+                <TransformGroup>
+                    <ScaleTransform/>
+                    <SkewTransform AngleX="0.075"/>
+                    <RotateTransform/>
+                    <TranslateTransform X="0.165"/>
+                </TransformGroup>
+            </Border.RenderTransform>
+            <TextBlock 
+            x:Name="ContentHistory" 
+            HorizontalAlignment="Center" 
+            TextWrapping="Wrap" 
+            VerticalAlignment="Top" 
+            Height="252" 
+            Width="501" Margin="0,1,0,0">
+            <Run Language="fr-fr" Text="rrr"/>
+            </TextBlock>
+        </Border>
     </Grid>
 </Window>
