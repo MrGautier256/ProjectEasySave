@@ -36,7 +36,7 @@
             BorderThickness="2">
             <TextBlock FontSize="10" 
                 FontWeight="Bold" 
-                Foreground="#FF3C3C3C" 
+                Foreground="Black" 
                 Text="Browse" 
                 TextWrapping="Wrap" 
                 />
@@ -74,7 +74,7 @@
             BorderThickness="2">
             <TextBlock FontSize="10" 
                 FontWeight="Bold" 
-                Foreground="#FF3C3C3C" 
+                Foreground="Black" 
                 Text="Browse" 
                 TextWrapping="Wrap" />
             <Button.Resources>

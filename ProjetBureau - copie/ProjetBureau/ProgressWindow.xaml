@@ -26,9 +26,11 @@
             Height="53" 
             Width="98" 
             FontSize="36" 
-            TextAlignment="Center" />
+            TextAlignment="Center"
+            FontWeight="Bold"/>
         <Button Name ="PlayPauseButton" Content="Pause" HorizontalAlignment="Left" Margin="41,145,0,0" VerticalAlignment="Top" Height="96" Width="168" Click="PlayPauseButton_Click"
             Background="SeaShell"
+            FontWeight="Bold"
             Foreground="Black"
             BorderBrush="Black"
             BorderThickness="2">
@@ -40,6 +42,7 @@
         </Button>
         <Button Name ="Stop" Content="Stop" HorizontalAlignment="Left" Margin="41,281,0,0" VerticalAlignment="Top" Height="97" Width="168" Click="Stop_Click"
             Background="SeaShell"
+            FontWeight="Bold"
             Foreground="Black"
             BorderBrush="Black"
             BorderThickness="2">
