@@ -128,7 +128,7 @@ namespace ProjetBureau
         {
             if (progressWindow.progress != progressState.pause)
             {
-                string[] text = { $"{countfile}/{totalFileToCopy}", $" | {fileName}", $"{progressWindow.ContentHistory.Text}", $"{percentage}" };
+                string[] text = { $"{countfile}/{totalFileToCopy} |", $" {fileName}", $"{progressWindow.ContentHistory.Text}", $"{percentage}" };
                 display(text);
             }
             progressWindow.ContentHistory.Text = $"{countfile}/{totalFileToCopy} | {fileName}\n {progressWindow.ContentHistory.Text}"; ;
