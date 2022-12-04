@@ -21,7 +21,7 @@
             Text="{Binding ElementName=ProgressBarSave, Path=Value, StringFormat={}{0:0}%}" 
             HorizontalAlignment="Center" 
             VerticalAlignment="Top" 
-            Margin="0,55,0,0" 
+            Margin="0,53,0,0" 
             RenderTransformOrigin="0.598,1.608" 
             Height="53" 
             Width="98" 
@@ -60,14 +60,19 @@
             VerticalAlignment="Top"
             Height="19" 
             Width="68"
-            Background="Transparent">
+            Background="White">
             <TextBlock 
             x:Name="ContentCountsize" 
             HorizontalAlignment="Left"
             TextWrapping="Wrap" 
-            VerticalAlignment="Center" 
+            VerticalAlignment="Center"
+            FontWeight="Bold"
             Height="19" 
-            Width="58" Margin="6,0,0,0"><Run/><LineBreak/><Run/></TextBlock>
+            Width="58" Margin="6,0,0,0">
+                <Run/>
+                <LineBreak/>
+                <Run/>
+            </TextBlock>
         </Border>
         <Border 
             Margin="312,132,0,0"
@@ -76,18 +81,19 @@
             HorizontalAlignment="Left" 
             VerticalAlignment="Top" 
             Height="19"
-            Background="Transparent" Width="433">
+            Background="White" Width="433">
             <TextBlock 
             x:Name="ContentFilename" 
             TextWrapping="Wrap" 
-            VerticalAlignment="Center" 
+            VerticalAlignment="Center"
+            FontWeight="Bold"
             Height="18" Margin="5,0,-2,0" Text=""/>
         </Border>
         <Border 
-            Margin="239,161,41,19" 
+            Margin="239,161,41,35" 
             BorderThickness="2"
             BorderBrush="Black"
-            Background="Transparent" RenderTransformOrigin="0.5,0.5">
+            Background="White" RenderTransformOrigin="0.5,0.5">
             <Border.RenderTransform>
                 <TransformGroup>
                     <ScaleTransform/>
@@ -100,9 +106,8 @@
             x:Name="ContentHistory" 
             HorizontalAlignment="Left" 
             TextWrapping="Wrap" 
-            VerticalAlignment="Top" 
-            Height="252" 
-            Width="507" Margin="6,1,0,0" Text=""/>
+            FontWeight="Bold" 
+            Width="507" Margin="6,1,0,1" Text=""/>
         </Border>
     </Grid>
 </Window>
