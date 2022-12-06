@@ -70,7 +70,7 @@ namespace CommonCode
         private bool CheckTargetDirectory(string DirName)
         {
             bool valid;
-            Regex RgxUrl = new Regex("[^a-zA-Z0-9 ]");
+            Regex RgxUrl = new("[^a-zA-Z0-9 ]");
             if (DirName.Length >= 60 || RgxUrl.IsMatch(DirName))
             {
                 view.TargetDirInvalid();
