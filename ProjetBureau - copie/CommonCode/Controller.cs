@@ -12,8 +12,8 @@ namespace CommonCode
 
     public class Controller : IController
     {
-        private Model model;
-        private IView view;
+        private readonly Model model;
+        private readonly IView view;
         public Controller(IView _view)
         {
             model = new Model();
@@ -26,35 +26,35 @@ namespace CommonCode
         /// </summary>
         public void execute()
         {
-            var language = view.askLanguage();
-            Traduction.Instance.setLanguage(language);
-            string logType = view.asklogType();
+            var language = view.AskLanguage();
+            Traduction.SetLanguage(language);
+            string logType = view.AsklogType();
 
-            string saveName = view.askTargetFile();
-            string sourcePath = view.askSourcePath();
-            string targetPath = view.askTargetPath();
+            string saveName = view.AskTargetFile();
+            string sourcePath = view.AskSourcePath();
+            string targetPath = view.AskTargetPath();
 
-            targetPath = combinePathAndName(targetPath, saveName);
+            targetPath = CombinePathAndName(targetPath, saveName);
 
-            if (checkPathIntegrity(sourcePath, targetPath) && !checkTargetDirectory(saveName))
+            if (CheckPathIntegrity(sourcePath, targetPath) && !CheckTargetDirectory(saveName))
             {
-                model.logType = setLogType(logType);
+                model.logType = SetLogType(logType);
                 model.sourcePath = sourcePath;
                 model.targetPath = targetPath;
                 model.targetFile = saveName;
-                view.progress(false);
-                var tableLog = SaveService.saveFile(model.sourcePath, model.targetPath, model.targetFile, model.logType,view.controlProgress);
-                SaveService.writeLog(tableLog, model.targetFile, model.logType);
-                view.progress(true);
+                view.Progress(false);
+                var tableLog = SaveService.SaveFile(model.sourcePath, model.targetPath, model.targetFile,view.ControlProgress);
+                SaveService.WriteLog(tableLog, model.targetFile, model.logType);
+                view.Progress(true);
             }
         }
 
-        private string combinePathAndName(string targetPath, string saveName)
+        private static string CombinePathAndName(string targetPath, string saveName)
         {
             return Path.Combine(targetPath, saveName);
         }
 
-        private string setLogType(string logtype)
+        private static string SetLogType(string logtype)
         {
             if (logtype == "xml") {return "xml";}
             else{return "json";}
@@ -67,13 +67,13 @@ namespace CommonCode
         /// </summary>
         /// <param name="DirName"></param>
         /// <returns></returns>
-        private bool checkTargetDirectory(string DirName)
+        private bool CheckTargetDirectory(string DirName)
         {
             bool valid;
-            Regex RgxUrl = new Regex("[^a-zA-Z0-9 ]");
+            Regex RgxUrl = new("[^a-zA-Z0-9 ]");
             if (RgxUrl.IsMatch(DirName))
             {
-                view.targetDirInvalid();
+                view.TargetDirInvalid();
                 valid = true;
             }
             else
@@ -88,25 +88,24 @@ namespace CommonCode
         /// <param name="source"></param>
         /// <param name="target"></param>
         /// <returns></returns>
-        private bool checkPathIntegrity(string source, string target)
+        private bool CheckPathIntegrity(string source, string target)
         {
-            bool integrity = false;
-            if (pathIsValid(source) && Directory.Exists(source))
+            bool integrity;
+            if (PathIsValid(source) && Directory.Exists(source))
             {
-                if (pathIsValid(target) && (target != ""))
+                if (PathIsValid(target) && (target != ""))
                 {
                     integrity = true;
                 }
                 else
                 {
-                    view.targetPathIsInvalid();
+                    view.TargetPathIsInvalid();
                     integrity = false;
-
                 }
             }
             else
             {
-                view.sourcePathIsInvalid();
+                view.SourcePathIsInvalid();
                 integrity = false;
             }
             return integrity;
@@ -119,7 +118,7 @@ namespace CommonCode
         /// <param name="path"></param>
         /// <param name="allowRelativePaths"></param>
         /// <returns></returns>
-        private bool pathIsValid(string path, bool allowRelativePaths = false)
+        private static bool PathIsValid(string path, bool allowRelativePaths = false)
         {
             bool isValid;
             try
@@ -142,7 +141,5 @@ namespace CommonCode
             }
             return isValid;
         }
-        ~Controller() { }
-
     }
 }

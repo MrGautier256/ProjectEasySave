@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
@@ -23,11 +24,11 @@ namespace ProjetBureau
 {
     public partial class MainWindow : Window, IView
     {
-        ProgressWindow progressWindow = new ProgressWindow();
+        readonly ProgressWindow progressWindow = new();
         public MainWindow()
         {
             InitializeComponent();
-            Traduction.Instance.SetInterfaceLanguage(SelectLanguage.Text);
+            Traduction.SetInterfaceLanguage(SelectLanguage.Text);
             TextEnterSourcePath.Content = Traduction.Instance.Langue.EnterSourcePath;
             TextLanguage.Content = Traduction.Instance.Langue.SelectLanguage;
             TextEnterTargetPath.Content = Traduction.Instance.Langue.EnterTargetPath;
@@ -35,11 +36,6 @@ namespace ProjetBureau
             TextEnterLogType.Content = Traduction.Instance.Langue.EnterLogType;
             SaveButton.Content = Traduction.Instance.Langue.Save;
         }
-
-        private string sourcePath = string.Empty;
-        private string targetPath = string.Empty;
-        private string targetFile = string.Empty;
-
         public string typeOfMode => "Graphic";
 
         /// <summary>
@@ -47,36 +43,22 @@ namespace ProjetBureau
         /// --------------Ask Informations to user (methods) ------------------
         /// </summary>
 
-        public langueEnum askLanguage()
+        public static LangueEnum AskLanguage()
         {
             Console.ForegroundColor = ConsoleColor.Cyan;
             string langageToPrint = string.Empty;
-            foreach (var item in Enum.GetValues(typeof(langueEnum)))
+            foreach (var item in Enum.GetValues(typeof(LangueEnum)))
             {
                 langageToPrint += $"{item}, ";
             }
             Console.WriteLine("Select language: " + langageToPrint);
             string? inputLanguage = Console.ReadLine()?.ToLower();
-
-
-            langueEnum selectedLanguage;
-            switch (inputLanguage)
+            var selectedLanguage = inputLanguage switch
             {
-                case "french":
-                case "fr":
-                case "français":
-                case "francais":
-                    selectedLanguage = langueEnum.french;
-                    break;
-                case "spanish":
-                case "es":
-                case "espagnol":
-                    selectedLanguage = langueEnum.spanish;
-                    break;
-                default:
-                    selectedLanguage = langueEnum.english;
-                    break;
-            }
+                "french" or "fr" or "français" or "francais" => LangueEnum.french,
+                "spanish" or "es" or "espagnol" => LangueEnum.spanish,
+                _ => LangueEnum.english,
+            };
             return selectedLanguage;
         }
 
@@ -85,7 +67,7 @@ namespace ProjetBureau
         /// ---methods informing the user that information is invalid---
         /// </summary>
 
-        public void sourcePathIsInvalid()
+        public void SourcePathIsInvalid()
         {
             string? messageBoxText = Traduction.Instance.Langue.SourcePathInvalid;
             string caption = "Source Path Invalid";
@@ -93,7 +75,7 @@ namespace ProjetBureau
             MessageBoxImage icon = MessageBoxImage.Warning;
             MessageBox.Show(messageBoxText, caption, button, icon, MessageBoxResult.Yes);
         }
-        public void targetPathIsInvalid()
+        public void TargetPathIsInvalid()
         {
             string? messageBoxText = Traduction.Instance.Langue.TargetPathInvalid;
             string caption = "Source Path Invalid";
@@ -101,7 +83,7 @@ namespace ProjetBureau
             MessageBoxImage icon = MessageBoxImage.Warning;
             MessageBox.Show(messageBoxText, caption, button, icon, MessageBoxResult.Yes);
         }
-        public void targetDirInvalid()
+        public void TargetDirInvalid()
         {
             string? messageBoxText = Traduction.Instance.Langue.targetDirInvalid;
             string caption = "Source Path Invalid";
@@ -117,22 +99,21 @@ namespace ProjetBureau
         /// </summary>
         /// <param name="toDisplay"></param>
 
-        public void display(string[] textToDisplay)
+        public void Display(string[] textToDisplay)
         {
-
             progressWindow.ContentCountsize.Dispatcher.Invoke(() => progressWindow.ContentCountsize.Text = textToDisplay[0], DispatcherPriority.Background);
             progressWindow.ContentFilename.Dispatcher.Invoke(() => progressWindow.ContentFilename.Text = textToDisplay[1], DispatcherPriority.Background);
             progressWindow.ContentHistory.Dispatcher.Invoke(() => progressWindow.ContentHistory.Text = textToDisplay[2], DispatcherPriority.Background);
             progressWindow.ProgressBarSave.Dispatcher.Invoke(() => progressWindow.ProgressBarSave.Value = Convert.ToDouble(textToDisplay[3]), DispatcherPriority.Background);
         }
-        public progressState controlProgress(string fileName, double countfile, int totalFileToCopy, double percentage)
+        public ProgressState ControlProgress(string fileName, double countfile, int totalFileToCopy, double percentage)
         {
-            if (progressWindow.progress != progressState.pause)
+            if (progressWindow.progress != ProgressState.pause)
             {
                 string[] text = { $"{countfile}/{totalFileToCopy}", $" {fileName}", $"{progressWindow.ContentHistory.Text}", $"{percentage}" };
-                display(text);
+                Display(text);
             }
-            progressWindow.ContentHistory.Text = $"{countfile}/{totalFileToCopy} | {fileName}\n{progressWindow.ContentHistory.Text}"; ;
+            progressWindow.ContentHistory.Text = $"{Environment.CurrentManagedThreadId} | {countfile}/{totalFileToCopy} | {fileName}\n{progressWindow.ContentHistory.Text}"; ;
 
             return progressWindow.progress;
         }
@@ -145,59 +126,63 @@ namespace ProjetBureau
 
         private void SelectLanguage_DropDownClosed(object sender, EventArgs e)
         {
-            Traduction.Instance.SetInterfaceLanguage(SelectLanguage.Text);
+            Traduction.SetInterfaceLanguage(SelectLanguage.Text);
             TextEnterSourcePath.Content = Traduction.Instance.Langue.EnterSourcePath;
             TextLanguage.Content = Traduction.Instance.Langue.SelectLanguage;
-            TextEnterTargetPath.Content = Traduction.Instance.Langue.EnterTargetPath;
+            TextEnterTargetPath.Content = Traduction.Instance.Langue.EnterTargetPath +" "+ Environment.CurrentManagedThreadId;
             TextEnterTargetFile.Content = Traduction.Instance.Langue.EnterTargetFile;
             TextEnterLogType.Content = Traduction.Instance.Langue.EnterLogType;
             SaveButton.Content = Traduction.Instance.Langue.Save;
         }
-        public void progress(bool state)
+        public void Progress(bool state)
         {
             if (!state)
             {
-                progressWindow.progress = progressState.play;
                 progressWindow.Show();
+                progressWindow.progress = ProgressState.play;
             }
             else if (state) 
             {
                 progressWindow.Hide();
+                progressWindow.ContentCountsize.Dispatcher.Invoke(() => progressWindow.ContentCountsize.Text = string.Empty, DispatcherPriority.Background);
+                progressWindow.ContentFilename.Dispatcher.Invoke(() => progressWindow.ContentFilename.Text = string.Empty, DispatcherPriority.Background);
+                progressWindow.ContentHistory.Dispatcher.Invoke(() => progressWindow.ContentHistory.Text = string.Empty, DispatcherPriority.Background);
+                progressWindow.ProgressBarSave.Dispatcher.Invoke(() => progressWindow.ProgressBarSave.Value = 0, DispatcherPriority.Background);
             }
         }
-        langueEnum IView.askLanguage() { return Traduction.Instance.convertLanguage(SelectLanguage.Text); }
+        LangueEnum IView.AskLanguage() { return Traduction.ConvertLanguage(SelectLanguage.Text); }
 
-        public string asklogType() { return "json"; }
+        public string AsklogType() { return "json"; }
 
-        public string askSourcePath() {return textBoxSourcePath.Text;}
+        public string AskSourcePath() {return textBoxSourcePath.Text;}
 
-        public string askTargetFile() {return textBoxNameSave.Text;}
+        public string AskTargetFile() {return textBoxNameSave.Text;}
 
-        public string askTargetPath() {return textBoxDestPath.Text;}
+        public string AskTargetPath() {return textBoxDestPath.Text;}
 
-        private void btnBrowseFolder_Click(object sender, RoutedEventArgs e)
+        private void BtnBrowseFolder_Click(object sender, RoutedEventArgs e)
         {
-            var folderDlg = new System.Windows.Forms.FolderBrowserDialog();
-            folderDlg.ShowNewFolderButton = true;
+            var folderDlg = new System.Windows.Forms.FolderBrowserDialog
+            {ShowNewFolderButton = true};
             // Show the FolderBrowserDialog.  
             var result = folderDlg.ShowDialog();
             if (result == System.Windows.Forms.DialogResult.OK)
             {
                 textBoxSourcePath.Text = folderDlg.SelectedPath;
-                Environment.SpecialFolder root = folderDlg.RootFolder;
+                //Environment.SpecialFolder root = folderDlg.RootFolder;
             }
         }
 
-        private void btnBrowseFolder_Copy_Click(object sender, RoutedEventArgs e)
+        private void BtnBrowseFolder_Copy_Click(object sender, RoutedEventArgs e)
         {
-            var folderDlg = new System.Windows.Forms.FolderBrowserDialog();
-            folderDlg.ShowNewFolderButton = true;
+            var folderDlg = new System.Windows.Forms.FolderBrowserDialog
+            {ShowNewFolderButton = true};
             // Show the FolderBrowserDialog.  
             var result = folderDlg.ShowDialog();
             if (result == System.Windows.Forms.DialogResult.OK)
             {
                 textBoxDestPath.Text = folderDlg.SelectedPath;
-                Environment.SpecialFolder root = folderDlg.RootFolder;
+                //Environment.SpecialFolder root = folderDlg.RootFolder;
             }
         }
     }

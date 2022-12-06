@@ -20,7 +20,7 @@ namespace ProjetBureau
     /// </summary>
     public partial class ProgressWindow : Window
     {
-        public progressState progress = progressState.play;
+        public ProgressState progress = ProgressState.play;
         public ProgressWindow()
         {
             InitializeComponent();
@@ -28,28 +28,28 @@ namespace ProjetBureau
 
         private void Stop_Click(object sender, RoutedEventArgs e)
         {
-            progress = progressState.stop;
+            progress = ProgressState.stop;
         }
 
         private void Play_Click(object sender, RoutedEventArgs e)
         {
-            progress = progressState.play;
+            progress = ProgressState.play;
         }
 
         private void Pause_Click(object sender, RoutedEventArgs e)
         {
-            progress = progressState.pause;
+            progress = ProgressState.pause;
         }
 
         private void PlayPauseButton_Click(object sender, RoutedEventArgs e)
         {
-            if (progress == progressState.play) 
+            if (progress == ProgressState.play) 
             { 
-                progress = progressState.pause; 
+                progress = ProgressState.pause; 
               PlayPauseButton.Content = "Pause";
             } 
-            else if (progress == progressState.pause) { 
-                progress = progressState.play; 
+            else if (progress == ProgressState.pause) { 
+                progress = ProgressState.play; 
                 PlayPauseButton.Content = "Play";}
         }
     }

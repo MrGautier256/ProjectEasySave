@@ -7,7 +7,7 @@ using System;
 
 namespace CommonCode
 {
-    public enum progressState { play, pause, stop };
+    public enum ProgressState { play, pause, stop };
     public static class SaveService 
     {
         /// <summary>
@@ -17,7 +17,7 @@ namespace CommonCode
         /// <param name="sourceDir"></param>
         /// <param name="targetDir"></param>
 
-        public static List<JsonData> saveFile(string sourceDir, string targetDir, string targetFile, string logType, Func<string, double, int, double, progressState> controlProgress)
+        public static List<JsonData> SaveFile(string sourceDir, string targetDir, string targetFile, Func<string, double, int, double, ProgressState> controlProgress)
         {
             var dir = new DirectoryInfo(sourceDir);
             long totalSize = 0;
@@ -25,7 +25,7 @@ namespace CommonCode
             var dirs = dir.GetDirectories("*", SearchOption.AllDirectories);
             double countFile = 0;
             double countSize = 0;
-            List<JsonData> tableLog = new List<JsonData>();
+            List<JsonData> tableLog = new();
 
             // Calcul de la taille du contenu a sauvegarder  
             // Calculating the size of the contents to back-up 
@@ -54,28 +54,30 @@ namespace CommonCode
                 string? targetFilePath = fileDirectoryName?.Replace(sourceDir, targetDir);
 
                 if (!Directory.Exists(targetFilePath)) { Directory.CreateDirectory(targetFilePath); }
-
+                
                 targetFilePath = Path.Combine(targetFilePath, file.Name);
                 string ElapsedTime = ChronoTimer.Chrono(() =>
                 {
                     file.CopyTo(targetFilePath, true);
+                    //Thread threadCopy = new Thread(() => file.CopyTo(targetFilePath, true));
+                    //threadCopy.Start();
                 });
 
                 if (controlProgress != null) 
                 {
                     var result = controlProgress(file.Name, countFile, totalFileToCopy, percentage);
-                    if (result == progressState.stop)
+                    if (result == ProgressState.stop)
                     {
                         break;
                     }
-                    else if (result == progressState.pause)
+                    else if (result == ProgressState.pause)
                     {
-                        while (result == progressState.pause)
+                        while (result == ProgressState.pause)
                         {result = controlProgress(file.Name, countFile, totalFileToCopy, percentage); Thread.Sleep(100); }
                     }
                 }
 
-                JsonData jsonFileInfo = new JsonData(
+                JsonData jsonFileInfo = new(
                     targetFile,
                     file.Name,
                     file.FullName,
@@ -96,11 +98,11 @@ namespace CommonCode
         /// Writing of the logs contained in tableLog in a jsonFile file in C:/User/Utilisateur/Appdata/EasySave/Logs
         /// </summary>
 
-        public static void writeLog(List<JsonData> tableLog, string targetFile, string logType)
+        public static void WriteLog(List<JsonData> tableLog, string targetFile, string logType)
         {
             string appdataPath = Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData);
             string path = $"{appdataPath}\\EasySave\\Logs\\";
-            string fileFullName = $"{path}{targetFile} - {DateTime.Now.ToString("MM.dd.yyyy")}";
+            string fileFullName = $"{path}{targetFile} - {DateTime.Now:MM.dd.yyyy}";
             if (!Directory.Exists(path)) { Directory.CreateDirectory(path); }
 
             string jsonFile = JsonConvert.SerializeObject(tableLog.ToArray());
@@ -125,7 +127,7 @@ namespace CommonCode
             while (File.Exists(fileFullName + ".json") || File.Exists(fileFullName + ".xml"))
             {
                 i++;
-                fileFullName = $"{path}{targetFile}{i} - {DateTime.Now.ToString("MM.dd.yyyy")}";
+                fileFullName = $"{path}{targetFile}{i} - {DateTime.Now:MM.dd.yyyy}";
             }
 
             return fileFullName;

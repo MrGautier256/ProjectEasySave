@@ -16,7 +16,6 @@ namespace ProjetConsole
         /// </summary>
         static void Main()
         {   
-            
             IController controller = new Controller(new View());
             controller.execute();
             Console.ReadKey();

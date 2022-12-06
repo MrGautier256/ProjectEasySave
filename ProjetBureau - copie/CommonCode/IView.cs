@@ -1,21 +1,21 @@
 ﻿namespace CommonCode
 {
-    public enum langueEnum { english, french, spanish };
+    public enum LangueEnum { english, french, spanish };
     public interface IView
     {
         string typeOfMode { get; }
 
-        langueEnum askLanguage();
-        string asklogType();
-        string askSourcePath();
-        string askTargetFile();
-        string askTargetPath();
-        void progress(bool v);
-        progressState controlProgress(string fileName, double countfile, int totalFileToCopy, double percentage);
-        void sourcePathIsInvalid();
-        void targetDirInvalid();
-        void targetPathIsInvalid();
-        void display(string[] toDisplay);
+        LangueEnum AskLanguage();
+        string AsklogType();
+        string AskSourcePath();
+        string AskTargetFile();
+        string AskTargetPath();
+        void Progress(bool v);
+        ProgressState ControlProgress(string fileName, double countfile, int totalFileToCopy, double percentage);
+        void SourcePathIsInvalid();
+        void TargetDirInvalid();
+        void TargetPathIsInvalid();
+        void Display(string[] toDisplay);
 
     }
 }

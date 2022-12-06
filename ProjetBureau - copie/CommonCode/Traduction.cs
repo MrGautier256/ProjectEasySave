@@ -25,11 +25,11 @@ namespace CommonCode
         {
             get
             {
-                if (_langue == langueEnum.french)
+                if (_langue == LangueEnum.french)
                 {
                     return language.french;
                 }
-                else if (_langue == langueEnum.spanish)
+                else if (_langue == LangueEnum.spanish)
                 {
                     return language.spanish;
                 }
@@ -41,27 +41,27 @@ namespace CommonCode
         }
 
 
-        private JsonTraduction language;
+        private readonly JsonTraduction language;
         private static Traduction? _instance;
-        private static langueEnum _langue;
+        private static LangueEnum _langue;
         /// <summary>
         /// Attribution de la langue choisie dans la fonction askLanguage
         /// Assignment of the language chosen in the askLanguage fonction
         /// </summary>
         /// <param name="langue"></param>
 
-        public void SetInterfaceLanguage(string langue)
+        public static void SetInterfaceLanguage(string langue)
         {
-            setLanguage(convertLanguage(langue)); 
+            SetLanguage(ConvertLanguage(langue)); 
         }   
-        public langueEnum convertLanguage(string langue)
+        public static LangueEnum ConvertLanguage(string langue)
         {
-            if (langue == "francais") { return langueEnum.french; }
-            else if (langue == "español") { return langueEnum.spanish; }
-            else { return langueEnum.english; }
+            if (langue == "francais") { return LangueEnum.french; }
+            else if (langue == "español") { return LangueEnum.spanish; }
+            else { return LangueEnum.english; }
 
         }
-        public void setLanguage(langueEnum langue)
+        public static void SetLanguage(LangueEnum langue)
         {
             _langue = langue;
         }
@@ -69,10 +69,7 @@ namespace CommonCode
         {
             get
             {
-                if (_instance == null)
-                {
-                    _instance = new Traduction();
-                }
+                _instance ??= new Traduction();
                 return _instance;
             }
         }

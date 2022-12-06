@@ -20,56 +20,43 @@ namespace ProjetConsole
         /// --------------Ask Informations to user (methods) ------------------
         /// </summary>
 
-        public string askSourcePath()
+        public string AskSourcePath()
         {
             Console.WriteLine("\n" + Traduction.Instance.Langue.EnterSourcePath);
             return Console.ReadLine() ?? string.Empty;
         }
-        public string askTargetFile()
+        public string AskTargetFile()
         {
             Console.WriteLine("\n" + Traduction.Instance.Langue.EnterTargetFile);
             return Console.ReadLine() ?? string.Empty;
         }
-        public string askTargetPath()
+        public string AskTargetPath()
         {
             Console.WriteLine("\n" + Traduction.Instance.Langue.EnterTargetPath);
             return Console.ReadLine() ?? string.Empty;
         }
-        public string asklogType()
+        public string AsklogType()
         {
             Console.WriteLine("\n" + Traduction.Instance.Langue.EnterLogType);
             return Console.ReadLine().ToLower() ?? string.Empty;
         }
 
-        public langueEnum askLanguage()
+        public LangueEnum AskLanguage()
         {
             Console.ForegroundColor = ConsoleColor.Cyan;
             string langageToPrint = string.Empty;
-            foreach (var item in Enum.GetValues(typeof(langueEnum)))
+            foreach (var item in Enum.GetValues(typeof(LangueEnum)))
             {
                 langageToPrint += $"{item}, ";
             }
             Console.WriteLine("Select language: " + langageToPrint);
             string? inputLanguage = Console.ReadLine()?.ToLower();
-            langueEnum selectedLanguage;
-
-            switch (inputLanguage)
+            var selectedLanguage = inputLanguage switch
             {
-                case "french":
-                case "fr":
-                case "français":
-                case "francais":
-                    selectedLanguage = langueEnum.french;
-                    break;
-                case "spanish":
-                case "es":
-                case "espagnol":
-                    selectedLanguage = langueEnum.spanish;
-                    break;
-                default:
-                    selectedLanguage = langueEnum.english;
-                    break;
-            }
+                "french" or "fr" or "français" or "francais" => LangueEnum.french,
+                "spanish" or "es" or "espagnol" => LangueEnum.spanish,
+                _ => LangueEnum.english,
+            };
             return selectedLanguage;
         }
 
@@ -78,11 +65,11 @@ namespace ProjetConsole
         /// ---methods informing the user that information is invalid---
         /// </summary>
         
-        public void sourcePathIsInvalid()
+        public void SourcePathIsInvalid()
         { Console.WriteLine(Traduction.Instance.Langue.SourcePathInvalid + "\n"); }
-        public void targetPathIsInvalid()
+        public void TargetPathIsInvalid()
         { Console.WriteLine(Traduction.Instance.Langue.TargetPathInvalid + "\n"); }
-        public void targetDirInvalid()
+        public void TargetDirInvalid()
         { Console.WriteLine(Traduction.Instance.Langue.targetDirInvalid + "\n"); }
 
         /// <summary>
@@ -91,7 +78,7 @@ namespace ProjetConsole
         /// </summary>
         /// <param name="state"></param>
         
-        public void progress(bool state)
+        public void Progress(bool state)
         {
             if (!state) { Console.WriteLine("\n" + Traduction.Instance.Langue.Buffering); }
             else if (state) { Console.WriteLine("\n" + Traduction.Instance.Langue.Complete); }
@@ -102,18 +89,18 @@ namespace ProjetConsole
         /// </summary>
         /// <param name="toDisplay"></param>
         
-        public void display(string[] toDisplay)
+        public void Display(string[] toDisplay)
         {
             Console.WriteLine(toDisplay[0]);
         }
 
-        public progressState controlProgress(string fileName, double countfile, int totalFileToCopy, double percentage)
+        public ProgressState ControlProgress(string fileName, double countfile, int totalFileToCopy, double percentage)
         {
             Console.ForegroundColor = ConsoleColor.Green;
             string[] text = {$"{percentage}% | {countfile}/{totalFileToCopy} {Traduction.Instance.Langue.InCopy} | {fileName}" };
-            display(text);
+            Display(text);
             Console.ForegroundColor = ConsoleColor.White;
-            return progressState.play;
+            return ProgressState.play;
         }
     }
 
