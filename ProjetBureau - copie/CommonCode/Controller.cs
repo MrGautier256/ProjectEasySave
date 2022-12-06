@@ -71,7 +71,7 @@ namespace CommonCode
         {
             bool valid;
             Regex RgxUrl = new Regex("[^a-zA-Z0-9 ]");
-            if (RgxUrl.IsMatch(DirName))
+            if (DirName.Length >= 60 || RgxUrl.IsMatch(DirName))
             {
                 view.targetDirInvalid();
                 valid = true;
