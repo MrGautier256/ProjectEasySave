@@ -67,7 +67,6 @@ namespace CommonCode
         /// </summary>
         /// <param name="DirName"></param>
         /// <returns></returns>
-
         private bool checkTargetDirectory(string DirName)
         {
             bool valid;
@@ -89,7 +88,6 @@ namespace CommonCode
         /// <param name="source"></param>
         /// <param name="target"></param>
         /// <returns></returns>
-
         private bool checkPathIntegrity(string source, string target)
         {
             bool integrity = false;
@@ -121,8 +119,6 @@ namespace CommonCode
         /// <param name="path"></param>
         /// <param name="allowRelativePaths"></param>
         /// <returns></returns>
-        
-
         private bool pathIsValid(string path, bool allowRelativePaths = false)
         {
             bool isValid;
