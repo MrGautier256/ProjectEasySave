@@ -25,18 +25,24 @@ namespace CommonCode
         {
             get
             {
+                JsonLangueContent? result;
                 if (_langue == LangueEnum.french)
                 {
-                    return language.french;
+                    result = language?.french;
                 }
                 else if (_langue == LangueEnum.spanish)
                 {
-                    return language.spanish;
+                    result = language?.spanish;
                 }
                 else
                 {
-                    return language.english;
+                    result = language?.english;
                 }
+                if (result == null)
+                {
+                    throw new Exception("Echec du chargement du fichier Json de Langue");
+                }
+                return result;
             }
         }
 

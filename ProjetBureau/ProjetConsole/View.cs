@@ -38,7 +38,7 @@ namespace ProjetConsole
         public string AsklogType()
         {
             Console.WriteLine("\n" + Traduction.Instance.Langue.EnterLogType);
-            return Console.ReadLine().ToLower() ?? string.Empty;
+            return Console.ReadLine()?.ToLower() ?? string.Empty;
         }
 
         public LangueEnum AskLanguage()

@@ -53,6 +53,8 @@ namespace CommonCode
                 string? fileDirectoryName = file.DirectoryName;
                 string? targetFilePath = fileDirectoryName?.Replace(sourceDir, targetDir);
 
+                if (targetFilePath == null) { throw new Exception("target file fath is empty"); }
+
                 if (!Directory.Exists(targetFilePath)) { Directory.CreateDirectory(targetFilePath); }
                 
                 targetFilePath = Path.Combine(targetFilePath, file.Name);
