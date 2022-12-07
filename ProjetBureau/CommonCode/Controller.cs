@@ -10,7 +10,7 @@ namespace CommonCode
     ///  Class Controller
     /// </summary>
 
-    public class Controller : IController
+    public class Controller 
     {
         private readonly Model model;
         private readonly IView view;
@@ -24,7 +24,7 @@ namespace CommonCode
         /// Execution sucessive des différentes fonctions necessaire au processus de sauvegarde
         /// Sucessive execution of the multiple functions necessary to the process of back-up 
         /// </summary>
-        public void execute()
+        public void execute(Action rafraichirUi)
         {
             var language = view.AskLanguage();
             Traduction.SetLanguage(language);
@@ -43,7 +43,7 @@ namespace CommonCode
                 model.targetPath = targetPath;
                 model.targetFile = saveName;
                 view.Progress(false);
-                var tableLog = SaveService.SaveFile(model.sourcePath, model.targetPath, model.targetFile,view.ControlProgress);
+                var tableLog = SaveService.SaveFile(model.sourcePath, model.targetPath, model.targetFile,view.ControlProgress, rafraichirUi);
                 SaveService.WriteLog(tableLog, model.targetFile, model.logType);
                 view.Progress(true);
             }

@@ -12,6 +12,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using System.Windows.Threading;
 
 namespace ProjetBureau
 {
@@ -46,11 +47,12 @@ namespace ProjetBureau
             if (progress == ProgressState.play) 
             { 
                 progress = ProgressState.pause; 
-              PlayPauseButton.Content = "Pause";
+              PlayPauseButton.Content = "Resume";
             } 
             else if (progress == ProgressState.pause) { 
                 progress = ProgressState.play; 
-                PlayPauseButton.Content = "Play";}
+                PlayPauseButton.Content = "Pause";}
+            //DoEvents();
         }
     }
 }

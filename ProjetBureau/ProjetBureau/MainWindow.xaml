@@ -7,7 +7,7 @@
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="800" Background="LightSkyBlue">
     <Grid RenderTransformOrigin="0.513,0.499">
-        <TextBox Text="{Binding Path=FlexString1,Mode=TwoWay}" 
+        <TextBox Text="" 
             Height="23" 
             HorizontalAlignment="Center" 
             Margin="0,132,0,0" 
@@ -47,7 +47,7 @@
             </Button.Resources>
         </Button>
 
-        <TextBox Text="{Binding FlexString1, Mode=TwoWay}" 
+        <TextBox Text="" 
             Height="23" 
             HorizontalAlignment="Center" 
             Margin="0,318,0,0" x:Name="textBoxDestPath" 
@@ -116,7 +116,7 @@
             HorizontalContentAlignment="Center" 
             FontFamily="Times New Roman"
         />
-        <TextBox Text="{Binding FlexString1, Mode=TwoWay}"
+        <TextBox Text=""
             Height="23" 
             HorizontalAlignment="Left" 
             Margin="95,233,0,0" x:Name="textBoxNameSave" 

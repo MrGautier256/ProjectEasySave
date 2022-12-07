@@ -15,9 +15,9 @@ namespace ProjetConsole
         /// Instantiation of a controller and launch of the function 'execute"
         /// </summary>
         static void Main()
-        {   
-            IController controller = new Controller(new View());
-            controller.execute();
+        {
+            Controller controller = new(new View());
+            controller.execute(null);
             Console.ReadKey();
         }
     }

@@ -35,6 +35,10 @@ namespace ProjetBureau
             TextEnterTargetFile.Content = Traduction.Instance.Langue.EnterTargetFile;
             TextEnterLogType.Content = Traduction.Instance.Langue.EnterLogType;
             SaveButton.Content = Traduction.Instance.Langue.Save;
+            textBoxSourcePath.Text = "C:\\Users\\Gautier\\OneDrive - Association Cesi Viacesi mail\\CESI\\3ème Année\\Projet 2 - Programmation Système\\Projet\\TestCopie\\Source3";
+            textBoxDestPath.Text = "C:\\Users\\Gautier\\OneDrive - Association Cesi Viacesi mail\\CESI\\3ème Année\\Projet 2 - Programmation Système\\Projet\\TestCopie";
+
+
         }
         public string typeOfMode => "Graphic";
 
@@ -108,20 +112,27 @@ namespace ProjetBureau
         }
         public ProgressState ControlProgress(string fileName, double countfile, int totalFileToCopy, double percentage)
         {
+            DoEvents();
             if (progressWindow.progress != ProgressState.pause)
             {
-                string[] text = { $"{countfile}/{totalFileToCopy}", $" {fileName}", $"{progressWindow.ContentHistory.Text}", $"{percentage}" };
+                string[] text = 
+                    { 
+                    $"{countfile}/{totalFileToCopy}", 
+                    $" {fileName}",
+                    $"{countfile}/{totalFileToCopy} | {fileName}\n{progressWindow.ContentHistory.Text}",
+                    $"{percentage}" 
+                    };
+
                 Display(text);
             }
-            progressWindow.ContentHistory.Text = $"{Environment.CurrentManagedThreadId} | {countfile}/{totalFileToCopy} | {fileName}\n{progressWindow.ContentHistory.Text}"; ;
 
             return progressWindow.progress;
         }
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
-            IController controller = new Controller(this);
-            controller.execute();
+            Controller controller = new Controller(this);
+            controller.execute(DoEvents);
         }
 
         private void SelectLanguage_DropDownClosed(object sender, EventArgs e)
@@ -185,5 +196,12 @@ namespace ProjetBureau
                 //Environment.SpecialFolder root = folderDlg.RootFolder;
             }
         }
+
+        public static void DoEvents()
+        {
+            System.Windows.Application.Current.Dispatcher.Invoke(DispatcherPriority.Background,
+                                                  new Action(delegate { }));
+        }
+
     }
 }

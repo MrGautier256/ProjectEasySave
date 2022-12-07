@@ -4,6 +4,7 @@ using System.Text;
 using System.Xml.Linq;
 using System.Xml;
 using System;
+using System.IO;
 
 namespace CommonCode
 {
@@ -17,7 +18,7 @@ namespace CommonCode
         /// <param name="sourceDir"></param>
         /// <param name="targetDir"></param>
 
-        public static List<JsonData> SaveFile(string sourceDir, string targetDir, string targetFile, Func<string, double, int, double, ProgressState> controlProgress)
+        public static List<JsonData> SaveFile(string sourceDir, string targetDir, string targetFile, Func<string, double, int, double, ProgressState> controlProgress,Action RafraichirUi)
         {
             var dir = new DirectoryInfo(sourceDir);
             long totalSize = 0;
@@ -60,9 +61,17 @@ namespace CommonCode
                 targetFilePath = Path.Combine(targetFilePath, file.Name);
                 string ElapsedTime = ChronoTimer.Chrono(() =>
                 {
-                    file.CopyTo(targetFilePath, true);
-                    //Thread threadCopy = new Thread(() => file.CopyTo(targetFilePath, true));
-                    //threadCopy.Start();
+                    //file.CopyTo(targetFilePath, true);
+                    Thread threadCopy = new Thread(() => file.CopyTo(targetFilePath, true));
+                    threadCopy.Start();
+                    while (threadCopy.IsAlive)
+                    {
+                        if (RafraichirUi != null)
+                        { RafraichirUi(); }
+                    //    Thread.Sleep(100); 
+                    }
+
+
                 });
 
                 if (controlProgress != null) 
@@ -95,6 +104,7 @@ namespace CommonCode
             }
             return tableLog;
         }
+
         /// <summary>
         /// Ecriture des logs contenus dans tableLog dans un fichier au format jsonFile dans C:/User/Utilisateur/Appdata/EasySave/Logs
         /// Writing of the logs contained in tableLog in a jsonFile file in C:/User/Utilisateur/Appdata/EasySave/Logs
