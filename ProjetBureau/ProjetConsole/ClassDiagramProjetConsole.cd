@@ -1,0 +1,57 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="ProjetConsole.Program">
+    <Position X="9.75" Y="3.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABAAAAAA=</HashCode>
+      <FileName>Program.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ProjetConsole.View" BaseTypeListCollapsed="true">
+    <Position X="11.5" Y="3" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAABEAABAACBAAAAAAAACgBAIAEAAACAAIAAAAAAAAA=</HashCode>
+      <FileName>View.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="CommonCode.ChronoTimer">
+    <Position X="9.75" Y="5" Width="1.5" />
+    <TypeIdentifier />
+  </Class>
+  <Class Name="CommonCode.Controller" BaseTypeListCollapsed="true">
+    <Position X="9.75" Y="2" Width="1.5" />
+    <TypeIdentifier />
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="CommonCode.JsonData">
+    <Position X="8" Y="0.75" Width="1.5" />
+    <TypeIdentifier />
+  </Class>
+  <Class Name="CommonCode.JsonLangueContent">
+    <Position X="6.25" Y="0.75" Width="1.5" />
+    <TypeIdentifier />
+  </Class>
+  <Class Name="CommonCode.JsonTraduction">
+    <Position X="3.75" Y="2" Width="1.5" />
+    <TypeIdentifier />
+    <ShowAsAssociation>
+      <Field Name="english" />
+      <Field Name="spanish" />
+      <Field Name="french" />
+    </ShowAsAssociation>
+  </Class>
+  <Class Name="CommonCode.Model">
+    <Position X="11.5" Y="0.75" Width="1.5" />
+    <TypeIdentifier />
+  </Class>
+  <Class Name="CommonCode.Traduction">
+    <Position X="8" Y="4.5" Width="1.5" />
+    <TypeIdentifier />
+  </Class>
+  <Interface Name="CommonCode.IController">
+    <Position X="9.75" Y="0.75" Width="1.5" />
+    <TypeIdentifier />
+  </Interface>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>
