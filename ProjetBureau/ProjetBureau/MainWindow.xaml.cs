@@ -41,8 +41,6 @@ namespace ProjetBureau
             SaveButton.Content = Traduction.Instance.Langue.Save;
             textBoxSourcePath.Text = "C:\\Users\\Gautier\\OneDrive - Association Cesi Viacesi mail\\CESI\\3ème Année\\Projet 2 - Programmation Système\\Projet\\TestCopie\\Source3";
             textBoxDestPath.Text = "C:\\Users\\Gautier\\OneDrive - Association Cesi Viacesi mail\\CESI\\3ème Année\\Projet 2 - Programmation Système\\Projet\\TestCopie";
-
-
         }
         public string typeOfMode => "Graphic";
 
@@ -149,6 +147,7 @@ namespace ProjetBureau
             TextEnterLogType.Content = Traduction.Instance.Langue.EnterLogType;
             SaveButton.Content = Traduction.Instance.Langue.Save;
         }
+
         public void Progress(bool state)
         {
             if (!state)

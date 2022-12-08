@@ -1,4 +1,5 @@
-﻿using System;
+﻿using CommonCode;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -24,7 +25,65 @@ namespace ProjetBureau
         public ImportWindow()
         {
             InitializeComponent();
+            Traduction.SetInterfaceLanguage(SelectLanguage.Text);
+            TextEnterSourcePath.Content = Traduction.Instance.Langue.EnterSourcePath;
+            TextLanguage.Content = Traduction.Instance.Langue.SelectLanguage;
+            TextEnterTargetPath.Content = Traduction.Instance.Langue.EnterTargetPath;
+            TextEnterLogType.Content = Traduction.Instance.Langue.EnterLogType;
+            textBoxSourcePath.Text = "C:\\Users\\Gautier\\OneDrive - Association Cesi Viacesi mail\\CESI\\3ème Année\\Projet 2 - Programmation Système\\Projet\\TestCopie\\Source3";
+            textBoxDestPath.Text = "C:\\Users\\Gautier\\OneDrive - Association Cesi Viacesi mail\\CESI\\3ème Année\\Projet 2 - Programmation Système\\Projet\\TestCopie";
         }
+        public string typeOfMode => "Graphic";
+
+        public static LangueEnum AskLanguage()
+        {
+            Console.ForegroundColor = ConsoleColor.Cyan;
+            string langageToPrint = string.Empty;
+            foreach (var item in Enum.GetValues(typeof(LangueEnum)))
+            {
+                langageToPrint += $"{item}, ";
+            }
+            Console.WriteLine("Select language: " + langageToPrint);
+            string? inputLanguage = Console.ReadLine()?.ToLower();
+            var selectedLanguage = inputLanguage switch
+            {
+                "french" or "fr" or "français" or "francais" => LangueEnum.french,
+                "spanish" or "es" or "espagnol" => LangueEnum.spanish,
+                _ => LangueEnum.english,
+            };
+            return selectedLanguage;
+        }
+
+        public void SourcePathIsInvalid()
+        {
+            string? messageBoxText = Traduction.Instance.Langue.SourcePathInvalid;
+            string caption = "Source Path Invalid";
+            MessageBoxButton button = MessageBoxButton.OK;
+            MessageBoxImage icon = MessageBoxImage.Warning;
+            System.Windows.MessageBox.Show(messageBoxText, caption, button, icon, MessageBoxResult.Yes);
+        }
+        public void TargetPathIsInvalid()
+        {
+            string? messageBoxText = Traduction.Instance.Langue.TargetPathInvalid;
+            string caption = "Source Path Invalid";
+            MessageBoxButton button = MessageBoxButton.OK;
+            MessageBoxImage icon = MessageBoxImage.Warning;
+            System.Windows.MessageBox.Show(messageBoxText, caption, button, icon, MessageBoxResult.Yes);
+        }
+        public void TargetDirInvalid()
+        {
+            string? messageBoxText = Traduction.Instance.Langue.targetDirInvalid;
+            string caption = "Source Path Invalid";
+            MessageBoxButton button = MessageBoxButton.OK;
+            MessageBoxImage icon = MessageBoxImage.Warning;
+            System.Windows.MessageBox.Show(messageBoxText, caption, button, icon, MessageBoxResult.Yes);
+        }
+
+        public string AsklogType() { return "json"; }
+
+        public string AskSourcePath() { return textBoxSourcePath.Text; }
+
+        public string AskTargetPath() { return textBoxDestPath.Text; }
 
         private void btnBrowseFile_Click(object sender, RoutedEventArgs e)
         {
