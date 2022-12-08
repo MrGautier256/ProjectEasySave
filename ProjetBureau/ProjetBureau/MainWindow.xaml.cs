@@ -4,6 +4,9 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Net;
+using System.Runtime.ConstrainedExecution;
+using System.Runtime.InteropServices;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
@@ -11,6 +14,7 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
 using System.Windows.Documents;
+using System.Windows.Forms;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
@@ -77,7 +81,7 @@ namespace ProjetBureau
             string caption = "Source Path Invalid";
             MessageBoxButton button = MessageBoxButton.OK;
             MessageBoxImage icon = MessageBoxImage.Warning;
-            MessageBox.Show(messageBoxText, caption, button, icon, MessageBoxResult.Yes);
+            System.Windows.MessageBox.Show(messageBoxText, caption, button, icon, MessageBoxResult.Yes);
         }
         public void TargetPathIsInvalid()
         {
@@ -85,7 +89,7 @@ namespace ProjetBureau
             string caption = "Source Path Invalid";
             MessageBoxButton button = MessageBoxButton.OK;
             MessageBoxImage icon = MessageBoxImage.Warning;
-            MessageBox.Show(messageBoxText, caption, button, icon, MessageBoxResult.Yes);
+            System.Windows.MessageBox.Show(messageBoxText, caption, button, icon, MessageBoxResult.Yes);
         }
         public void TargetDirInvalid()
         {
@@ -93,7 +97,7 @@ namespace ProjetBureau
             string caption = "Source Path Invalid";
             MessageBoxButton button = MessageBoxButton.OK;
             MessageBoxImage icon = MessageBoxImage.Warning;
-            MessageBox.Show(messageBoxText, caption, button, icon, MessageBoxResult.Yes);
+            System.Windows.MessageBox.Show(messageBoxText, caption, button, icon, MessageBoxResult.Yes);
         }
 
 
@@ -115,12 +119,12 @@ namespace ProjetBureau
             DoEvents();
             if (progressWindow.progress != ProgressState.pause)
             {
-                string[] text = 
-                    { 
-                    $"{countfile}/{totalFileToCopy}", 
+                string[] text =
+                    {
+                    $"{countfile}/{totalFileToCopy}",
                     $" {fileName}",
                     $"{countfile}/{totalFileToCopy} | {fileName}\n{progressWindow.ContentHistory.Text}",
-                    $"{percentage}" 
+                    $"{percentage}"
                     };
 
                 Display(text);
@@ -140,7 +144,7 @@ namespace ProjetBureau
             Traduction.SetInterfaceLanguage(SelectLanguage.Text);
             TextEnterSourcePath.Content = Traduction.Instance.Langue.EnterSourcePath;
             TextLanguage.Content = Traduction.Instance.Langue.SelectLanguage;
-            TextEnterTargetPath.Content = Traduction.Instance.Langue.EnterTargetPath +" "+ Environment.CurrentManagedThreadId;
+            TextEnterTargetPath.Content = Traduction.Instance.Langue.EnterTargetPath + " " + Environment.CurrentManagedThreadId;
             TextEnterTargetFile.Content = Traduction.Instance.Langue.EnterTargetFile;
             TextEnterLogType.Content = Traduction.Instance.Langue.EnterLogType;
             SaveButton.Content = Traduction.Instance.Langue.Save;
@@ -152,7 +156,7 @@ namespace ProjetBureau
                 progressWindow.Show();
                 progressWindow.progress = ProgressState.play;
             }
-            else if (state) 
+            else if (state)
             {
                 progressWindow.Hide();
                 progressWindow.ContentCountsize.Dispatcher.Invoke(() => progressWindow.ContentCountsize.Text = string.Empty, DispatcherPriority.Background);
@@ -165,21 +169,21 @@ namespace ProjetBureau
 
         public string AsklogType() { return "json"; }
 
-        public string AskSourcePath() {return textBoxSourcePath.Text;}
+        public string AskSourcePath() { return textBoxSourcePath.Text; }
 
-        public string AskTargetFile() {return textBoxNameSave.Text;}
+        public string AskTargetFile() { return textBoxNameSave.Text; }
 
-        public string AskTargetPath() {return textBoxDestPath.Text;}
+        public string AskTargetPath() { return textBoxDestPath.Text; }
 
         private void BtnBrowseFolder_Click(object sender, RoutedEventArgs e)
         {
             var folderDlg = new System.Windows.Forms.FolderBrowserDialog
-            {ShowNewFolderButton = true};
+            { ShowNewFolderButton = true };
             // Show the FolderBrowserDialog.  
             var result = folderDlg.ShowDialog();
             if (result == System.Windows.Forms.DialogResult.OK)
             {
-                textBoxSourcePath.Text = folderDlg.SelectedPath;
+                textBoxDestPath.Text = folderDlg.SelectedPath;
                 //Environment.SpecialFolder root = folderDlg.RootFolder;
             }
         }
@@ -187,7 +191,7 @@ namespace ProjetBureau
         private void BtnBrowseFolder_Copy_Click(object sender, RoutedEventArgs e)
         {
             var folderDlg = new System.Windows.Forms.FolderBrowserDialog
-            {ShowNewFolderButton = true};
+            { ShowNewFolderButton = true };
             // Show the FolderBrowserDialog.  
             var result = folderDlg.ShowDialog();
             if (result == System.Windows.Forms.DialogResult.OK)
@@ -203,5 +207,9 @@ namespace ProjetBureau
                                                   new Action(delegate { }));
         }
 
+        private void ImportButton_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
     }
 }
