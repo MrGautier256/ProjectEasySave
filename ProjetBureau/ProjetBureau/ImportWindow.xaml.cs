@@ -19,40 +19,17 @@ namespace ProjetBureau
 {
     public partial class ImportWindow : Window
     {
-        public ImportWindow()
+        public ImportWindow(string language)
         {
             InitializeComponent();
-            Traduction.SetInterfaceLanguage(SelectLanguage.Text);
+            Traduction.SetInterfaceLanguage(language);
             TextEnterSourcePath.Content = Traduction.Instance.Langue.EnterSourcePath;
-            TextLanguage.Content = Traduction.Instance.Langue.SelectLanguage;
             TextEnterTargetPath.Content = Traduction.Instance.Langue.EnterTargetPath;
             TextEnterLogType.Content = Traduction.Instance.Langue.EnterLogType;
             ImportButton.Content = Traduction.Instance.Langue.Import;
-            textBoxSourcePath.Text = "C:\\Users\\Gautier\\OneDrive - Association Cesi Viacesi mail\\CESI\\3ème Année\\Projet 2 - Programmation Système\\Projet\\TestCopie\\Source3";
-            textBoxDestPath.Text = "C:\\Users\\Gautier\\OneDrive - Association Cesi Viacesi mail\\CESI\\3ème Année\\Projet 2 - Programmation Système\\Projet\\TestCopie";
-        }
-        public string typeOfMode => "Graphic";
-
-        public static LangueEnum AskLanguage()
-        {
-            Console.ForegroundColor = ConsoleColor.Cyan;
-            string langageToPrint = string.Empty;
-            foreach (var item in Enum.GetValues(typeof(LangueEnum)))
-            {
-                langageToPrint += $"{item}, ";
-            }
-            Console.WriteLine("Select language: " + langageToPrint);
-            string? inputLanguage = Console.ReadLine()?.ToLower();
-            var selectedLanguage = inputLanguage switch
-            {
-                "french" or "fr" or "français" or "francais" => LangueEnum.french,
-                "spanish" or "es" or "espagnol" => LangueEnum.spanish,
-                _ => LangueEnum.english,
-            };
-            return selectedLanguage;
         }
 
-        public void SourcePathIsInvalid()
+        public void SourcePathImportIsInvalid()
         {
             string? messageBoxText = Traduction.Instance.Langue.SourcePathInvalid;
             string caption = "Source Path Invalid";
@@ -60,18 +37,10 @@ namespace ProjetBureau
             MessageBoxImage icon = MessageBoxImage.Warning;
             System.Windows.MessageBox.Show(messageBoxText, caption, button, icon, MessageBoxResult.Yes);
         }
-        public void TargetPathIsInvalid()
+        public void TargetPathImportIsInvalid()
         {
             string? messageBoxText = Traduction.Instance.Langue.TargetPathInvalid;
-            string caption = "Source Path Invalid";
-            MessageBoxButton button = MessageBoxButton.OK;
-            MessageBoxImage icon = MessageBoxImage.Warning;
-            System.Windows.MessageBox.Show(messageBoxText, caption, button, icon, MessageBoxResult.Yes);
-        }
-        public void TargetDirInvalid()
-        {
-            string? messageBoxText = Traduction.Instance.Langue.targetDirInvalid;
-            string caption = "Source Path Invalid";
+            string caption = "Destination Path Invalid";
             MessageBoxButton button = MessageBoxButton.OK;
             MessageBoxImage icon = MessageBoxImage.Warning;
             System.Windows.MessageBox.Show(messageBoxText, caption, button, icon, MessageBoxResult.Yes);

@@ -139,37 +139,6 @@
             <ComboBoxItem IsSelected="true" Content="json"></ComboBoxItem>
             <ComboBoxItem Content="xml"></ComboBoxItem>
         </ComboBox>
-        <ComboBox 
-            x:Name="SelectLanguage" 
-            HorizontalAlignment="Left" 
-            Margin="682,31,0,0" 
-            VerticalAlignment="Top" 
-            Width="98"
-            FontWeight="Bold">
-            <ComboBox.Style>
-                <Style TargetType="ComboBox">
-                    <Setter Property="BorderBrush" Value="Black"/>
-                    <Style.Triggers>
-                        <DataTrigger Binding="{Binding Value}" Value="{x:Null}">
-                            <Setter Property="BorderBrush" Value="Black" />
-                        </DataTrigger>
-                    </Style.Triggers>
-                </Style>
-            </ComboBox.Style>
-            <ComboBoxItem IsSelected="true" Content="english"></ComboBoxItem>
-            <ComboBoxItem Content="francais"></ComboBoxItem>
-            <ComboBoxItem Content="español"></ComboBoxItem>
-        </ComboBox>
-        <Label 
-            x:Name="TextLanguage" 
-            Content="Langue" 
-            HorizontalAlignment="Left" 
-            FontWeight="Bold"
-            Margin="682,-3,0,0" 
-            VerticalAlignment="Top" 
-            Width="98" 
-            HorizontalContentAlignment="Center" 
-            FontSize="18"/>
         <Button 
             x:Name="ImportButton" 
             Content="Importer" 

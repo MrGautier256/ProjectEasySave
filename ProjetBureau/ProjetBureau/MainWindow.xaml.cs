@@ -208,9 +208,9 @@ namespace ProjetBureau
 
         private void ImportButton_Click(object sender, RoutedEventArgs e)
         {
-            var importwindow = new ImportWindow();
+            var importwindow = new ImportWindow(SelectLanguage.Text);
             importwindow.Show();
-            this.Close();
+            //this.Close();
         }
     }
 }
