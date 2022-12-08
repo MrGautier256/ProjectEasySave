@@ -17,9 +17,6 @@ using System.Windows.Shapes;
 
 namespace ProjetBureau
 {
-    /// <summary>
-    /// Logique d'interaction pour Window1.xaml
-    /// </summary>
     public partial class ImportWindow : Window
     {
         public ImportWindow()
