@@ -225,7 +225,7 @@
             </Button.Resources>
         </Button>
         <Button 
-            x:Name="ImportButton" 
+            x:Name="ImportLinkButton" 
             Content="Importer une sauvegarde" 
             HorizontalAlignment="Right" 
             Margin="0,373,180,0" 

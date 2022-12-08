@@ -11,7 +11,9 @@
 		"targetDirInvalid": "Nom de sauvegarde invalide",
 		"EnterLogType": "Entrez le type de fichier de log :",
 		"SelectLanguage": "Langue :",
-		"Save": "Sauvegarder"
+		"Save": "Sauvegarder",
+		"ImportLink": "Importer une sauvegarde",
+		"Import": "Importer"
 	},
 	"english": {
 		"EnterSourcePath": "Enter source Path :",
@@ -25,7 +27,9 @@
 		"targetDirInvalid": "Invalid save name",
 		"EnterLogType": "Enter the log file type :",
 		"SelectLanguage": "Language :",
-		"Save": "Save"
+		"Save": "Save",
+		"ImportLink": "Import a backup",
+		"Import": "Import"
 	},
 	"spanish": {
 		"EnterSourcePath": "Entre el camino raiz :",
@@ -39,6 +43,8 @@
 		"targetDirInvalid": "Nombre de guardado invalido",
 		"EnterLogType": "Entre el tipo del archivo de log :",
 		"SelectLanguage": "Idioma :",
-		"Save": "Guardado"
+		"Save": "Guardado",
+		"ImportLink": "Importar una copia de seguridad",
+		"Import": "Importar"
 	}
 }

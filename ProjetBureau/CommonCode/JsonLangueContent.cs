@@ -19,5 +19,7 @@
         public string? EnterLogType;
         public string? SelectLanguage;
         public string? Save;
+        public string? ImportLink;
+        public string? Import;
     }
 }

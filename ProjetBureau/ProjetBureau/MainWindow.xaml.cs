@@ -39,6 +39,7 @@ namespace ProjetBureau
             TextEnterTargetFile.Content = Traduction.Instance.Langue.EnterTargetFile;
             TextEnterLogType.Content = Traduction.Instance.Langue.EnterLogType;
             SaveButton.Content = Traduction.Instance.Langue.Save;
+            ImportLinkButton.Content = Traduction.Instance.Langue.ImportLink;
             textBoxSourcePath.Text = "C:\\Users\\Gautier\\OneDrive - Association Cesi Viacesi mail\\CESI\\3ème Année\\Projet 2 - Programmation Système\\Projet\\TestCopie\\Source3";
             textBoxDestPath.Text = "C:\\Users\\Gautier\\OneDrive - Association Cesi Viacesi mail\\CESI\\3ème Année\\Projet 2 - Programmation Système\\Projet\\TestCopie";
         }
@@ -145,6 +146,7 @@ namespace ProjetBureau
             TextEnterTargetFile.Content = Traduction.Instance.Langue.EnterTargetFile;
             TextEnterLogType.Content = Traduction.Instance.Langue.EnterLogType;
             SaveButton.Content = Traduction.Instance.Langue.Save;
+            ImportLinkButton.Content = Traduction.Instance.Langue.ImportLink;
         }
 
         public void Progress(bool state)

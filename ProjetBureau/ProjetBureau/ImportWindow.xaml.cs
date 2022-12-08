@@ -30,6 +30,7 @@ namespace ProjetBureau
             TextLanguage.Content = Traduction.Instance.Langue.SelectLanguage;
             TextEnterTargetPath.Content = Traduction.Instance.Langue.EnterTargetPath;
             TextEnterLogType.Content = Traduction.Instance.Langue.EnterLogType;
+            ImportButton.Content = Traduction.Instance.Langue.Import;
             textBoxSourcePath.Text = "C:\\Users\\Gautier\\OneDrive - Association Cesi Viacesi mail\\CESI\\3ème Année\\Projet 2 - Programmation Système\\Projet\\TestCopie\\Source3";
             textBoxDestPath.Text = "C:\\Users\\Gautier\\OneDrive - Association Cesi Viacesi mail\\CESI\\3ème Année\\Projet 2 - Programmation Système\\Projet\\TestCopie";
         }
