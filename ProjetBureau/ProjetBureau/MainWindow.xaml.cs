@@ -103,8 +103,7 @@ namespace ProjetBureau
         /// Affichage en temps réel des informations de la sauvegarde (Pourcentage | Nom du fichier | Nombre de fichier restant)
         /// Display in real time the informations of the back-up (Percentage | File's name | Number of remaining files)
         /// </summary>
-        /// <param name="toDisplay"></param>
-
+        /// <param name="textToDisplay"></param>
         public void Display(string[] textToDisplay)
         {
             progressWindow.ContentCountsize.Dispatcher.Invoke(() => progressWindow.ContentCountsize.Text = textToDisplay[0], DispatcherPriority.Background);
@@ -142,7 +141,7 @@ namespace ProjetBureau
             Traduction.SetInterfaceLanguage(SelectLanguage.Text);
             TextEnterSourcePath.Content = Traduction.Instance.Langue.EnterSourcePath;
             TextLanguage.Content = Traduction.Instance.Langue.SelectLanguage;
-            TextEnterTargetPath.Content = Traduction.Instance.Langue.EnterTargetPath + " " + Environment.CurrentManagedThreadId;
+            TextEnterTargetPath.Content = Traduction.Instance.Langue.EnterTargetPath;
             TextEnterTargetFile.Content = Traduction.Instance.Langue.EnterTargetFile;
             TextEnterLogType.Content = Traduction.Instance.Langue.EnterLogType;
             SaveButton.Content = Traduction.Instance.Langue.Save;
@@ -174,7 +173,7 @@ namespace ProjetBureau
 
         public string AskTargetPath() { return textBoxDestPath.Text; }
 
-        private void BtnBrowseFolder_Click(object sender, RoutedEventArgs e)
+        private void BtnBrowseSourceFolder_Click(object sender, RoutedEventArgs e)
         {
             var folderDlg = new System.Windows.Forms.FolderBrowserDialog
             { ShowNewFolderButton = true };
@@ -182,12 +181,11 @@ namespace ProjetBureau
             var result = folderDlg.ShowDialog();
             if (result == System.Windows.Forms.DialogResult.OK)
             {
-                textBoxDestPath.Text = folderDlg.SelectedPath;
+                textBoxSourcePath.Text = folderDlg.SelectedPath;
                 //Environment.SpecialFolder root = folderDlg.RootFolder;
             }
         }
-
-        private void BtnBrowseFolder_Copy_Click(object sender, RoutedEventArgs e)
+        private void BtnBrowseDestFolder_Click(object sender, RoutedEventArgs e)
         {
             var folderDlg = new System.Windows.Forms.FolderBrowserDialog
             { ShowNewFolderButton = true };
