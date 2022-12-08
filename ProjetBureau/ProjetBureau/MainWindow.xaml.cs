@@ -209,7 +209,9 @@ namespace ProjetBureau
 
         private void ImportButton_Click(object sender, RoutedEventArgs e)
         {
-
+            var importwindow = new ImportWindow();
+            importwindow.Show();
+            this.Close();
         }
     }
 }
