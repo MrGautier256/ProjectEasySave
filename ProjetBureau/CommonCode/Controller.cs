@@ -14,6 +14,7 @@ namespace CommonCode
     {
         private readonly Model model;
         private readonly IView view;
+        private SaveFileService? _saveFileService;
         public Controller(IView _view)
         {
             model = new Model();
@@ -24,7 +25,7 @@ namespace CommonCode
         /// Execution sucessive des différentes fonctions necessaire au processus de sauvegarde
         /// Sucessive execution of the multiple functions necessary to the process of back-up 
         /// </summary>
-        public void execute(Action rafraichirUi)
+        public void execute()
         {
             var language = view.AskLanguage();
             Traduction.SetLanguage(language);
@@ -43,10 +44,20 @@ namespace CommonCode
                 model.targetPath = targetPath;
                 model.targetFile = saveName;
                 view.Progress(false);
-                var tableLog = SaveService.SaveFile(model.sourcePath, model.targetPath, model.targetFile,view.ControlProgress, rafraichirUi);
-                SaveService.WriteLog(tableLog, model.targetFile, model.logType);
-                view.Progress(true);
+
+                _saveFileService = new SaveFileService(model.sourcePath, model.targetPath, model.targetFile);
+                _saveFileService.Finished += _saveFileService_Finished;
+                _saveFileService.ProgressEvent += view.ControlProgress;
+                view.SendSaveFileServiceCommand(_saveFileService);
+                _saveFileService.Start();
             }
+        }
+        private void _saveFileService_Finished(List<JsonData> tableLog, bool finishedNormaly)
+        {
+            SaveService.WriteLog(tableLog, model.targetFile, model.logType);
+            view.Progress(true);
+            _saveFileService.Finished -= _saveFileService_Finished;
+            _saveFileService.ProgressEvent -= view.ControlProgress;
         }
 
         private static string CombinePathAndName(string targetPath, string saveName)

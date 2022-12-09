@@ -104,37 +104,26 @@ namespace ProjetBureau
         /// Affichage en temps réel des informations de la sauvegarde (Pourcentage | Nom du fichier | Nombre de fichier restant)
         /// Display in real time the informations of the back-up (Percentage | File's name | Number of remaining files)
         /// </summary>
-        /// <param name="textToDisplay"></param>
-        public void Display(string[] textToDisplay)
+        /// <param name="toDisplay"></param>
+
+        public void ControlProgress(string fileName, double countfile, int totalFileToCopy, double percentage)
         {
-            progressWindow.ContentCountsize.Dispatcher.Invoke(() => progressWindow.ContentCountsize.Text = textToDisplay[0], DispatcherPriority.Background);
-            progressWindow.ContentFilename.Dispatcher.Invoke(() => progressWindow.ContentFilename.Text = textToDisplay[1], DispatcherPriority.Background);
-            progressWindow.ContentHistory.Dispatcher.Invoke(() => progressWindow.ContentHistory.Text = textToDisplay[2], DispatcherPriority.Background);
-            progressWindow.ProgressBarSave.Dispatcher.Invoke(() => progressWindow.ProgressBarSave.Value = Convert.ToDouble(textToDisplay[3]), DispatcherPriority.Background);
-        }
-        public ProgressState ControlProgress(string fileName, double countfile, int totalFileToCopy, double percentage)
-        {
-            DoEvents();
-            if (progressWindow.progress != ProgressState.pause)
+            Dispatcher.Invoke(() =>
             {
-                string[] text =
-                    {
-                    $"{countfile}/{totalFileToCopy}",
-                    $" {fileName}",
-                    $"{countfile}/{totalFileToCopy} | {fileName}\n{progressWindow.ContentHistory.Text}",
-                    $"{percentage}"
-                    };
-
-                Display(text);
-            }
-
-            return progressWindow.progress;
+                if (progressWindow.progress != ProgressState.pause)
+                {
+                    progressWindow.ContentCountsize.Text = $"{countfile}/{totalFileToCopy}";
+                    progressWindow.ContentFilename.Text = $" {fileName}";
+                    progressWindow.ContentHistory.Text = $"{countfile}/{totalFileToCopy} | {fileName}\n{progressWindow.ContentHistory.Text}";
+                    progressWindow.ProgressBarSave.Value = Convert.ToDouble(percentage);
+                }
+            }, DispatcherPriority.Background);
         }
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
             Controller controller = new Controller(this);
-            controller.execute(DoEvents);
+            controller.execute();
         }
 
         private void SelectLanguage_DropDownClosed(object sender, EventArgs e)
@@ -151,19 +140,22 @@ namespace ProjetBureau
 
         public void Progress(bool state)
         {
-            if (!state)
+            Dispatcher.Invoke(() =>
             {
-                progressWindow.Show();
-                progressWindow.progress = ProgressState.play;
-            }
-            else if (state)
-            {
-                progressWindow.Hide();
-                progressWindow.ContentCountsize.Dispatcher.Invoke(() => progressWindow.ContentCountsize.Text = string.Empty, DispatcherPriority.Background);
-                progressWindow.ContentFilename.Dispatcher.Invoke(() => progressWindow.ContentFilename.Text = string.Empty, DispatcherPriority.Background);
-                progressWindow.ContentHistory.Dispatcher.Invoke(() => progressWindow.ContentHistory.Text = string.Empty, DispatcherPriority.Background);
-                progressWindow.ProgressBarSave.Dispatcher.Invoke(() => progressWindow.ProgressBarSave.Value = 0, DispatcherPriority.Background);
-            }
+                if (!state)
+                {
+                    progressWindow.Show();
+                    progressWindow.progress = ProgressState.play;
+                }
+                else if (state)
+                {
+                    progressWindow.Hide();
+                    progressWindow.ContentCountsize.Text = string.Empty;
+                    progressWindow.ContentFilename.Text = string.Empty;
+                    progressWindow.ContentHistory.Text = string.Empty;
+                    progressWindow.ProgressBarSave.Value = 0;
+                }
+            }, DispatcherPriority.Background);
         }
         LangueEnum IView.AskLanguage() { return Traduction.ConvertLanguage(SelectLanguage.Text); }
 
@@ -199,11 +191,13 @@ namespace ProjetBureau
                 //Environment.SpecialFolder root = folderDlg.RootFolder;
             }
         }
-
-        public static void DoEvents()
+        public void SendSaveFileServiceCommand(ISaveFileServiceCommand saveFileService)
         {
-            System.Windows.Application.Current.Dispatcher.Invoke(DispatcherPriority.Background,
-                                                  new Action(delegate { }));
+            progressWindow.SaveFileServiceCommand = saveFileService;
+        }
+        private void Window_Closed(object sender, EventArgs e)
+        {
+            progressWindow.Close();
         }
 
         private void ImportButton_Click(object sender, RoutedEventArgs e)

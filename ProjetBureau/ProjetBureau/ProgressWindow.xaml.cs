@@ -22,6 +22,8 @@ namespace ProjetBureau
     public partial class ProgressWindow : Window
     {
         public ProgressState progress = ProgressState.play;
+        public ISaveFileServiceCommand? SaveFileServiceCommand { get; set; }
+
         public ProgressWindow()
         {
             InitializeComponent();
@@ -29,30 +31,26 @@ namespace ProjetBureau
 
         private void Stop_Click(object sender, RoutedEventArgs e)
         {
+            ArgumentNullException.ThrowIfNull(SaveFileServiceCommand);
+            SaveFileServiceCommand.Stop();
             progress = ProgressState.stop;
-        }
-
-        private void Play_Click(object sender, RoutedEventArgs e)
-        {
-            progress = ProgressState.play;
-        }
-
-        private void Pause_Click(object sender, RoutedEventArgs e)
-        {
-            progress = ProgressState.pause;
         }
 
         private void PlayPauseButton_Click(object sender, RoutedEventArgs e)
         {
-            if (progress == ProgressState.play) 
-            { 
-                progress = ProgressState.pause; 
-              PlayPauseButton.Content = "Resume";
-            } 
-            else if (progress == ProgressState.pause) { 
-                progress = ProgressState.play; 
-                PlayPauseButton.Content = "Pause";}
-            //DoEvents();
+            ArgumentNullException.ThrowIfNull(SaveFileServiceCommand);
+            if (progress == ProgressState.play)
+            {
+                progress = ProgressState.pause;
+                PlayPauseButton.Content = "Resume";
+                SaveFileServiceCommand.Pause();
+            }
+            else if (progress == ProgressState.pause)
+            {
+                progress = ProgressState.play;
+                PlayPauseButton.Content = "Pause";
+                SaveFileServiceCommand.Resume();
+            }
         }
     }
 }

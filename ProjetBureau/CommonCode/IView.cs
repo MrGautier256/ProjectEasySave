@@ -11,11 +11,10 @@
         string AskTargetFile();
         string AskTargetPath();
         void Progress(bool v);
-        ProgressState ControlProgress(string fileName, double countfile, int totalFileToCopy, double percentage);
+        void ControlProgress(string fileName, double countfile, int totalFileToCopy, double percentage);
         void SourcePathIsInvalid();
         void TargetDirInvalid();
         void TargetPathIsInvalid();
-        void Display(string[] toDisplay);
-
+        void SendSaveFileServiceCommand(ISaveFileServiceCommand saveFileService);
     }
 }
