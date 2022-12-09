@@ -45,7 +45,7 @@
             FontSize="36" 
             TextAlignment="Center"
             FontWeight="Bold"/>
-        <Button Name ="PlayPauseButton" Content="Pause" HorizontalAlignment="Left" Margin="41,145,0,0" VerticalAlignment="Top" Height="96" Width="168" Click="PlayPauseButton_Click"
+        <Button Name ="PlayPauseButton" Content="Pause" HorizontalAlignment="Left" Margin="35,191,0,0" VerticalAlignment="Top" Height="96" Width="168" Click="PlayPauseButton_Click"
             Background="SeaShell"
             FontWeight="Bold"
             Foreground="Black"
@@ -57,7 +57,7 @@
                 </Style>
             </Button.Resources>
         </Button>
-        <Button Name ="Stop" Content="Stop" HorizontalAlignment="Left" Margin="41,281,0,0" VerticalAlignment="Top" Height="97" Width="168" Click="Stop_Click"
+        <Button Name ="Stop" Content="Stop" HorizontalAlignment="Left" Margin="35,327,0,0" VerticalAlignment="Top" Height="97" Width="168" Click="Stop_Click"
             Background="SeaShell"
             FontWeight="Bold"
             Foreground="Black"
@@ -70,7 +70,7 @@
             </Button.Resources>
         </Button>
         <Border 
-            Margin="239,132,0,0"
+            Margin="233,175,0,0"
             BorderThickness="2"
             BorderBrush="Black"
             HorizontalAlignment="Left"
@@ -92,7 +92,7 @@
             </TextBlock>
         </Border>
         <Border 
-            Margin="312,132,0,0"
+            Margin="306,175,0,0"
             BorderThickness="2"
             BorderBrush="Black" 
             HorizontalAlignment="Left" 
@@ -107,7 +107,7 @@
             Height="18" Margin="5,0,-2,0" Text=""/>
         </Border>
         <Border 
-            Margin="239,161,41,35" 
+            Margin="233,204,47,-2" 
             BorderThickness="2"
             BorderBrush="Black"
             Background="White" RenderTransformOrigin="0.5,0.5">
@@ -124,7 +124,96 @@
             HorizontalAlignment="Left" 
             TextWrapping="Wrap" 
             FontWeight="Bold" 
-            Width="507" Margin="6,1,0,1" Text=""/>
+            Width="507" Margin="6,1,0,6" Text=""/>
         </Border>
+        <Border 
+            Margin="40,123,0,0"
+            BorderThickness="2"
+            BorderBrush="Black"
+            HorizontalAlignment="Left"
+            VerticalAlignment="Top"
+            Height="31" 
+            Width="344"
+            Background="Transparent">
+            <ProgressBar 
+            Minimum="0" 
+            Maximum="100" 
+            Value="0" 
+            Name="ProgressBarCopy" 
+            Background="White" 
+            BorderBrush="White" 
+            BorderThickness="1" 
+            RenderTransformOrigin="0.5,0.5">
+                <ProgressBar.RenderTransform>
+                    <TransformGroup>
+                        <ScaleTransform ScaleY="-1"/>
+                        <SkewTransform/>
+                        <RotateTransform/>
+                        <TranslateTransform/>
+                    </TransformGroup>
+                </ProgressBar.RenderTransform>
+            </ProgressBar>
+        </Border>
+        <Border 
+            Margin="400,123,0,0"
+            BorderThickness="2"
+            BorderBrush="Black"
+            HorizontalAlignment="Left"
+            VerticalAlignment="Top"
+            Height="31" 
+            Width="344"
+            Background="Transparent">
+            <ProgressBar 
+            Minimum="0" 
+            Maximum="100" 
+            Value="0" 
+            Name="ProgressBarEncrypt" 
+            Background="White" 
+            BorderBrush="White" 
+            BorderThickness="1" 
+            RenderTransformOrigin="0.5,0.5">
+                <ProgressBar.RenderTransform>
+                    <TransformGroup>
+                        <ScaleTransform ScaleY="-1" ScaleX="-1"/>
+                        <SkewTransform/>
+                        <RotateTransform/>
+                        <TranslateTransform/>
+                    </TransformGroup>
+                </ProgressBar.RenderTransform>
+            </ProgressBar>
+        </Border>
+        <TextBlock 
+            Text="{Binding Value, ElementName=ProgressBarSave, StringFormat=\{0:0\}%}" 
+            HorizontalAlignment="Center" 
+            VerticalAlignment="Top" 
+            Margin="0,56,0,0" 
+            RenderTransformOrigin="0.598,1.608" 
+            Height="52" 
+            Width="98" 
+            FontSize="36" 
+            TextAlignment="Center"
+            FontWeight="Bold"/>
+        <TextBlock 
+            Text="{Binding Value, ElementName=ProgressBarEncrypt, StringFormat=\{0:0\}%}" 
+            HorizontalAlignment="Right" 
+            VerticalAlignment="Top" 
+            Margin="0,118,194,0" 
+            RenderTransformOrigin="0.598,1.608" 
+            Height="36" 
+            Width="68" 
+            FontSize="28" 
+            TextAlignment="Center"
+            FontWeight="Bold"/>
+        <TextBlock 
+            Text="{Binding Value, ElementName=ProgressBarCopy, StringFormat=\{0:0\}%}" 
+            HorizontalAlignment="Left" 
+            VerticalAlignment="Top" 
+            Margin="177,118,0,0" 
+            RenderTransformOrigin="0.598,1.608" 
+            Height="38" 
+            Width="62" 
+            FontSize="28" 
+            TextAlignment="Center"
+            FontWeight="Bold"/>
     </Grid>
 </Window>
