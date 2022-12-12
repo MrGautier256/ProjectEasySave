@@ -82,6 +82,6 @@ namespace ProjetBureau
                 textBoxDestPath.Text = folderDlg.SelectedPath;
                 //Environment.SpecialFolder root = folderDlg.RootFolder;
             }
-        }
+        }
     }
 }

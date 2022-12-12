@@ -1,0 +1,8 @@
+{
+  "profiles": {
+    "ProjetBureau": {
+      "commandName": "Project",
+      "remoteDebugEnabled": false
+    }
+  }
+}
