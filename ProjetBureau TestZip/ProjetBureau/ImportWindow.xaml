@@ -11,7 +11,7 @@
             Height="23" 
             HorizontalAlignment="Center" 
             Margin="0,132,0,0" 
-            x:Name="textBoxSourcePath" 
+            x:Name="ImportSourcePath" 
             VerticalAlignment="Top" 
             Width="610"
             FontWeight="Bold"
@@ -50,7 +50,7 @@
         <TextBox Text="" 
             Height="23" 
             HorizontalAlignment="Left" 
-            Margin="93,301,0,0" x:Name="textBoxDestPath" 
+            Margin="93,301,0,0" x:Name="ImportBoxDestPath" 
             VerticalAlignment="Top" 
             Width="610"
             FontWeight="Bold"
@@ -151,7 +151,7 @@
             Background="SeaShell"
             Foreground="Black"
             BorderBrush="Black"
-            BorderThickness="2">
+            BorderThickness="2" Click="ImportButton_Click">
             <Button.Resources>
                 <Style TargetType="{x:Type Border}">
                     <Setter Property="CornerRadius" Value="5"/>

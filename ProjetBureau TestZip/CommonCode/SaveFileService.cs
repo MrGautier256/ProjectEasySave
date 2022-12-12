@@ -21,7 +21,7 @@ namespace CommonCode
         public string TargetDir { get; }
         public string TargetFile { get; }
 
-        public event Action<string, double, int, double>? ProgressEvent;
+        public event Action<string, double, int, double, bool>? ProgressEvent;
 
         public event Action<List<JsonData>, bool>? Finished;
 
@@ -66,10 +66,10 @@ namespace CommonCode
                 Finished(tableLogs, finishedNormaly);
         }
 
-        private void CallProgressEvent(string fileName, double countfile, int totalFileToCopy, double percentage)
+        private void CallProgressEvent(string fileName, double countfile, int totalFileToCopy, double percentage, bool copy)
         {
             if (ProgressEvent != null)
-                ProgressEvent(fileName, countfile, totalFileToCopy, percentage);
+                ProgressEvent(fileName, countfile, totalFileToCopy, percentage, copy);
         }
 
         public void Start()
@@ -138,7 +138,7 @@ namespace CommonCode
                         string ElapsedTime = ChronoTimer.Chrono(() =>
                         {
                             zipArchive.CreateEntryFromFile(file.FullName, targetFilePath);
-                            CallProgressEvent(file.Name, countFile, totalFileToCopy, percentage);
+                            CallProgressEvent(file.Name, countFile, totalFileToCopy, percentage, true);
                         });
 
                         JsonData jsonFileInfo = new(
@@ -156,10 +156,49 @@ namespace CommonCode
                         tableLogs.Add(jsonFileInfo);
                     }
                 }
-
+                EncryptFile(ZipPath, Path.Combine(TargetDir, $"{TargetFile} - {DateTime.Now:MM.dd.yyyy}.zip"));
+                File.Delete(ZipPath);
                 CallFinished(true);
             });
             _threadCopy.Start();
         }
+
+        void EncryptFile(string inputFile, string outputFile)
+        {
+            int bytesize = 8192;
+
+            var file = new FileInfo(inputFile);
+            long filesize = file.Length;
+            double nbrOfBuffer = filesize / bytesize;
+            double countbyte = 1;
+
+            using (var fin = new FileStream(inputFile, FileMode.Open))
+            using (var fout = new FileStream(outputFile, FileMode.Create))
+            {
+                byte[] buffer = new byte[bytesize];
+                while (true)
+                {
+                    double percentage = Math.Round((countbyte * 100) / nbrOfBuffer, 2, MidpointRounding.AwayFromZero);
+                    int totalFileToCopy = (int)nbrOfBuffer;
+                    CallProgressEvent(file.Name, countbyte, totalFileToCopy, percentage, false);
+
+                    countbyte++;
+
+                    int bytesRead = fin.Read(buffer);
+                    if (bytesRead == 0)
+                        break;
+                    EncryptBytes(buffer, bytesRead);
+                    fout.Write(buffer, 0, bytesRead);
+                }
+            }
+        }
+        void EncryptBytes(byte[] buffer, int count)
+        {
+            byte Secret = 64;
+
+            for (int i = 0; i < count; i++)
+                buffer[i] = (byte)(buffer[i] ^ Secret);
+        }
+
     }
 }

@@ -11,7 +11,7 @@
         string AskTargetFile();
         string AskTargetPath();
         void Progress(bool v);
-        void ControlProgress(string fileName, double countfile, int totalFileToCopy, double percentage);
+        void ControlProgress(string fileName, double countfile, int totalFileToCopy, double percentage, bool copy);
         void SourcePathIsInvalid();
         void TargetDirInvalid();
         void TargetPathIsInvalid();

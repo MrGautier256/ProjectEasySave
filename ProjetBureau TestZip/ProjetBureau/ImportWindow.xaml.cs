@@ -48,9 +48,9 @@ namespace ProjetBureau
 
         public string AsklogType() { return "json"; }
 
-        public string AskSourcePath() { return textBoxSourcePath.Text; }
+        public string AskSourcePath() { return ImportSourcePath.Text; }
 
-        public string AskTargetPath() { return textBoxDestPath.Text; }
+        public string AskTargetPath() { return ImportBoxDestPath.Text; }
 
         private void btnBrowseFile_Click(object sender, RoutedEventArgs e)
         {
@@ -64,6 +64,7 @@ namespace ProjetBureau
                 {
                     string text = File.ReadAllText(file);
                     size = text.Length;
+
                 }
                 catch (IOException)
                 {
@@ -79,9 +80,14 @@ namespace ProjetBureau
             var result = folderDlg.ShowDialog();
             if (result == System.Windows.Forms.DialogResult.OK)
             {
-                textBoxDestPath.Text = folderDlg.SelectedPath;
+                ImportBoxDestPath.Text = folderDlg.SelectedPath;
                 //Environment.SpecialFolder root = folderDlg.RootFolder;
             }
+        }
+
+        private void ImportButton_Click(object sender, RoutedEventArgs e)
+        {
+            
         }
     }
 }

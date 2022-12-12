@@ -107,7 +107,7 @@ namespace ProjetBureau
         /// </summary>
         /// <param name="toDisplay"></param>
 
-        public void ControlProgress(string fileName, double countfile, int totalFileToCopy, double percentage)
+        public void ControlProgress(string fileName, double countfile, int totalFileToCopy, double percentage, bool copy)
         {
             Dispatcher.Invoke(() =>
             {
@@ -116,7 +116,19 @@ namespace ProjetBureau
                     progressWindow.ContentCountsize.Text = $"{countfile}/{totalFileToCopy}";
                     progressWindow.ContentFilename.Text = $" {fileName}";
                     progressWindow.ContentHistory.Text = $"{countfile}/{totalFileToCopy} | {fileName}\n{progressWindow.ContentHistory.Text}";
-                    progressWindow.ProgressBarSave.Value = Convert.ToDouble(percentage);
+
+                    if(copy) 
+                    { 
+                        progressWindow.ProgressBarCopy.Value = Convert.ToDouble(percentage);
+                        progressWindow.ProgressBarSave.Value = Convert.ToDouble(percentage / 2);
+                    }
+                    else if (!copy) 
+                    {
+                        progressWindow.ProgressBarEncrypt.Value = Convert.ToDouble(percentage);
+                        progressWindow.ProgressBarSave.Value = Convert.ToDouble(percentage + 50);
+                    }
+
+
                 }
             }, DispatcherPriority.Background);
         }
@@ -157,6 +169,9 @@ namespace ProjetBureau
                     progressWindow.ContentFilename.Text = string.Empty;
                     progressWindow.ContentHistory.Text = string.Empty;
                     progressWindow.ProgressBarSave.Value = 0;
+                    progressWindow.ProgressBarCopy.Value = 0;
+                    progressWindow.ProgressBarEncrypt.Value = 0;
+
                 }
             }, DispatcherPriority.Background);
         }
