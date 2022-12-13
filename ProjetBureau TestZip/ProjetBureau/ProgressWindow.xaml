@@ -174,7 +174,7 @@
             RenderTransformOrigin="0.5,0.5">
                 <ProgressBar.RenderTransform>
                     <TransformGroup>
-                        <ScaleTransform ScaleY="-1" ScaleX="-1"/>
+                        <ScaleTransform ScaleY="-1" ScaleX="1"/>
                         <SkewTransform/>
                         <RotateTransform/>
                         <TranslateTransform/>
