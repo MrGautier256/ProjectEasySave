@@ -16,7 +16,8 @@ namespace ProjetConsole
         /// </summary>
         static void Main()
         {
-            Controller controller = new(new View());
+            
+            Controller controller = new(new View(), new RemoteView());
             controller.Execute();
             Console.ReadKey();
         }

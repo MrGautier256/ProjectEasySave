@@ -1,7 +1,15 @@
 ﻿namespace CommonCode
 {
     public enum LangueEnum { english, french, spanish };
-    public interface IView
+
+    public interface IViewProgress
+    {
+        void Progress(bool v);
+        void ControlProgress(string fileName, int countfile, int totalFileToCopy, double percentage);
+    }
+
+
+    public interface IView : IViewProgress
     {
         string typeOfMode { get; }
 
@@ -10,8 +18,6 @@
         string AskSourcePath();
         string AskTargetFile();
         string AskTargetPath();
-        void Progress(bool v);
-        void ControlProgress(string fileName, double countfile, int totalFileToCopy, double percentage);
         void SourcePathIsInvalid();
         void TargetDirInvalid();
         void TargetPathIsInvalid();

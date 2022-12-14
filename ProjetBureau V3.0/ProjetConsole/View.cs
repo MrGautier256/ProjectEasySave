@@ -94,13 +94,18 @@ namespace ProjetConsole
             Console.WriteLine(toDisplay[0]);
         }
 
-        public ProgressState ControlProgress(string fileName, double countfile, int totalFileToCopy, double percentage)
+        public void ControlProgress(string fileFullName, double countfile, int totalFileToCopy, double percentage)
         {
+            string fileName = Path.GetFileName(fileFullName);
             Console.ForegroundColor = ConsoleColor.Green;
             string[] text = {$"{percentage}% | {countfile}/{totalFileToCopy} {Traduction.Instance.Langue.InCopy} | {fileName}" };
             Display(text);
             Console.ForegroundColor = ConsoleColor.White;
-            return ProgressState.play;
+        }
+
+        public void SendSaveFileServiceCommand(ISaveFileServiceCommand saveFileService)
+        {
+            // Do Nothing
         }
     }
 

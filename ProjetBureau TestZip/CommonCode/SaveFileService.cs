@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.IO;
-using System.IO.Compression;
+using Ionic.Zip;
 
 namespace CommonCode
 {
@@ -100,72 +100,81 @@ namespace CommonCode
                 // Création du dossier destination
                 // Create the destination directory
                 Directory.CreateDirectory(TargetDir);
-                File.Create(ZipPath).Close();
+                //File.Create(ZipPath).Close();
 
 
                 //Récupération des fichiers dans le dossier source, copie vers le dossier destination, envoie des informations vers la view, ajout des informations à un objet de type JsonData et ajout à une liste de d'objets JsonData 
                 // Get the files in the source directory, copy to the destination directory, send info to the view, add info to a JsonData object and add it to a list of JsonData objects
 
 
-                using (ZipArchive zipArchive = ZipFile.Open(ZipPath, ZipArchiveMode.Update))
+                foreach (FileInfo file in files)
+
                 {
-                    foreach (FileInfo file in files)
-
+                    if (_progressState == ProgressState.stop)
                     {
-                        if (_progressState == ProgressState.stop)
-                        {
-                            CallFinished(false);
-                            return;
-                        }
-                        _manualResetEvent.WaitOne();
-                        countFile++;
-                        countSize += file.Length;
-                        double percentage = Math.Round((countSize * 100) / totalSize, 2, MidpointRounding.AwayFromZero);
-
-                        string? fileDirectoryName = file.DirectoryName;
-                        string? tempTargetFilePath = fileDirectoryName?.Replace(SourceDir, TargetDir);
-                        string? targetFilePath = tempTargetFilePath?.Replace(TargetDir, "");
-                        if(targetFilePath.StartsWith("\\"))
-                        {
-                            targetFilePath = targetFilePath.Remove(0, 1);
-                        }
-
-
-                        if (targetFilePath == null)
-                            throw new Exception(Traduction.Instance.Langue.TargetPathInvalid);
-
-                        targetFilePath = Path.Combine(targetFilePath, file.Name);
-                        string ElapsedTime = ChronoTimer.Chrono(() =>
-                        {
-                            zipArchive.CreateEntryFromFile(file.FullName, targetFilePath);
-                            CallProgressEvent(file.Name, countFile, totalFileToCopy, percentage, true);
-                        });
-
-                        JsonData jsonFileInfo = new(
-                            TargetFile,
-                            file.Name,
-                            file.FullName,
-                            targetFilePath,
-                            countFile,
-                            totalFileToCopy,
-                            file.Length,
-                            totalFileToCopy - countFile,
-                            percentage,
-                            ElapsedTime
-                            );
-                        tableLogs.Add(jsonFileInfo);
+                        CallFinished(false);
+                        return;
                     }
+                    _manualResetEvent.WaitOne();
+                    countFile++;
+                    countSize += file.Length;
+                    double percentage = Math.Round((countSize * 100) / totalSize, 2, MidpointRounding.AwayFromZero);
+
+                    string? fileDirectoryName = file.DirectoryName;
+                    string? tempTargetFilePath = fileDirectoryName?.Replace(SourceDir, TargetDir);
+                    string? tempTempTargetFilePath = tempTargetFilePath?.Replace(TargetDir, "");
+                    string? targetFilePath = tempTempTargetFilePath?.Replace(file.Name, "");
+                    if (targetFilePath.StartsWith("\\"))
+                    {
+                        targetFilePath = targetFilePath.Remove(0, 1);
+                    }
+
+
+                    if (targetFilePath == null)
+                        throw new Exception(Traduction.Instance.Langue.TargetPathInvalid);
+
+                    string ElapsedTime = ChronoTimer.Chrono(() =>
+                    {
+
+                        using (var zipArchive = new ZipFile(ZipPath))
+                        {
+                            zipArchive.SaveProgress += ZipArchive_SaveProgress;
+                            zipArchive.AddFile(file.FullName, targetFilePath);
+                            zipArchive.Save();
+                        }
+                        CallProgressEvent(file.Name, countFile, totalFileToCopy, percentage, true);
+                    });
+
+                    JsonData jsonFileInfo = new(
+                        TargetFile,
+                        file.Name,
+                        file.FullName,
+                        targetFilePath,
+                        countFile, 
+                        totalFileToCopy,
+                        file.Length,
+                        totalFileToCopy - countFile,
+                        percentage,
+                        ElapsedTime
+                        );
+                    tableLogs.Add(jsonFileInfo);
                 }
-                EncryptFile(ZipPath, Path.Combine(TargetDir, $"{TargetFile} - {DateTime.Now:MM.dd.yyyy}.zip"));
-                File.Delete(ZipPath);
+                //EncryptFile(ZipPath, Path.Combine(TargetDir, $"{TargetFile} - {DateTime.Now:MM.dd.yyyy}.zip"));
+                //File.Delete(ZipPath);
                 CallFinished(true);
             });
             _threadCopy.Start();
         }
 
+        private void ZipArchive_SaveProgress(object? sender, SaveProgressEventArgs e)
+        {
+            e.
+            throw new NotImplementedException();
+        }
+
         void EncryptFile(string inputFile, string outputFile)
         {
-            int bytesize = 8192;
+            int bytesize = 8192 * 256;
 
             var file = new FileInfo(inputFile);
             long filesize = file.Length;

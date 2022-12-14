@@ -13,7 +13,7 @@ namespace CommonCode
             string _FileName, 
             string _SourceFilePath, 
             string _TargetFilePath, 
-            double _FileNumber, 
+            int _FileNumber, 
             int _TotalFilesToCopy, 
             long _filesSize, 
             double _NbFilesLeftToDo, 
@@ -24,7 +24,7 @@ namespace CommonCode
             FileName = _FileName;
             SourceFilePath = _SourceFilePath;    
             TargetFilePath = _TargetFilePath;    
-            FileNumber = Math.Truncate(_FileNumber);
+            FileNumber = _FileNumber;
             TotalFilesToCopy = _TotalFilesToCopy;
             FilesSize = _filesSize;
             NbFilesLeftToDo = Math.Truncate(_NbFilesLeftToDo); 
@@ -36,7 +36,7 @@ namespace CommonCode
         public string FileName { get; set; }
         public string SourceFilePath { get; set; }
         public string TargetFilePath { get; set; }
-        public double FileNumber { get; set; }
+        public int FileNumber { get; set; }
         public double TotalFilesToCopy { get; set; }
         public long FilesSize { get; set; }
         public double NbFilesLeftToDo { get; set; }

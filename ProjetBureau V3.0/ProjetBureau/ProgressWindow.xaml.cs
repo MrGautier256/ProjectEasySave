@@ -29,6 +29,16 @@ namespace ProjetBureau
             InitializeComponent();
         }
 
+        public void init()
+        {
+            progress = ProgressState.play;
+            ContentCountsize.Text = string.Empty;
+            ContentFilename.Text = string.Empty;
+            ContentHistory.Text = string.Empty;
+            PlayPauseButton.IsEnabled = true;
+            PlayPauseButton.Content = "Pause";
+            ProgressBarSave.Value = 0;
+        }
         private void Stop_Click(object sender, RoutedEventArgs e)
         {
             ArgumentNullException.ThrowIfNull(SaveFileServiceCommand);

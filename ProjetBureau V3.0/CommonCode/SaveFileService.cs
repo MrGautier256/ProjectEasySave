@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.IO;
 using System.IO.Compression;
+using System.Diagnostics;
 
 namespace CommonCode
 {
@@ -21,9 +22,9 @@ namespace CommonCode
         public string TargetDir { get; }
         public string TargetFile { get; }
 
-        public event Action<string, double, int, double>? ProgressEvent;
+        public event Action<string, int, int, double>? ProgressEvent;
 
-        public event Action<List<JsonData>,bool>? Finished;
+        public event Action<List<JsonData>, bool>? Finished;
 
         #region Private fields
         private ProgressState _progressState = ProgressState.play;
@@ -56,7 +57,7 @@ namespace CommonCode
         {
             if (_threadCopy == null)
                 throw new Exception("Cannot call Stop before starting");
-
+            _manualResetEvent.Set();
             _progressState = ProgressState.stop;
         }
 
@@ -66,7 +67,7 @@ namespace CommonCode
                 Finished(tableLogs, finishedNormaly);
         }
 
-        private void CallProgressEvent(string fileName, double countfile, int totalFileToCopy, double percentage)
+        private void CallProgressEvent(string fileName, int countfile, int totalFileToCopy, double percentage)
         {
             if (ProgressEvent != null)
                 ProgressEvent(fileName, countfile, totalFileToCopy, percentage);
@@ -79,9 +80,10 @@ namespace CommonCode
                 var dir = new DirectoryInfo(SourceDir);
                 long totalSize = 0;
                 var files = dir.GetFiles("*", SearchOption.AllDirectories);
-                var dirs = dir.GetDirectories("*", SearchOption.AllDirectories);
-                double countFile = 0;
-                double countSize = 0;
+                int countFile = 1;
+                long countSize = 0;
+                object locking = new object();
+                bool finishedNormally = true;
 
                 // Calcul de la taille du contenu a sauvegarder  
                 // Calculating the size of the contents to back-up 
@@ -100,18 +102,15 @@ namespace CommonCode
 
                 //Récupération des fichiers dans le dossier source, copie vers le dossier destination, envoie des informations vers la view, ajout des informations à un objet de type JsonData et ajout à une liste de d'objets JsonData 
                 // Get the files in the source directory, copy to the destination directory, send info to the view, add info to a JsonData object and add it to a list of JsonData objects
-                foreach (FileInfo file in files)
-
+                Parallel.ForEach(files, new ParallelOptions { MaxDegreeOfParallelism = 4 }, (FileInfo file, ParallelLoopState state) =>
                 {
                     if (_progressState == ProgressState.stop)
                     {
-                        CallFinished(false);
+                        finishedNormally = false;
+                        state.Break();
                         return;
                     }
                     _manualResetEvent.WaitOne();
-                    countFile++;
-                    countSize += file.Length;
-                    double percentage = Math.Round((countSize * 100) / totalSize, 2, MidpointRounding.AwayFromZero);
 
                     string? fileDirectoryName = file.DirectoryName;
                     string? targetFilePath = fileDirectoryName?.Replace(SourceDir, TargetDir);
@@ -122,29 +121,42 @@ namespace CommonCode
                     if (!Directory.Exists(targetFilePath))
                         Directory.CreateDirectory(targetFilePath);
 
+                    int countFileTemp = 0;
+                    double percentage = 0;
+
                     targetFilePath = Path.Combine(targetFilePath, file.Name);
+
                     string ElapsedTime = ChronoTimer.Chrono(() =>
                     {
-                        file.CopyTo(targetFilePath, true);
-                        CallProgressEvent(file.Name, countFile, totalFileToCopy, percentage);
+                        //file.CopyTo(targetFilePath, true);
+                        SaveService.EncryptFile(file.FullName, targetFilePath);
                     });
-
-                    JsonData jsonFileInfo = new(
-                        TargetFile,
-                        file.Name,
-                        file.FullName,
-                        targetFilePath,
-                        countFile,
-                        totalFileToCopy,
-                        file.Length,
-                        totalFileToCopy - countFile,
-                        percentage,
-                        ElapsedTime
+                    lock (locking)
+                    {
+                        countFileTemp = countFile++;
+                        countSize += file.Length;
+                        percentage = Math.Round((double)countSize * 100 / totalSize, 2, MidpointRounding.AwayFromZero);
+                        JsonData jsonFileInfo = new
+                        (
+                            TargetFile,
+                            file.Name,
+                            file.FullName,
+                            targetFilePath,
+                            countFileTemp,
+                            totalFileToCopy,
+                            file.Length,
+                            totalFileToCopy - countFileTemp,
+                            percentage,
+                            ElapsedTime
                         );
-                    tableLogs.Add(jsonFileInfo);
-                }
+                        tableLogs.Add(jsonFileInfo);
+                        Debug.WriteLine(percentage);
+                    }
+                    CallProgressEvent(file.FullName, countFileTemp, totalFileToCopy, percentage);
 
-                CallFinished(true);
+                });
+
+                CallFinished(finishedNormally);
             });
             _threadCopy.Start();
         }

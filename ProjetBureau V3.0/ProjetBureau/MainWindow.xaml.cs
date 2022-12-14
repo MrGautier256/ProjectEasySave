@@ -2,6 +2,7 @@
 using Microsoft.Win32;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Net;
@@ -30,9 +31,20 @@ namespace ProjetBureau
     public partial class MainWindow : Window, IView
     {
         readonly ProgressWindow progressWindow = new();
+        private System.Windows.Forms.Timer timer;
+        bool? previousState = null;
+        RemoteView remoteView;
+
         public MainWindow()
         {
             InitializeComponent();
+
+            remoteView = new();
+
+            timer = new System.Windows.Forms.Timer();
+            timer.Tick += Timer_Tick;
+            timer.Interval = 500;
+
             Traduction.SetInterfaceLanguage(SelectLanguage.Text);
             TextEnterSourcePath.Content = Traduction.Instance.Langue.EnterSourcePath;
             TextLanguage.Content = Traduction.Instance.Langue.SelectLanguage;
@@ -44,6 +56,27 @@ namespace ProjetBureau
             textBoxSourcePath.Text = "C:\\Users\\Gautier\\OneDrive - Association Cesi Viacesi mail\\CESI\\3ème Année\\Projet 2 - Programmation Système\\Projet\\TestCopie\\Source3";
             textBoxDestPath.Text = "C:\\Users\\Gautier\\OneDrive - Association Cesi Viacesi mail\\CESI\\3ème Année\\Projet 2 - Programmation Système\\Projet\\TestCopie";
         }
+
+        private void Timer_Tick(object? sender, EventArgs e)
+        {
+            var businessProcesses = Process.GetProcessesByName(Properties.Settings.Default.BusinessProcessName);
+            bool businessProcessIsOn = (businessProcesses?.Length > 0);
+            progressWindow.PlayPauseButton.IsEnabled = !businessProcessIsOn;
+            if (previousState == businessProcessIsOn)
+            { return; }
+            if (businessProcessIsOn && progressWindow.progress == ProgressState.play && progressWindow.IsVisible)
+            {
+                progressWindow.progress = ProgressState.pause;
+                progressWindow.SaveFileServiceCommand?.Pause();
+            }
+            else if (!businessProcessIsOn && progressWindow.progress == ProgressState.pause && progressWindow.IsVisible)
+            {
+                progressWindow.progress = ProgressState.play;
+                progressWindow.SaveFileServiceCommand?.Resume();
+            }
+            previousState = businessProcessIsOn;
+        }
+
         public string typeOfMode => "Graphic";
 
         /// <summary>
@@ -107,12 +140,13 @@ namespace ProjetBureau
         /// </summary>
         /// <param name="toDisplay"></param>
 
-        public void ControlProgress(string fileName, double countfile, int totalFileToCopy, double percentage)
+        public void ControlProgress(string fileFullName, int countfile, int totalFileToCopy, double percentage)
         {
             Dispatcher.Invoke(() =>
             {
                 if (progressWindow.progress != ProgressState.pause)
                 {
+                    string fileName = System.IO.Path.GetFileName(fileFullName);
                     progressWindow.ContentCountsize.Text = $"{countfile}/{totalFileToCopy}";
                     progressWindow.ContentFilename.Text = $" {fileName}";
                     progressWindow.ContentHistory.Text = $"{countfile}/{totalFileToCopy} | {fileName}\n{progressWindow.ContentHistory.Text}";
@@ -123,7 +157,7 @@ namespace ProjetBureau
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
-            Controller controller = new Controller(this);
+            Controller controller = new Controller(this, remoteView);
             controller.Execute();
         }
 
@@ -145,18 +179,18 @@ namespace ProjetBureau
             {
                 if (!state)
                 {
+                    progressWindow.init();
                     progressWindow.Show();
+                    timer.Start();
                     this.IsEnabled = false;
                     progressWindow.progress = ProgressState.play;
                 }
                 else if (state)
                 {
+                    timer.Stop();
                     progressWindow.Hide();
+                    previousState = null;
                     this.IsEnabled = true;
-                    progressWindow.ContentCountsize.Text = string.Empty;
-                    progressWindow.ContentFilename.Text = string.Empty;
-                    progressWindow.ContentHistory.Text = string.Empty;
-                    progressWindow.ProgressBarSave.Value = 0;
                 }
             }, DispatcherPriority.Background);
         }
@@ -200,6 +234,7 @@ namespace ProjetBureau
         }
         private void Window_Closed(object sender, EventArgs e)
         {
+            timer.Tick -= Timer_Tick;
             progressWindow.Close();
         }
 

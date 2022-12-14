@@ -5,20 +5,17 @@ using System.Text.RegularExpressions;
 
 namespace CommonCode
 {
-    /// <summary>
-    ///  Classe Controller
-    ///  Class Controller
-    /// </summary>
-
     public class Controller 
     {
         private readonly Model model;
         private readonly IView view;
+        private readonly IViewProgress remoteView;
         private SaveFileService? _saveFileService;
-        public Controller(IView _view)
+        public Controller(IView _view, IViewProgress _remoteView)
         {
             model = new Model();
             view = _view;
+            remoteView = _remoteView;
         }
 
         /// <summary>
@@ -43,10 +40,13 @@ namespace CommonCode
                 model.sourcePath = sourcePath;
                 model.targetPath = targetPath;
                 model.targetFile = saveName;
+
                 view.Progress(false);
+                remoteView.Progress(false);
 
                 _saveFileService = new SaveFileService(model.sourcePath, model.targetPath, model.targetFile);
                 _saveFileService.Finished += SaveFileService_Finished;
+                _saveFileService.ProgressEvent += remoteView.ControlProgress;
                 _saveFileService.ProgressEvent += view.ControlProgress;
                 view.SendSaveFileServiceCommand(_saveFileService);
                 _saveFileService.Start();
@@ -56,6 +56,8 @@ namespace CommonCode
         {
             SaveService.WriteLog(tableLog, model.targetFile, model.logType);
             view.Progress(true);
+            remoteView.Progress(true);
+
             _saveFileService.Finished -= SaveFileService_Finished;
             _saveFileService.ProgressEvent -= view.ControlProgress;
         }
