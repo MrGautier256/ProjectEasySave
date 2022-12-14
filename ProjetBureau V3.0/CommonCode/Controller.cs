@@ -20,7 +20,7 @@ namespace CommonCode
 
         /// <summary>
         /// Execution sucessive des différentes fonctions necessaire au processus de sauvegarde
-        /// Sucessive execution of the multiple functions necessary to the process of back-up 
+        /// Sucessive execution of the multiple functions necessary to the process of backup 
         /// </summary>
         public void Execute()
         {
@@ -52,6 +52,11 @@ namespace CommonCode
                 _saveFileService.Start();
             }
         }
+
+        /// <summary>
+        /// Méthode appelant la méthode d'écriture de log et indiquant la fin du processus de sauvegarde
+        /// Method calling the write log method and indicating the end of the backup process
+        /// </summary>
         private void SaveFileService_Finished(List<JsonData> tableLog, bool finishedNormaly)
         {
             SaveService.WriteLog(tableLog, model.targetFile, model.logType);
@@ -62,11 +67,19 @@ namespace CommonCode
             _saveFileService.ProgressEvent -= view.ControlProgress;
         }
 
+        /// <summary>
+        /// Combinez le chemin et le nom de la sauvegarde pour créer le répertoire de la sauvegarde
+        /// Combine Path and save name to create directory of the save
+        /// </summary>
         private static string CombinePathAndName(string targetPath, string saveName)
         {
             return Path.Combine(targetPath, saveName);
         }
 
+        /// <summary>
+        /// Définition du type de log choisis par l'utilisateur
+        /// Setting of the type of log chosen by the user
+        /// </summary>
         private static string SetLogType(string logtype)
         {
             if (logtype == "xml") {return "xml";}
@@ -77,8 +90,6 @@ namespace CommonCode
         /// Regex verifiant la validité du nom de sauvegarde
         /// Regex checking the validity of the Back-up's name
         /// </summary>
-        /// <param name="DirName"></param>
-        /// <returns></returns>
         private bool CheckTargetDirectory(string DirName)
         {
             bool valid;
@@ -93,13 +104,11 @@ namespace CommonCode
 
             return valid;
         }
+
         /// <summary>
         /// Execution des différentes fonctions de vérification de chemin
         /// Execution of the different path control functions 
         /// </summary>
-        /// <param name="source"></param>
-        /// <param name="target"></param>
-        /// <returns></returns>
         private bool CheckPathIntegrity(string source, string target)
         {
             bool integrity;
@@ -127,9 +136,6 @@ namespace CommonCode
         /// Verification de la validité du format du chemin
         /// Verifying the validity of the path format
         /// </summary>
-        /// <param name="path"></param>
-        /// <param name="allowRelativePaths"></param>
-        /// <returns></returns>
         private static bool PathIsValid(string path, bool allowRelativePaths = false)
         {
             bool isValid;

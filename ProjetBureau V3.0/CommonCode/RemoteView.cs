@@ -5,8 +5,8 @@ using System.Text;
 namespace CommonCode
 {
     /// <summary>
-    ///  Classe Controller
-    ///  Class Controller
+    ///  Classe RemoteView permettant la connexion a une application console déportée ayant accès a l'état d'avancement de la sauvegarde 
+    ///  RemoteView class allowing connection to a remote console application with access to the progress of the backup 
     /// </summary>
 
     public class RemoteView : IViewProgress
@@ -18,20 +18,25 @@ namespace CommonCode
             Socket listenSocket = new(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp);
             listenSocket.Bind(ipep);
             listenSocket.Listen();
-            //Task.Run(() =>
-            //{
-            //    while (true)
-            //    {
-            //        var client = listenSocket.Accept();
-            //        lock (clients)
-            //        {
-            //            clients.Add(client);
-            //        }
-            //    }
-            //});
+            Task.Run(() =>
+            {
+                while (true)
+                {
+                    var client = listenSocket.Accept();
+                    lock (clients)
+                    {
+                        clients.Add(client);
+                    }
+                }
+            });
         }
-        public void ControlProgress(string fileName, int countfile, int totalFileToCopy, double percentage)
+
+        /// <summary>
+        /// 
+        /// </summary>
+        public void ControlProgress(string fileFullName, int countfile, int totalFileToCopy, double percentage)
         {
+            string fileName = System.IO.Path.GetFileName(fileFullName);
             SendText($"{percentage}% | {countfile}/{totalFileToCopy} {Traduction.Instance.Langue.InCopy} | {fileName}");
         }
 

@@ -94,7 +94,7 @@ namespace ProjetConsole
             Console.WriteLine(toDisplay[0]);
         }
 
-        public void ControlProgress(string fileFullName, double countfile, int totalFileToCopy, double percentage)
+        public void ControlProgress(string fileFullName, int countfile, int totalFileToCopy, double percentage)
         {
             string fileName = Path.GetFileName(fileFullName);
             Console.ForegroundColor = ConsoleColor.Green;

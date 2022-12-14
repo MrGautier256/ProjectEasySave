@@ -5,6 +5,8 @@ namespace CommonCode
 {
     public static class ChronoTimer
     {
+        //Methode chronométrant l'exécution d'une autre méthode
+        // Method timing the execution of another method
         public static string Chrono(Action method)
         {
             Stopwatch stopWatch = new Stopwatch();

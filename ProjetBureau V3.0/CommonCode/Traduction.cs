@@ -54,8 +54,6 @@ namespace CommonCode
         /// Attribution de la langue choisie dans la fonction askLanguage
         /// Assignment of the language chosen in the askLanguage fonction
         /// </summary>
-        /// <param name="langue"></param>
-
         public static void SetInterfaceLanguage(string langue)
         {
             SetLanguage(ConvertLanguage(langue)); 
