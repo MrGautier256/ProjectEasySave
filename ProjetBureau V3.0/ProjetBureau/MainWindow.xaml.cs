@@ -80,7 +80,6 @@ namespace ProjetBureau
         /// --------------Demande d'informations à l'utilisateur (méthode) ------------------
         /// --------------Ask Informations to user (methods) ------------------
         /// </summary>
-
         public static LangueEnum AskLanguage()
         {
             Console.ForegroundColor = ConsoleColor.Cyan;
@@ -99,12 +98,20 @@ namespace ProjetBureau
             };
             return selectedLanguage;
         }
+        LangueEnum IView.AskLanguage() { return Traduction.ConvertLanguage(SelectLanguage.Text); }
+
+        public string AsklogType() { return "json"; }
+
+        public string AskSourcePath() { return textBoxSourcePath.Text; }
+
+        public string AskTargetFile() { return textBoxNameSave.Text; }
+
+        public string AskTargetPath() { return textBoxDestPath.Text; }
 
         /// <summary>
         /// ---Méthodes informant l'utilisateurs que des informations sont invalides---
         /// ---methods informing the user that information is invalid---
         /// </summary>
-
         public void SourcePathIsInvalid()
         {
             string? messageBoxText = Traduction.Instance.Langue.SourcePathInvalid;
@@ -135,8 +142,6 @@ namespace ProjetBureau
         /// Affichage en temps réel des informations de la sauvegarde (Pourcentage | Nom du fichier | Nombre de fichier restant)
         /// Display in real time the informations of the back-up (Percentage | File's name | Number of remaining files)
         /// </summary>
-        /// <param name="toDisplay"></param>
-
         public void ControlProgress(string fileFullName, int countfile, int totalFileToCopy, double percentage)
         {
             Dispatcher.Invoke(() =>
@@ -158,6 +163,10 @@ namespace ProjetBureau
             controller.Execute();
         }
 
+        /// <summary>
+        /// Réglage du language selon le choix de l'utilisateur dans le menu déroulant
+        /// Setting of language according to the user's choice in the drop-down menu
+        /// </summary>
         private void SelectLanguage_DropDownClosed(object sender, EventArgs e)
         {
             Traduction.SetInterfaceLanguage(SelectLanguage.Text);
@@ -169,6 +178,10 @@ namespace ProjetBureau
             SaveButton.Content = Traduction.Instance.Langue.Save;
         }
 
+        /// <summary>
+        /// Information de début et de fin de sauvegarde et affichage et fermeture de la fenetre de progression
+        /// Backup start and end information, display and hiding of the progress window
+        /// </summary>
         public void Progress(bool state)
         {
             Dispatcher.Invoke(() =>
@@ -190,16 +203,11 @@ namespace ProjetBureau
                 }
             }, DispatcherPriority.Background);
         }
-        LangueEnum IView.AskLanguage() { return Traduction.ConvertLanguage(SelectLanguage.Text); }
 
-        public string AsklogType() { return "json"; }
-
-        public string AskSourcePath() { return textBoxSourcePath.Text; }
-
-        public string AskTargetFile() { return textBoxNameSave.Text; }
-
-        public string AskTargetPath() { return textBoxDestPath.Text; }
-
+        /// <summary>
+        /// Methodes récupérant le chemin source de la sauvegarde 
+        /// Methods get source path of the backup
+        /// </summary>
         private void BtnBrowseSourceFolder_Click(object sender, RoutedEventArgs e)
         {
             var folderDlg = new System.Windows.Forms.FolderBrowserDialog
@@ -212,6 +220,11 @@ namespace ProjetBureau
                 //Environment.SpecialFolder root = folderDlg.RootFolder;
             }
         }
+
+        /// <summary>
+        /// Methodes récupérant le chemin de destination de la sauvegarde 
+        /// Methods get destination path of the backup
+        /// </summary>
         private void BtnBrowseDestFolder_Click(object sender, RoutedEventArgs e)
         {
             var folderDlg = new System.Windows.Forms.FolderBrowserDialog
