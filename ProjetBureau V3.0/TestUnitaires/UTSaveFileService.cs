@@ -19,7 +19,7 @@ namespace TestUnitaires
             tempPathSource = Path.Combine(masterDirectory, "Source");
             tempPathTarget = Path.Combine(masterDirectory, "Destination");
             var dossierSource1 = Path.Combine(tempPathSource, "Dossier1");
-            var sousDossierSource1 = Path.Combine(dossierSource1, "DossierSource1");
+            var sousDossierSource1 = Path.Combine(dossierSource1, "SousDossier1");
             var dossierSource2 = Path.Combine(tempPathSource, "Dossier2");
 
             Directory.CreateDirectory(tempPathSource);
@@ -32,9 +32,6 @@ namespace TestUnitaires
             FillDirectory(dossierSource1);
             FillDirectory(sousDossierSource1);
             FillDirectory(dossierSource2);
-
-            //var tempFileOutput = Path.GetTempFileName();
-            //var tempFileOutputOutput = Path.GetTempFileName();
         }
         private string GenerateGarbage(int increment)
         {
