@@ -32,7 +32,8 @@ namespace CommonCode
         }
 
         /// <summary>
-        /// 
+        /// Mise en forme des informations de la sauvegarde en temps réel (Pourcentage | Nom du fichier | Nombre de fichier restant)
+        /// Format real-time backup information (Percentage | File's name | Number of remaining files)
         /// </summary>
         public void ControlProgress(string fileFullName, int countfile, int totalFileToCopy, double percentage)
         {
@@ -40,11 +41,19 @@ namespace CommonCode
             SendText($"{percentage}% | {countfile}/{totalFileToCopy} {Traduction.Instance.Langue.InCopy} | {fileName}");
         }
 
+        /// <summary>
+        /// Information de début et de fin de sauvegarde
+        /// Backup start and end information
+        /// </summary>
         public void Progress(bool state)
         {
             SendText(!state ? Traduction.Instance.Langue.Buffering : Traduction.Instance.Langue.Complete);
         }
 
+        /// <summary>
+        /// Envoie des données a l'application déportée
+        /// Send data to the remote application
+        /// </summary>
         public void SendText(string s)
         {
             byte[] data = Encoding.UTF8.GetBytes(s);

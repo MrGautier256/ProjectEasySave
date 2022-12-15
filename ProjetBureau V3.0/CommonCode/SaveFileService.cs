@@ -26,13 +26,15 @@ namespace CommonCode
 
         public event Action<List<JsonData>, bool>? Finished;
 
-        #region Private fields
         private ProgressState _progressState = ProgressState.play;
         private List<JsonData> tableLogs = new();
         private Thread? _threadCopy;
         private ManualResetEvent _manualResetEvent = new ManualResetEvent(true);
-        #endregion Private fields
 
+        /// <summary>
+        /// Fonction appelée lors de la mise en pause de l'application
+        /// Function called when app is paused
+        /// </summary>
         public void Pause()
         {
             if (_threadCopy == null)
@@ -43,6 +45,10 @@ namespace CommonCode
             _manualResetEvent.Reset();
         }
 
+        /// <summary>
+        /// Fonction appelée lors de la reprise de l'application
+        /// Function called when app is resumed
+        /// </summary>
         public void Resume()
         {
             if (_threadCopy == null)
@@ -53,6 +59,10 @@ namespace CommonCode
             _manualResetEvent.Set();
         }
 
+        /// <summary>
+        /// Fonction appelée lors de l'interruption de l'application
+        /// Function called when app is stopped
+        /// </summary>
         public void Stop()
         {
             if (_threadCopy == null)
@@ -61,18 +71,31 @@ namespace CommonCode
             _progressState = ProgressState.stop;
         }
 
+        /// <summary>
+        /// Appelle l'évenement indiquant la fin de la copie
+        /// Calls the event indicating the end of the copy
+        /// </summary>
         private void CallFinished(bool finishedNormaly)
         {
             if (Finished != null)
                 Finished(tableLogs, finishedNormaly);
         }
 
+
+        /// <summary>
+        /// Appelle l'évenement de progression
+        /// Calls the progress event 
+        /// </summary>
         private void CallProgressEvent(string fileName, int countfile, int totalFileToCopy, double percentage)
         {
             if (ProgressEvent != null)
                 ProgressEvent(fileName, countfile, totalFileToCopy, percentage);
         }
 
+        /// <summary>
+        /// Fonction effectuant diverses actions pour la sauvegarde (creation des dossiers, copie et chiffrement, creation des logs)
+        /// Function performing various actions for the backup (creation of folders, copy and encryption, creation of logs)
+        /// </summary>
         public void Start()
         {
             _threadCopy = new Thread(() =>

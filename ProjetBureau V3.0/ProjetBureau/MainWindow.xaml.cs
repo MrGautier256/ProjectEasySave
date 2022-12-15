@@ -54,6 +54,10 @@ namespace ProjetBureau
             SaveButton.Content = Traduction.Instance.Langue.Save;
         }
 
+        /// <summary>
+        /// Methode vérifiant que le logiciel métier n'est pas ouvert
+        /// Method checking that the business software is not open
+        /// </summary>
         private void Timer_Tick(object? sender, EventArgs e)
         {
             var businessProcesses = Process.GetProcessesByName(Properties.Settings.Default.BusinessProcessName);
@@ -237,6 +241,7 @@ namespace ProjetBureau
                 //Environment.SpecialFolder root = folderDlg.RootFolder;
             }
         }
+
         public void SendSaveFileServiceCommand(ISaveFileServiceCommand saveFileService)
         {
             progressWindow.SaveFileServiceCommand = saveFileService;

@@ -29,7 +29,7 @@ public partial class Program
                 byte[] data = new byte[1024];
                 byteReveived = listenSocket.Receive(data);
                 text = Encoding.UTF8.GetString(data, 0, byteReveived);
-                Console.WriteLine(text);
+                Console.WriteLine(text+"\n");
             }
         }
         catch (Exception)

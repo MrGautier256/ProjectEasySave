@@ -12,7 +12,10 @@ namespace CommonCode
     public enum ProgressState { play, pause, stop };
     public static class SaveService
     {
-
+        /// <summary>
+        /// Méthode de chiffrement de fichier
+        /// File encryption method
+        /// </summary>
         public static void EncryptFile(string inputFile, string outputFile)
         {
             int bytesize = 8192 * 256;
@@ -38,6 +41,11 @@ namespace CommonCode
                 }
             }
         }
+
+        /// <summary>
+        /// Méthode de chiffrement d'octet
+        /// Byte encryption method
+        /// </summary>
         static void EncryptBytes(byte[] buffer, int count)
         {
             byte Secret = 64;
@@ -75,6 +83,10 @@ namespace CommonCode
             }
         }
 
+        /// <summary>
+        /// Methode renommant les fichiers de log
+        /// Method for renaming log files
+        /// </summary>
         private static string RenameLogFile(string path, string fileFullName, string targetFile)
         {
             int i = 0;
